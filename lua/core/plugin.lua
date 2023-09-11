@@ -49,6 +49,9 @@ local plugins = {
     'L3MON4D3/LuaSnip',
     -------------------
 
+    --Coderunner
+  { "CRAG666/code_runner.nvim", config = true },
+
     --oil.nvim
     'stevearc/oil.nvim',
 

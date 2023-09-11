@@ -33,8 +33,8 @@ vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>q", vim.cmd.bd)
 
 -- to move between buffers
-vim.keymap.set("n", "<S-f>", vim.cmd.bnext)
-vim.keymap.set("n", "<S-b>", vim.cmd.bprevious)
+vim.keymap.set("n", "<leader>nb", vim.cmd.bnext)
+vim.keymap.set("n", "<leader>pb", vim.cmd.bprevious)
 
 
 -- to move between windows
@@ -42,3 +42,9 @@ vim.keymap.set({ "n" }, "<C-j>", "<C-w>j")
 vim.keymap.set({ "n" }, "<C-k>", "<C-w>k")
 vim.keymap.set({ "n" }, "<C-l>", "<C-w>l")
 vim.keymap.set({ "n" }, "<C-h>", "<C-w>h")
+
+-- to move cursor in inseart mood
+vim.keymap.set({ "i" }, "<C-j>", "<C-o>j")
+vim.keymap.set({ "i" }, "<C-k>", "<C-o>k")
+vim.keymap.set({ "i" }, "<C-l>", "<C-o>l")
+vim.keymap.set({ "i" }, "<C-h>", "<C-o>h")
