@@ -38,13 +38,7 @@ vim.keymap.set("n", "<leader>pb", vim.cmd.bprevious)
 
 
 -- to move between windows
-vim.keymap.set({ "n" }, "<C-j>", "<C-w>j")
-vim.keymap.set({ "n" }, "<C-k>", "<C-w>k")
-vim.keymap.set({ "n" }, "<C-l>", "<C-w>l")
-vim.keymap.set({ "n" }, "<C-h>", "<C-w>h")
-
--- to move cursor in inseart mood
-vim.keymap.set({ "i" }, "<C-j>", "<C-o>j")
-vim.keymap.set({ "i" }, "<C-k>", "<C-o>k")
-vim.keymap.set({ "i" }, "<C-l>", "<C-o>l")
-vim.keymap.set({ "i" }, "<C-h>", "<C-o>h")
+vim.keymap.set({ "n","i" }, "<C-j>", "<Esc><C-w>j")
+vim.keymap.set({ "n","i" }, "<C-k>", "<Esc><C-w>k")
+vim.keymap.set({ "n","i" }, "<C-l>", "<Esc><C-w>l")
+vim.keymap.set({ "n","i" }, "<C-h>", "<Esc><C-w>h")

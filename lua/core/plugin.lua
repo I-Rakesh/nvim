@@ -26,7 +26,7 @@ local plugins = {
         'dracula/vim',
         lazy = false,
     },
-    { 'rose-pine/neovim', name = 'rose-pine' },
+    { 'rose-pine/neovim',         name = 'rose-pine' },
 
     --Treesitter
     'nvim-treesitter/nvim-treesitter',
@@ -50,7 +50,7 @@ local plugins = {
     -------------------
 
     --Coderunner
-  { "CRAG666/code_runner.nvim", config = true },
+    { "CRAG666/code_runner.nvim", config = true },
 
     --oil.nvim
     'stevearc/oil.nvim',
@@ -92,6 +92,9 @@ local plugins = {
 
     -- tmux navigator
     'christoomey/vim-tmux-navigator',
+
+    --indent lines
+    'lukas-reineke/indent-blankline.nvim',
 }
 local opts = {}
 
