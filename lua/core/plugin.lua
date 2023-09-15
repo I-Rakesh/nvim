@@ -47,6 +47,12 @@ local plugins = {
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
     'L3MON4D3/LuaSnip',
+
+    --Formating
+    {
+        'jose-elias-alvarez/null-ls.nvim',
+        event = "VeryLazy",
+    },
     -------------------
 
     --Coderunner

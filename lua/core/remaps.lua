@@ -42,3 +42,13 @@ vim.keymap.set({ "n","i" }, "<C-j>", "<Esc><C-w>j")
 vim.keymap.set({ "n","i" }, "<C-k>", "<Esc><C-w>k")
 vim.keymap.set({ "n","i" }, "<C-l>", "<Esc><C-w>l")
 vim.keymap.set({ "n","i" }, "<C-h>", "<Esc><C-w>h")
+
+-- to resize panes
+vim.keymap.set('n', '<M-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Up>', ':resize +3<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<M-Down>', ':resize -3<CR>', { noremap = true, silent = true })
+
+-- to open new panes
+vim.keymap.set("n", '"', ':split<CR>:enew<CR>')
+vim.keymap.set("n", '>', vim.cmd.vnew)

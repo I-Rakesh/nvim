@@ -1,6 +1,9 @@
 local wilder = require('wilder')
-wilder.setup({ modes = { ':', '/', '?' } })
-
+wilder.setup({
+    modes = { ':', '/', '?' },
+    next_key = '<C-n>',
+    previous_key = '<C-p>',
+})
 wilder.set_option('pipeline', {
     wilder.branch(
         wilder.cmdline_pipeline(),
