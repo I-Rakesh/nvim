@@ -27,10 +27,20 @@ require('code_runner').setup({
             "./$fileName"
         },
     },
+    mode = 'float',
+    float = {
+    border = 'single',
+    height = 0.5,
+    width = 0.5,
+    x = 0.5,
+    y = 0.5,
+    border_hl = 'Normal',
+  },
 })
-vim.keymap.set('n', '<leader>r', ':RunCode<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>rr', ':RunFile term<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rf', ':RunFile float<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rt', ':RunFile tab<CR>', { noremap = true, silent = false })
 vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
 vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
 vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false })

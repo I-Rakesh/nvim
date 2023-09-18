@@ -4,6 +4,9 @@ vim.o.termguicolors = true
 require("nvim-tree").setup({
   view = {
     adaptive_size = true
+  },
+  filters = {
+    dotfiles = true,
   }
 })
 

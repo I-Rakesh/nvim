@@ -30,6 +30,8 @@ local plugins = {
 
     --Treesitter
     'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/nvim-treesitter-refactor',
 
     -- Harpoon
     'ThePrimeagen/harpoon',
@@ -101,6 +103,9 @@ local plugins = {
 
     --indent lines
     'lukas-reineke/indent-blankline.nvim',
+
+    --Terminal
+    'akinsho/toggleterm.nvim',
 }
 local opts = {}
 

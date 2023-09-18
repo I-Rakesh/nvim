@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+-- Redo
+vim.keymap.set("n","<C-r>","<S-u>")
+
 -- to move selected text up or down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -30,7 +33,7 @@ vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left>
 vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true })
 
 -- to close the current buffer
-vim.keymap.set("n", "<leader>q", vim.cmd.bd)
+vim.keymap.set("n", "<leader>x", vim.cmd.bd)
 
 -- to move between buffers
 vim.keymap.set("n", "<leader>nb", vim.cmd.bnext)
@@ -52,3 +55,7 @@ vim.keymap.set('n', '<M-Down>', ':resize -3<CR>', { noremap = true, silent = tru
 -- to open new panes
 vim.keymap.set("n", '"', ':split<CR>:enew<CR>')
 vim.keymap.set("n", '>', vim.cmd.vnew)
+
+-- Navigate between quickfix items
+vim.keymap.set("n", "<leader>;", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist"})
+vim.keymap.set("n", "<leader>,", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist"})

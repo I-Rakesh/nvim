@@ -29,4 +29,72 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+  autopairs = {
+    enable = true,
+  },
+
+  --Treesitter-text_objects
+    textobjects = {
+    select = {
+      enable = true,
+      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ['aa'] = '@parameter.outer',
+        ['ia'] = '@parameter.inner',
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+        ['il'] = '@loop.inner',
+        ['al'] = '@loop.outer',
+        ['ii'] = '@conditional.inner',
+        ['ai'] = '@conditional.outer',
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ['[f'] = '@function.outer',
+        ['[c'] = '@class.outer',
+      },
+      goto_next_end = {
+        ['[F'] = '@function.outer',
+        ['[C'] = '@class.outer',
+      },
+      goto_previous_start = {
+        [']f'] = '@function.outer',
+        [']c'] = '@class.outer',
+      },
+      goto_previous_end = {
+        [']F'] = '@function.outer',
+        [']C'] = '@class.outer',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ['<leader>ss'] = '@parameter.inner',
+      },
+      swap_previous = {
+        ['<leader>S'] = '@parameter.inner',
+      },
+    },
+  },
+
+  --Treesitter_refactor
+  refactor = {
+    navigation = {
+      enable = true,
+      -- Assign keymaps to false to disable them, e.g. `goto_definition = false`.
+      keymaps = {
+        goto_definition = false,
+        list_definitions = false,
+        list_definitions_toc = false,
+        goto_next_usage = "<leader>gnu",
+        goto_previous_usage = "<leader>gpu",
+      },
+    },
+  },
 }
