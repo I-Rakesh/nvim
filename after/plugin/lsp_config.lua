@@ -39,8 +39,8 @@ require("lspconfig").pyright.setup {}
 require("lspconfig").jdtls.setup {}
 require("lspconfig").bashls.setup {}
 
-vim.keymap.set('n', 'pd', vim.diagnostic.goto_prev)
-vim.keymap.set('n', 'nd', vim.diagnostic.goto_next)
+vim.keymap.set('n', '<leader>pd', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '<leader>nd', vim.diagnostic.goto_next)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -55,7 +55,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
     vim.keymap.set('n', '<space>wl', function()
