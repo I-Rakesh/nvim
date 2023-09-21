@@ -41,6 +41,7 @@ local plugins = {
     --Package manager
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
+    "jay-babu/mason-null-ls.nvim",
     "neovim/nvim-lspconfig",
 
     --Auto Complete

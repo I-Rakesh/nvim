@@ -6,6 +6,9 @@ null_ls.setup({
     null_ls.builtins.formatting.shfmt,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.diagnostics.mypy,
+    null_ls.builtins.diagnostics.ruff,
+    null_ls.builtins.formatting.black,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then

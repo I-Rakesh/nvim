@@ -46,15 +46,21 @@ vim.keymap.set({ "n","i" }, "<C-k>", "<Esc><C-w>k")
 vim.keymap.set({ "n","i" }, "<C-l>", "<Esc><C-w>l")
 vim.keymap.set({ "n","i" }, "<C-h>", "<Esc><C-w>h")
 
+-- Change window layout
+vim.keymap.set("n", "<leader>V", "<Esc><C-w>H")
+vim.keymap.set("n", "<leader>H", "<Esc><C-w>K")
+
 -- to resize panes
-vim.keymap.set('n', '<M-Left>', ':vertical resize -3<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Right>', ':vertical resize +3<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Up>', ':resize +3<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<M-Down>', ':resize -3<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+vim.keymap.set("n", "<M-Up>", "<C-w>_")
+vim.keymap.set("n", "<M-Down>", "<C-w>=")
 
 -- to open new panes
-vim.keymap.set("n", '"', ':split<CR>:enew<CR>')
-vim.keymap.set("n", '>', vim.cmd.vnew)
+vim.keymap.set("n", '<leader>"', ':split<CR>:enew<CR>')
+vim.keymap.set("n", '<leader>%', vim.cmd.vnew)
 
 -- Navigate between quickfix items
 vim.keymap.set("n", "<leader>;", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist"})

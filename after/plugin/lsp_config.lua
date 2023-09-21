@@ -2,6 +2,9 @@ require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = { "lua_ls", "clangd", "pyright", "jdtls", "bashls" }
 })
+require ('mason-null-ls').setup({
+  ensure_installed = { "shellcheck", "clang-format", "shfmt", "mypy", "ruff", "black" }
+})
 
 local lspconfig = require('lspconfig')
 
