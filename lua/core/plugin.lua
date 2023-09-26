@@ -48,6 +48,7 @@ local plugins = {
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'saadparwaiz1/cmp_luasnip',
+    'onsails/lspkind.nvim',
     'rafamadriz/friendly-snippets',
     'L3MON4D3/LuaSnip',
 
@@ -63,6 +64,9 @@ local plugins = {
 
     --oil.nvim
     'stevearc/oil.nvim',
+
+    -- Repeat (.)
+    'tpope/vim-repeat',
 
     -- Lualine
     {

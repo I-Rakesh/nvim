@@ -2,11 +2,17 @@ local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>sf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>sw', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>sb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>sh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>st', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>sg', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ch', builtin.colorscheme, {})
 vim.keymap.set('n', '<leader>sd', builtin.diagnostics, {})
 vim.keymap.set('n', '<leader>sr', builtin.lsp_references, {})
+vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, {})
+vim.keymap.set('n', '<leader>sj', builtin.jumplist, {})
+vim.keymap.set('n', '<leader>sm', builtin.marks, {})
+vim.keymap.set('n', '<leader>so', builtin.oldfiles, {})
+vim.keymap.set('n', '<leader>s*', builtin.grep_string, {})
+vim.keymap.set('n', '<leader>sch', builtin.command_history, {})
 
 require('telescope').setup({
     defaults = {
