@@ -42,8 +42,8 @@ require("lspconfig").pyright.setup {}
 require("lspconfig").jdtls.setup {}
 require("lspconfig").bashls.setup {}
 
-vim.keymap.set('n', '<leader>pd', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>nd', vim.diagnostic.goto_next)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),

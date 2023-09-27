@@ -1,4 +1,5 @@
 local builtin = require('telescope.builtin')
+local actions = require("telescope.actions")
 vim.keymap.set('n', '<leader>sf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>sw', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>sb', builtin.buffers, {})
@@ -16,6 +17,9 @@ vim.keymap.set('n', '<leader>sch', builtin.command_history, {})
 
 require('telescope').setup({
     defaults = {
+      mappings = {
+        i = { ["<leader>q"] = actions.send_to_qflist + actions.open_qflist, },
+      },
         vimgrep_arguments = {
             "rg",
             "--color=never",

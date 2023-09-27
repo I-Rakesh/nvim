@@ -47,8 +47,11 @@ local plugins = {
     --Auto Complete
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-path',
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind.nvim',
+
+    -- Snippets
     'rafamadriz/friendly-snippets',
     'L3MON4D3/LuaSnip',
 
@@ -111,6 +114,15 @@ local plugins = {
 
     --Terminal
     'akinsho/toggleterm.nvim',
+
+    --Commenting lines
+    {
+      'numToStr/Comment.nvim',
+      opts = {
+        -- add any options here
+      },
+      lazy = false,
+    }
 }
 local opts = {}
 
