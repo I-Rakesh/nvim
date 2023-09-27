@@ -122,6 +122,12 @@ local plugins = {
         -- add any options here
       },
       lazy = false,
+    },
+
+    -- Dressing for better input
+    {
+      'stevearc/dressing.nvim',
+      event = "VeryLazy",
     }
 }
 local opts = {}
