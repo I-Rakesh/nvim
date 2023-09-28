@@ -110,7 +110,7 @@ local plugins = {
     'christoomey/vim-tmux-navigator',
 
     --indent lines
-    'lukas-reineke/indent-blankline.nvim',
+    { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
     --Terminal
     'akinsho/toggleterm.nvim',
@@ -128,7 +128,14 @@ local plugins = {
     {
       'stevearc/dressing.nvim',
       event = "VeryLazy",
-    }
+    },
+
+    -- Markdown preview
+    {
+      "iamcco/markdown-preview.nvim",
+      run = function() vim.fn["mkdp#util#install"]() end,
+    },
+    { "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }
 }
 local opts = {}
 

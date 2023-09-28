@@ -1,9 +1,9 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "clangd", "pyright", "jdtls", "bashls" }
+  ensure_installed = { "lua_ls", "clangd", "pyright", "jdtls", "bashls", "marksman" }
 })
 require ('mason-null-ls').setup({
-  ensure_installed = { "shellcheck", "clang-format", "shfmt", "mypy", "ruff", "black" }
+  ensure_installed = { "shellcheck", "clang-format", "shfmt", "mypy", "ruff", "black", "markdownlint" }
 })
 
 local lspconfig = require('lspconfig')
@@ -41,6 +41,7 @@ require("lspconfig").clangd.setup {
 require("lspconfig").pyright.setup {}
 require("lspconfig").jdtls.setup {}
 require("lspconfig").bashls.setup {}
+require("lspconfig").marksman.setup {}
 
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
