@@ -24,6 +24,7 @@ require('code_runner').setup({
         },
         sh = {
             "cd $dir &&",
+            "chmod +x $fileName &&",
             "./$fileName"
         },
     },

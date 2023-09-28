@@ -37,8 +37,8 @@ vim.keymap.set("n", "<leader>x", vim.cmd.bd)
 vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>")
 
 -- to move between buffers
-vim.keymap.set("n", "<leader>[b", vim.cmd.bnext)
-vim.keymap.set("n", "<leader>]b", vim.cmd.bprevious)
+vim.keymap.set("n", "[b", vim.cmd.bnext)
+vim.keymap.set("n", "]b", vim.cmd.bprevious)
 
 
 -- to move between windows
