@@ -14,6 +14,14 @@ vim.keymap.set('n', '<leader>sm', builtin.marks, {})
 vim.keymap.set('n', '<leader>so', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader>s*', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>sch', builtin.command_history, {})
+vim.keymap.set("n", "<leader>s/",
+  function()
+    require("telescope.builtin").current_buffer_fuzzy_find(
+      require("telescope.themes").get_dropdown {
+       previewer = false,
+     })
+  end,
+{desc = "Search Current Buffer" })
 
 require('telescope').setup({
     defaults = {
@@ -50,7 +58,7 @@ require('telescope').setup({
             preview_cutoff = 120,
         },
         file_sorter = require("telescope.sorters").get_fuzzy_file,
-        file_ignore_patterns = { "node_modules" },
+        file_ignore_patterns = { "node_modules", ".class" },
         generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
         path_display = { "truncate" },
         winblend = 0,
