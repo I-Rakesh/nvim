@@ -1,8 +1,8 @@
 require("dressing").setup({
   input = {
-    winblend = 10,
+    buf_options = {},
+    win_options = {
+      winblend = 0,
+    },
   },
-  builtin = {
-    winblend = 10,
-  }
 })

@@ -28,8 +28,16 @@ local plugins = {
     { 'rose-pine/neovim',         name = 'rose-pine' },
 
     --Treesitter
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-treesitter/nvim-treesitter-textobjects',
+    {
+      "nvim-treesitter/nvim-treesitter",
+      event = { "BufReadPre", "BufNewFile" },
+      build = ":TSUpdate",
+    },
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      event = { "BufReadPost", "BufNewFile" },
+      dependencies = { "nvim-treesitter/nvim-treesitter",}
+    },
     'nvim-treesitter/nvim-treesitter-refactor',
 
     -- Harpoon
@@ -93,17 +101,25 @@ local plugins = {
     'rcarriga/nvim-notify',
 
     --Git Itergration
-    'lewis6991/gitsigns.nvim',
+    {
+      'lewis6991/gitsigns.nvim',
+      event = { "BufReadPre", "BufNewFile" },
+    },
     'tpope/vim-fugitive',
 
     --Autopair braces
     {
-        "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
+      "windwp/nvim-autopairs",
+      event = { "InsertEnter" },
+      dependencies = { "hrsh7th/nvim-cmp" },
+      config = function() require("nvim-autopairs").setup {} end
     },
 
     --Surround
-    'tpope/vim-surround',
+    {
+      'tpope/vim-surround',
+      event = { "BufReadPre", "BufNewFile" },
+    },
 
     -- tmux navigator
     'christoomey/vim-tmux-navigator',
@@ -120,7 +136,7 @@ local plugins = {
       opts = {
         -- add any options here
       },
-      lazy = false,
+      event = { "BufReadPre", "BufNewFile" },
     },
 
     -- Dressing for better input
