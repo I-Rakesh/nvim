@@ -69,6 +69,9 @@ local plugins = {
     },
     -------------------
 
+    -- Tabbing
+    'abecodes/tabout.nvim',
+
     --Coderunner
     { "CRAG666/code_runner.nvim", config = true },
 
