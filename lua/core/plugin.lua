@@ -48,13 +48,15 @@ local plugins = {
     --Package manager
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "jay-babu/mason-null-ls.nvim",
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
     "neovim/nvim-lspconfig",
 
     --Auto Complete
     'hrsh7th/nvim-cmp',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-buffer',
+    'f3fora/cmp-spell',
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind.nvim',
 
@@ -62,7 +64,7 @@ local plugins = {
     'rafamadriz/friendly-snippets',
     'L3MON4D3/LuaSnip',
 
-    --Formating
+    --Formatting
     {
         'jose-elias-alvarez/null-ls.nvim',
         event = "VeryLazy",
@@ -72,10 +74,10 @@ local plugins = {
     -- Tabbing
     'abecodes/tabout.nvim',
 
-    --Coderunner
+    --Code runner
     { "CRAG666/code_runner.nvim", config = true },
 
-    --oil.nvim
+    --oil nvim
     'stevearc/oil.nvim',
 
     -- Repeat (.)
@@ -90,7 +92,7 @@ local plugins = {
     -- nvim-tree
     'nvim-tree/nvim-tree.lua',
 
-    --Cmd autocomplete
+    --Cmd auto complete
     {
         'gelguy/wilder.nvim',
         config = function()
@@ -103,7 +105,7 @@ local plugins = {
     --Notification ui
     'rcarriga/nvim-notify',
 
-    --Git Itergration
+    --Git Integration
     {
       'lewis6991/gitsigns.nvim',
       event = { "BufReadPre", "BufNewFile" },

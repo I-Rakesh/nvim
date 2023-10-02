@@ -14,6 +14,7 @@ vim.keymap.set('n', '<leader>sm', builtin.marks, {})
 vim.keymap.set('n', '<leader>so', builtin.oldfiles, {})
 vim.keymap.set('n', '<leader>s*', builtin.grep_string, {})
 vim.keymap.set('n', '<leader>sch', builtin.command_history, {})
+vim.keymap.set('n', '<leader>z', builtin.spell_suggest, {})
 vim.keymap.set("n", "<leader>s/",
   function()
     require("telescope.builtin").current_buffer_fuzzy_find(

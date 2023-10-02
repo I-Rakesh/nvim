@@ -40,6 +40,15 @@ cmp.setup({
         end,
     },
     sources = cmp.config.sources({
+      {
+        name = 'spell',
+        option = {
+          keep_all_entries = false,
+          enable_in_context = function()
+            return true
+          end,
+        },
+      },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },

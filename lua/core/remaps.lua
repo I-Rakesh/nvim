@@ -37,8 +37,8 @@ vim.keymap.set("n", "<leader>x", vim.cmd.bd)
 vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>")
 
 -- to move between buffers
-vim.keymap.set("n", "[b", vim.cmd.bnext)
-vim.keymap.set("n", "]b", vim.cmd.bprevious)
+vim.keymap.set("n", "]b", vim.cmd.bnext)
+vim.keymap.set("n", "[b", vim.cmd.bprevious)
 
 
 -- to move between windows
@@ -71,6 +71,6 @@ vim.keymap.set("n", '<leader>"', ":new<CR><C-w><C-r>")
 vim.keymap.set("n", '<leader>%', ":vnew<CR><C-w><C-r>")
 
 -- Navigate between quickfix items
-vim.keymap.set("n", "[q", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist"})
-vim.keymap.set("n", "]q", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist"})
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist"})
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist"})
 vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>")

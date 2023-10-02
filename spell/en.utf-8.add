@@ -1,0 +1,12 @@
+Treesitter
+config
+Lsp
+nvim
+Lualine
+Autopair
+tmux
+Cmd
+ui
+tabout
+tabkey
+filetypes

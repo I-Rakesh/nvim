@@ -28,3 +28,6 @@ vim.opt.smartcase = true -- if you include mixed case in your search, assumes yo
 
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0
+
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }

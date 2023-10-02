@@ -1,9 +1,30 @@
-require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = { "lua_ls", "clangd", "pyright", "jdtls", "bashls", "marksman" }
+require("mason").setup({
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗",
+    },
+  },
 })
-require ('mason-null-ls').setup({
-  ensure_installed = { "shellcheck", "clang-format", "shfmt", "mypy", "ruff", "black", "markdownlint" }
+require('mason-tool-installer').setup ({
+  ensure_installed = {
+    --Lsp servers
+    "lua_ls",
+    "clangd",
+    "pyright",
+    "jdtls",
+    "bashls",
+    "marksman",
+    --Formatters and Linters
+    "shellcheck",
+    "clang-format",
+    "shfmt",
+    "mypy",
+    "ruff",
+    "black",
+    "prettier"
+  }
 })
 
 local lspconfig = require('lspconfig')
@@ -43,8 +64,8 @@ require("lspconfig").jdtls.setup {}
 require("lspconfig").bashls.setup {}
 require("lspconfig").marksman.setup {}
 
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_next)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
