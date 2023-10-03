@@ -17,6 +17,7 @@ require('mason-tool-installer').setup ({
     "bashls",
     "marksman",
     --Formatters and Linters
+    "stylua",
     "shellcheck",
     "clang-format",
     "shfmt",

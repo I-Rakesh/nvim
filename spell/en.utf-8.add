@@ -10,3 +10,16 @@ ui
 tabout
 tabkey
 filetypes
+javascript
+dir
+runtimepath
+filetype
+to
+treesitter
+textobj
+textobjects
+jumplist
+keymaps
+goto
+resize
+quickfix

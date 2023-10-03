@@ -1,32 +1,33 @@
 vim.g.mapleader = " "
 
 -- Redo
-vim.keymap.set("n","<C-r>","<S-u>")
+vim.keymap.set("n","<S-u>","<C-r>")
 
 -- to move selected text up or down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
--- to keep the curser in the middle while moving and searching
+-- to keep the cursor in the middle while moving and searching
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- to presearve copied text to past without loosing
+-- to Preserve copied text to past without loosing
 vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set("n", "<leader>P", [["+p]])
 
--- to copy into system clipbord or vim buffer
+-- to copy into system clipboard or vim buffer
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
--- formate code based on Lsp
+-- format code based on Lsp
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
--- to change the word at the curser
+-- to change the word at the cursor
 vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Makes a file executable
@@ -47,7 +48,7 @@ vim.keymap.set({ "n","i" }, "<C-k>", "<Esc><C-w>k")
 vim.keymap.set({ "n","i" }, "<C-l>", "<Esc><C-w>l")
 vim.keymap.set({ "n","i" }, "<C-h>", "<Esc><C-w>h")
 
--- to rearrnge window
+-- to rearrange window
 vim.keymap.set({ "n" }, "<leader>H", "<Esc><C-w>H")
 vim.keymap.set({ "n" }, "<leader>J", "<Esc><C-w>J")
 vim.keymap.set({ "n" }, "<leader>K", "<Esc><C-w>K")
@@ -59,7 +60,7 @@ vim.keymap.set("n", "<leader>V", "<Esc><C-w>H")
 vim.keymap.set("n", "<leader>S", "<Esc><C-w>K")
 
 -- to resize panes
-vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]]) -- make the window bigger vertically
 vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
 vim.keymap.set("n", "≠", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
 vim.keymap.set("n", "–", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
