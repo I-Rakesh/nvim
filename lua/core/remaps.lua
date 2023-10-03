@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 -- Redo
-vim.keymap.set("n","<S-u>","<C-r>")
+vim.keymap.set("n", "<S-u>", "<C-r>")
 
 -- to move selected text up or down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -41,12 +41,11 @@ vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>")
 vim.keymap.set("n", "]b", vim.cmd.bnext)
 vim.keymap.set("n", "[b", vim.cmd.bprevious)
 
-
 -- to move between windows
-vim.keymap.set({ "n","i" }, "<C-j>", "<Esc><C-w>j")
-vim.keymap.set({ "n","i" }, "<C-k>", "<Esc><C-w>k")
-vim.keymap.set({ "n","i" }, "<C-l>", "<Esc><C-w>l")
-vim.keymap.set({ "n","i" }, "<C-h>", "<Esc><C-w>h")
+vim.keymap.set({ "n", "i" }, "<C-j>", "<Esc><C-w>j")
+vim.keymap.set({ "n", "i" }, "<C-k>", "<Esc><C-w>k")
+vim.keymap.set({ "n", "i" }, "<C-l>", "<Esc><C-w>l")
+vim.keymap.set({ "n", "i" }, "<C-h>", "<Esc><C-w>h")
 
 -- to rearrange window
 vim.keymap.set({ "n" }, "<leader>H", "<Esc><C-w>H")
@@ -69,9 +68,9 @@ vim.keymap.set("n", "<leader>=", "<C-w>=")
 
 -- to open new panes
 vim.keymap.set("n", '<leader>"', ":new<CR><C-w><C-r>")
-vim.keymap.set("n", '<leader>%', ":vnew<CR><C-w><C-r>")
+vim.keymap.set("n", "<leader>%", ":vnew<CR><C-w><C-r>")
 
 -- Navigate between quickfix items
-vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist"})
-vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist"})
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
 vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>")

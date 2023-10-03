@@ -31,4 +31,4 @@ vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0
 
 vim.opt.spell = true
-vim.opt.spelllang = { 'en_us' }
+vim.opt.spelllang = { "en_us" }
