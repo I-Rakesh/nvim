@@ -38,8 +38,8 @@ vim.keymap.set("n", "<leader>x", vim.cmd.bd)
 vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>")
 
 -- to move between buffers
-vim.keymap.set("n", "]b", vim.cmd.bnext)
-vim.keymap.set("n", "[b", vim.cmd.bprevious)
+vim.keymap.set("n", "<Tab>", vim.cmd.bnext)
+vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious)
 
 -- to move between windows
 vim.keymap.set({ "n", "i" }, "<C-j>", "<Esc><C-w>j")
@@ -52,11 +52,7 @@ vim.keymap.set({ "n" }, "<leader>H", "<Esc><C-w>H")
 vim.keymap.set({ "n" }, "<leader>J", "<Esc><C-w>J")
 vim.keymap.set({ "n" }, "<leader>K", "<Esc><C-w>K")
 vim.keymap.set({ "n" }, "<leader>L", "<Esc><C-w>L")
-vim.keymap.set({ "n" }, "<C-" .. vim.g.mapleader .. ">", "<Esc><C-w><C-r>", { noremap = true })
-
--- Change window layout
-vim.keymap.set("n", "<leader>V", "<Esc><C-w>H")
-vim.keymap.set("n", "<leader>S", "<Esc><C-w>K")
+vim.keymap.set({ "n", "i" }, "<C-" .. vim.g.mapleader .. ">", "<Esc><C-w><C-r>", { noremap = true })
 
 -- to resize panes
 vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]]) -- make the window bigger vertically
