@@ -2,7 +2,7 @@ local lazy_status = require("lazy.status") -- to configure lazy pending updates 
 require("lualine").setup({
 	options = {
 		icons_enabled = true,
-		theme = "auto",
+		theme = "onedark",
 		component_separators = { left = "", right = "" },
 		section_separators = { left = "", right = "" },
 		disabled_filetypes = {

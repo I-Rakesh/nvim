@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+--tmux-sessions
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer.sh<CR>")
+
 -- Redo
 vim.keymap.set("n", "<S-u>", "<C-r>")
 
@@ -55,16 +58,16 @@ vim.keymap.set({ "n" }, "<leader>L", "<Esc><C-w>L")
 vim.keymap.set({ "n", "i" }, "<C-" .. vim.g.mapleader .. ">", "<Esc><C-w><C-r>", { noremap = true })
 
 -- to resize panes
-vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]]) -- make the window bigger vertically
-vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
-vim.keymap.set("n", "≠", [[<cmd>horizontal resize +2<cr>]]) -- make the window bigger horizontally by pressing shift and =
-vim.keymap.set("n", "–", [[<cmd>horizontal resize -2<cr>]]) -- make the window smaller horizontally by pressing shift and -
+vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]])
+vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]])
+vim.keymap.set("n", "≠", [[<cmd>horizontal resize +2<cr>]])
+vim.keymap.set("n", "–", [[<cmd>horizontal resize -2<cr>]])
 vim.keymap.set("n", "<leader>-", "<C-w>_")
 vim.keymap.set("n", "<leader>=", "<C-w>=")
 
 -- to open new panes
-vim.keymap.set("n", '<leader>"', ":new<CR><C-w><C-r>")
-vim.keymap.set("n", "<leader>%", ":vnew<CR><C-w><C-r>")
+vim.keymap.set("n", '<leader>"', ":new<CR>")
+vim.keymap.set("n", "<leader>%", ":vnew<CR>")
 
 -- Navigate between quickfix items
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })

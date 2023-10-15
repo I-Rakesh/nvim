@@ -11,6 +11,12 @@ require("rose-pine").setup({
 	disable_background = true,
 	disable_float_background = true,
 })
+require("onedark").setup({
+	transparent = true,
+	lualine = {
+		transparent = true,
+	},
+})
 
 function ColorMyPencils(color)
 	color = color or "gruvbox"
