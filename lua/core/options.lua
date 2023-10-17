@@ -1,5 +1,8 @@
 vim.g.mapleader = " "
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -29,10 +32,10 @@ vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>cc",
-  ':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR>',
-  { noremap = true, silent = true }
+	"n",
+	"<Leader>cc",
+	':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR>',
+	{ noremap = true, silent = true }
 )
 
 vim.opt.timeoutlen = 1000

@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
 --tmux-sessions
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer.sh<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer<CR>")
 
 -- Redo
 vim.keymap.set("n", "<S-u>", "<C-r>")
