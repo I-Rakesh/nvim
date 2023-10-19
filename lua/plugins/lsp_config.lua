@@ -1,6 +1,5 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = "VeryLazy",
 	dependencies = {
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
@@ -25,15 +24,16 @@ return {
 				"jdtls",
 				"bashls",
 				"marksman",
-				--Formatters and Linters
+				--Formatters
 				"stylua",
-				"shellcheck",
 				"clang-format",
-				"shfmt",
-				"mypy",
 				"ruff",
 				"black",
 				"prettier",
+				-- Linters
+				"shfmt",
+				"shellcheck",
+				"mypy",
 			},
 		})
 
@@ -67,7 +67,6 @@ return {
 			},
 		})
 		require("lspconfig").pyright.setup({})
-		require("lspconfig").jdtls.setup({})
 		require("lspconfig").bashls.setup({})
 		require("lspconfig").marksman.setup({})
 
