@@ -21,6 +21,8 @@ return {
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 		cmp.setup({
 			mapping = cmp.mapping.preset.insert({
+				["<C-b>"] = cmp.mapping.scroll_docs(-4),
+				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
 				["<C-e>"] = cmp.mapping.abort(),
