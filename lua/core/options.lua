@@ -14,8 +14,6 @@ vim.opt.smartindent = true
 vim.o.breakindent = true
 vim.opt.wrap = false
 
-vim.o.undofile = true
-
 vim.opt.swapfile = false
 
 vim.opt.hlsearch = false
