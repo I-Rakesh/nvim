@@ -46,6 +46,16 @@ return {
 				enable = true,
 			},
 
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "<leader><space>",
+					node_incremental = "<leader><space>",
+					scope_incremental = "<c-s>",
+					node_decremental = "<M-space>",
+				},
+			},
+
 			--Treesitter-text_objects
 			textobjects = {
 				select = {
