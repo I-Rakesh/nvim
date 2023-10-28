@@ -1,14 +1,19 @@
 vim.g.mapleader = " "
 
 --tmux-sessions
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer<CR>")
+vim.keymap.set(
+	"n",
+	"<C-f>",
+	"<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer<CR>",
+	{ desc = "tmux-sessionizer" }
+)
 
 -- Redo
-vim.keymap.set("n", "<S-u>", "<C-r>")
+vim.keymap.set("n", "<S-u>", "<C-r>", { desc = "Redo" })
 
 -- to move selected text up or down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move Selected Down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move Selected Up" })
 
 -- to keep the cursor in the middle while moving and searching
 vim.keymap.set("n", "J", "mzJ`z")
@@ -18,59 +23,64 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- to Preserve copied text to past without loosing
-vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set("n", "<leader>P", [["+p]])
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Past Without Coping" })
+vim.keymap.set("n", "<leader>P", [["+p]], { desc = "Past To System Clipbord" })
 
 -- to copy into system clipboard or vim buffer
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy Selected To System Clipbord" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Copy Line To System Clipbord" })
 
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
-vim.keymap.set({ "n", "v" }, "X", [["_x]])
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Deleat Without Coping" })
+vim.keymap.set({ "n", "v" }, "X", [["_x]], { desc = "Deleat Letter Without Coping" })
 
 -- format code based on Lsp
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Formater" })
 
 -- to change the word at the cursor
-vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Change Word" })
 
 -- Makes a file executable
-vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true })
+vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make File Executable" })
 
 -- to close the current buffer
-vim.keymap.set("n", "<leader>x", vim.cmd.bd)
-vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>")
+vim.keymap.set("n", "<leader>x", vim.cmd.bd, { desc = "Close Current Buffer" })
+vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>", { desc = "Close All Buffers Exept Current" })
 
 -- to move between buffers
-vim.keymap.set("n", "<Tab>", vim.cmd.bnext)
-vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious)
+vim.keymap.set("n", "<Tab>", vim.cmd.bnext, { desc = "Next Buffer" })
+vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious, { desc = "Previous Buffer" })
 
 -- to move between windows
-vim.keymap.set({ "n", "i" }, "<C-j>", "<Esc><C-w>j")
-vim.keymap.set({ "n", "i" }, "<C-k>", "<Esc><C-w>k")
-vim.keymap.set({ "n", "i" }, "<C-l>", "<Esc><C-w>l")
-vim.keymap.set({ "n", "i" }, "<C-h>", "<Esc><C-w>h")
+vim.keymap.set({ "n", "i" }, "<C-j>", "<Esc><C-w>j", { desc = "Move Curser Down" })
+vim.keymap.set({ "n", "i" }, "<C-k>", "<Esc><C-w>k", { desc = "Move Curser Up" })
+vim.keymap.set({ "n", "i" }, "<C-l>", "<Esc><C-w>l", { desc = "Move Curser  Right" })
+vim.keymap.set({ "n", "i" }, "<C-h>", "<Esc><C-w>h", { desc = "Move Curser Left" })
 
 -- to rearrange window
-vim.keymap.set({ "n" }, "<leader>H", "<Esc><C-w>H")
-vim.keymap.set({ "n" }, "<leader>J", "<Esc><C-w>J")
-vim.keymap.set({ "n" }, "<leader>K", "<Esc><C-w>K")
-vim.keymap.set({ "n" }, "<leader>L", "<Esc><C-w>L")
-vim.keymap.set({ "n", "i" }, "<C-" .. vim.g.mapleader .. ">", "<Esc><C-w><C-r>", { noremap = true })
+vim.keymap.set({ "n" }, "<leader>H", "<Esc><C-w>H", { desc = "Move Window Left" })
+vim.keymap.set({ "n" }, "<leader>J", "<Esc><C-w>J", { desc = "Move Window Down" })
+vim.keymap.set({ "n" }, "<leader>K", "<Esc><C-w>K", { desc = "Move Window  Up" })
+vim.keymap.set({ "n" }, "<leader>L", "<Esc><C-w>L", { desc = "Move Window Right" })
+vim.keymap.set(
+	{ "n", "i" },
+	"<C-" .. vim.g.mapleader .. ">",
+	"<Esc><C-w><C-r>",
+	{ noremap = true, desc = "Swap Window Positions" }
+)
 
 -- to resize panes
-vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]])
-vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]])
-vim.keymap.set("n", "≠", [[<cmd>horizontal resize +2<cr>]])
-vim.keymap.set("n", "–", [[<cmd>horizontal resize -2<cr>]])
-vim.keymap.set("n", "<leader>-", "<C-w>_")
-vim.keymap.set("n", "<leader>=", "<C-w>=")
+vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]], { desc = "Resize Window Vertical+" })
+vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]], { desc = "Resize Window Vertical-" })
+vim.keymap.set("n", "≠", [[<cmd>horizontal resize +2<cr>]], { desc = "Resize Window Horizantal+" })
+vim.keymap.set("n", "–", [[<cmd>horizontal resize -2<cr>]], { desc = "Resize Window Horizantal-" })
+vim.keymap.set("n", "<leader>-", "<C-w>_", { desc = "Maxinize Horzantal Split" })
+vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equlize Splipts" })
 
 -- to open new panes
-vim.keymap.set("n", '<leader>"', ":new<CR>")
-vim.keymap.set("n", "<leader>%", ":vnew<CR>")
+vim.keymap.set("n", '<leader>"', ":new<CR>", { desc = "New Horzantal Split" })
+vim.keymap.set("n", "<leader>%", ":vnew<CR>", { desc = "New Vertical Split" })
 
 -- Navigate between quickfix items
-vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward qfixlist" })
-vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Backward qfixlist" })
-vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>")
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward Qfixlist" })
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Backward Qfixlist" })
+vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>", { desc = "Open Quickfix list" })
