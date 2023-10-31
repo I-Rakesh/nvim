@@ -38,6 +38,7 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Formater" })
 
 -- to change the word at the cursor
 vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Change Word" })
+vim.keymap.set("v", "<leader>cw", '"hy:%s/<C-r>h//g<left><left>', { desc = "Change Word" })
 
 -- Makes a file executable
 vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make File Executable" })

@@ -15,7 +15,6 @@ return {
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
 		local luasnip = require("luasnip")
-		local tabout = require("tabout")
 
 		require("luasnip.loaders.from_vscode").lazy_load()
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -25,30 +24,29 @@ return {
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-				["<C-e>"] = cmp.mapping.abort(),
+				["<C-Space>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if luasnip.expandable() then
-						luasnip.expand()
-					elseif cmp.visible() then
+				["<Tab>"] = function(fallback)
+					if cmp.visible() then
 						cmp.select_next_item()
-					elseif luasnip.jumpable(1) then
-						luasnip.jump(1)
-					elseif vim.api.nvim_get_mode().mode == "i" then
-						tabout.tabout()
+					elseif luasnip.expand_or_jumpable() then
+						vim.fn.feedkeys(
+							vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
+							""
+						)
 					else
 						fallback()
 					end
-				end, { "i", "s" }),
-				["<S-Tab>"] = cmp.mapping(function(fallback)
+				end,
+				["<S-Tab>"] = function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
 					elseif luasnip.jumpable(-1) then
-						luasnip.jump(-1)
+						vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
 					else
 						fallback()
 					end
-				end, { "i", "s" }),
+				end,
 			}),
 			snippet = {
 				expand = function(args)
