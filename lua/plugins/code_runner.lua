@@ -26,6 +26,10 @@ return {
 					"g++ -o $fileNameWithoutExt $fileName &&",
 					"$dir/$fileNameWithoutExt",
 				},
+				html = {
+					"cd $dir &&",
+					"open $fileName",
+				},
 				sh = {
 					"cd $dir &&",
 					"chmod +x $fileName &&",

@@ -48,3 +48,7 @@ RHS
 MSB
 LSBs
 LSB
+Waitable
+Mutexes
+multithreading
+multithreaded
