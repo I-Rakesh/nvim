@@ -50,3 +50,6 @@ vim.opt.compatible = false
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+vim.opt.virtualedit = "block"
+vim.opt.inccommand = "split"

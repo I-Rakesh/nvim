@@ -37,7 +37,7 @@ vim.keymap.set({ "n", "v" }, "X", [["_x]], { desc = "Deleat Letter Without Copin
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Formater" })
 
 -- to change the word at the cursor
-vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Change Word" })
+vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { desc = "Change Word" })
 vim.keymap.set("v", "<leader>cw", '"hy:%s/<C-r>h//g<left><left>', { desc = "Change Word" })
 
 -- Makes a file executable
