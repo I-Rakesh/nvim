@@ -55,6 +55,9 @@ vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true, desc 
 vim.keymap.set("n", "<leader>x", vim.cmd.bd, { desc = "Close Current Buffer" })
 vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>", { desc = "Close All Buffers Exept Current" })
 
+-- to close tab
+vim.keymap.set("n", "<leader>tx", ":tabc<CR>", { desc = "Close Current Tab" })
+
 -- to move between buffers
 vim.keymap.set("n", "<Tab>", vim.cmd.bnext, { desc = "Next Buffer" })
 vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious, { desc = "Previous Buffer" })
