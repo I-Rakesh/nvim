@@ -29,12 +29,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
-vim.api.nvim_set_keymap(
-	"n",
-	"<Leader>cc",
-	':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR>',
-	{ noremap = true, silent = true, desc = "Toggle Color Column" }
-)
 
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0

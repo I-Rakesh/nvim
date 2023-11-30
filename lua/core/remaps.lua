@@ -8,6 +8,14 @@ vim.keymap.set(
 	{ desc = "tmux-sessionizer" }
 )
 
+-- Color column
+vim.api.nvim_set_keymap(
+	"n",
+	"<Leader>cc",
+	':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR>',
+	{ noremap = true, silent = true, desc = "Toggle Color Column" }
+)
+
 -- Redo
 vim.keymap.set("n", "<S-u>", "<C-r>", { desc = "Redo" })
 
