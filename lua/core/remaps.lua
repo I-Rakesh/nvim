@@ -81,10 +81,10 @@ vim.keymap.set(
 )
 
 -- to resize panes
-vim.keymap.set("n", "+", [[<cmd>vertical resize +5<cr>]], { desc = "Resize Window Vertical+" })
-vim.keymap.set("n", "_", [[<cmd>vertical resize -5<cr>]], { desc = "Resize Window Vertical-" })
-vim.keymap.set("n", "≠", [[<cmd>horizontal resize +2<cr>]], { desc = "Resize Window Horizantal+" })
-vim.keymap.set("n", "–", [[<cmd>horizontal resize -2<cr>]], { desc = "Resize Window Horizantal-" })
+vim.keymap.set("n", "<A-p>", [[<cmd>vertical resize +5<cr>]], { desc = "Resize Window Vertical+" })
+vim.keymap.set("n", "<A-m>", [[<cmd>vertical resize -5<cr>]], { desc = "Resize Window Vertical-" })
+vim.keymap.set("n", "<A-=>", [[<cmd>horizontal resize +2<cr>]], { desc = "Resize Window Horizantal+" })
+vim.keymap.set("n", "<A-->", [[<cmd>horizontal resize -2<cr>]], { desc = "Resize Window Horizantal-" })
 vim.keymap.set("n", "<leader>-", "<C-w>_", { desc = "Maxinize Horzantal Split" })
 vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equlize Splipts" })
 
