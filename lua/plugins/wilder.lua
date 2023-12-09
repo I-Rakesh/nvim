@@ -1,6 +1,6 @@
 return {
 	"gelguy/wilder.nvim",
-	event = "VeryLazy",
+	keys = { ":", "/", "?" },
 	build = function()
 		vim.cmd([[silent UpdateRemotePlugins]])
 	end,
