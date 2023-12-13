@@ -12,6 +12,11 @@ return {
 		"L3MON4D3/LuaSnip",
 	},
 	config = function()
+		require("lspkind").init({
+			symbol_map = {
+				Copilot = "",
+			},
+		})
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
 		local luasnip = require("luasnip")
