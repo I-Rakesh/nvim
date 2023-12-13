@@ -63,6 +63,7 @@ return {
 						end,
 					},
 				},
+				{ name = "copilot" },
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
