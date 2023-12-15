@@ -34,8 +34,8 @@ return {
 			defaults = {
 				mappings = {
 					n = {
-						["<leader>qx"] = trouble.open_with_trouble,
-						["<leader>qsx"] = actions.smart_send_to_qflist + actions.open_qflist,
+						["<C-t>"] = trouble.open_with_trouble,
+						["<leader>q"] = actions.smart_send_to_qflist + actions.open_qflist,
 					},
 				},
 				vimgrep_arguments = {

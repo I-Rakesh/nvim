@@ -93,6 +93,6 @@ vim.keymap.set("n", '<leader>"', ":new<CR>", { desc = "New Horzantal Split" })
 vim.keymap.set("n", "<leader>%", ":vnew<CR>", { desc = "New Vertical Split" })
 
 -- Navigate between quickfix items
--- vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward Qfixlist" })
--- vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Backward Qfixlist" })
--- vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>", { desc = "Open Quickfix list" })
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz", { desc = "Forward Qfixlist" })
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz", { desc = "Backward Qfixlist" })
+vim.keymap.set("n", "<leader>q", "<cmd>copen<CR>", { desc = "Open Quickfix list" })
