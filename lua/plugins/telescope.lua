@@ -7,6 +7,7 @@ return {
 		vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 		local builtin = require("telescope.builtin")
 		local actions = require("telescope.actions")
+		local trouble = require("trouble.providers.telescope")
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
 		vim.keymap.set("n", "<leader>sw", builtin.live_grep, { desc = "Search Word" })
 		vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Search Buffer" })
@@ -32,7 +33,10 @@ return {
 		require("telescope").setup({
 			defaults = {
 				mappings = {
-					i = { ["<leader>q"] = actions.send_to_qflist + actions.open_qflist },
+					n = {
+						["<leader>qx"] = trouble.open_with_trouble,
+						["<leader>qsx"] = actions.smart_send_to_qflist + actions.open_qflist,
+					},
 				},
 				vimgrep_arguments = {
 					"rg",
