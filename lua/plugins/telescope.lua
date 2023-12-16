@@ -1,5 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	event = "VeryLazy",
 	cmd = "Telescope",
 	tag = "0.1.3",
 	dependencies = { "nvim-lua/plenary.nvim" },
@@ -7,7 +8,6 @@ return {
 		vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 		local builtin = require("telescope.builtin")
 		local actions = require("telescope.actions")
-		local trouble = require("trouble.providers.telescope")
 		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
 		vim.keymap.set("n", "<leader>sw", builtin.live_grep, { desc = "Search Word" })
 		vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Search Buffer" })
@@ -15,7 +15,7 @@ return {
 		vim.keymap.set("n", "<leader>sk", ":Telescope keymaps<CR>", { desc = "Search Keymaps" })
 		vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "Search Git" })
 		vim.keymap.set("n", "<leader>ch", builtin.colorscheme, { desc = "Change Color Scheme" })
-		vim.keymap.set("n", "<leader>sdw", builtin.diagnostics, { desc = "Search Diagnostics" })
+		vim.keymap.set("n", "<leader>sdw", builtin.diagnostics, { desc = "Search Workspace Diagnostics" })
 		vim.keymap.set("n", "<leader>sdb", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Search Diagnostics" })
 		vim.keymap.set("n", "<leader>sr", builtin.lsp_references, { desc = "Search References" })
 		vim.keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, { desc = "Search Symbles" })
@@ -31,12 +31,19 @@ return {
 			}))
 		end, { desc = "Search Current Buffer" })
 
+		local open_with_trouble = function(...)
+			return require("trouble.providers.telescope").open_with_trouble(...)
+		end
+		local open_selected_with_trouble = function(...)
+			return require("trouble.providers.telescope").open_selected_with_trouble(...)
+		end
 		require("telescope").setup({
 			defaults = {
 				mappings = {
 					n = {
-						["<C-t>"] = trouble.open_with_trouble,
 						["<leader>q"] = actions.smart_send_to_qflist + actions.open_qflist,
+						["<leader>tse"] = open_selected_with_trouble,
+						["<leader>te"] = open_with_trouble,
 					},
 				},
 				vimgrep_arguments = {
@@ -49,7 +56,7 @@ return {
 					"--smart-case",
 				},
 				prompt_prefix = "   ",
-				selection_caret = "  ",
+				selection_caret = " ",
 				entry_prefix = "  ",
 				initial_mode = "insert",
 				selection_strategy = "reset",

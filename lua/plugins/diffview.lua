@@ -1,6 +1,5 @@
 return {
 	"sindrets/diffview.nvim",
-	event = { "VeryLazy" },
 	keys = {
 		{ "<leader>dv", mode = { "n" }, "<cmd>DiffviewOpen<CR>", desc = "DiffView" },
 		{ "<leader>dcv", mode = { "n" }, ":DiffviewOpen ", desc = "DiffView Specific File Commit" },

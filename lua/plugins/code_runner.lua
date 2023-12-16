@@ -1,6 +1,14 @@
 return {
 	"CRAG666/code_runner.nvim",
-	event = "VeryLazy",
+	keys = {
+		{ "<leader>rr", mode = "n", ":RunProject<CR>", desc = "Run Project" },
+		{ "<leader>rx", mode = "n", ":RunClose<CR>", desc = "Run Close" },
+		{ "<leader>rcf", mode = "n", ":CRFiletype<CR>" },
+		{ "<leader>rcp", mode = "n", ":CRProjects<CR>" },
+		{ "<leader>rr", mode = "n", ":RunFile term<CR>", desc = "Run Code In Horzantle Split" },
+		{ "<leader>rf", mode = "n", ":RunFile float<CR>", desc = "Run Code In Float" },
+		{ "<leader>rt", mode = "n", ":RunFile tab<CR>", desc = "Run Code In Tab" },
+	},
 	config = function()
 		require("code_runner").setup({
 			filetype = {
@@ -46,28 +54,5 @@ return {
 				border_hl = "Normal",
 			},
 		})
-
-		vim.keymap.set(
-			"n",
-			"<leader>rr",
-			":RunFile term<CR>",
-			{ noremap = true, silent = false, desc = "Run Code In Horzantle Split" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>rf",
-			":RunFile float<CR>",
-			{ noremap = true, silent = false, desc = "Run Code In Float" }
-		)
-		vim.keymap.set(
-			"n",
-			"<leader>rt",
-			":RunFile tab<CR>",
-			{ noremap = true, silent = false, desc = "Run Code In Tab" }
-		)
-		vim.keymap.set("n", "<leader>rp", ":RunProject<CR>", { noremap = true, silent = false, desc = "Run Project" })
-		vim.keymap.set("n", "<leader>rx", ":RunClose<CR>", { noremap = true, silent = false, desc = "Run Close" })
-		vim.keymap.set("n", "<leader>rcf", ":CRFiletype<CR>", { noremap = true, silent = false })
-		vim.keymap.set("n", "<leader>rcp", ":CRProjects<CR>", { noremap = true, silent = false })
 	end,
 }

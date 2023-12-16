@@ -1,10 +1,9 @@
 return {
 	"tpope/vim-surround",
-	-- event = { "BufReadPre", "BufNewFile" },
 	keys = {
-		{ "cs" },
-		{ "ds" },
-		{ "ys" },
+		{ "cs", mode = { "n" } },
+		{ "ds", mode = { "n" } },
+		{ "ys", mode = { "n" } },
 		{ "S", mode = { "v" } },
 	},
 }
