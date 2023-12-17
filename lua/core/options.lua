@@ -47,3 +47,5 @@ vim.opt.splitright = true
 
 vim.opt.virtualedit = "block"
 vim.opt.inccommand = "split"
+
+vim.cmd("highlight Pmenu guibg=NONE")

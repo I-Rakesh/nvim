@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = "VeryLazy",
+	event = "InsertEnter",
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
@@ -86,7 +86,5 @@ return {
 				documentation = cmp.config.window.bordered(),
 			},
 		})
-
-		vim.cmd("highlight Pmenu guibg=NONE")
 	end,
 }
