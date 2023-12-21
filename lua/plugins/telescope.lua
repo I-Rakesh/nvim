@@ -1,36 +1,40 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	event = "VeryLazy",
 	cmd = "Telescope",
-	tag = "0.1.3",
+	version = false,
 	dependencies = { "nvim-lua/plenary.nvim" },
+	keys = {
+		{ "<leader>sf", mode = "n", "<cmd>Telescope find_files<CR>", { desc = "Search files" } },
+		{ "<leader>sw", mode = "n", "<cmd>Telescope live_grep<CR>", { desc = "Search Word" } },
+		{ "<leader>sb", mode = "n", "<cmd>Telescope buffers<CR>", { desc = "Search Buffer" } },
+		{ "<leader>st", mode = "n", "<cmd>Telescope help_tags<CR>", { desc = "Search Help Tags" } },
+		{ "<leader>sk", mode = "n", "<cmd>Telescope keymaps<CR>", { desc = "Search Keymaps" } },
+		{ "<leader>sg", mode = "n", "<cmd>Telescope git_files<CR>", { desc = "Search Git" } },
+		{ "<leader>ch", mode = "n", "<cmd>Telescope colorscheme<CR>", { desc = "Change Color Scheme" } },
+		{
+			"<leader>sdw",
+			mode = "n",
+			"<cmd>Telescope diagnostics<CR>",
+			{ desc = "Search Workspace Diagnostics" },
+		},
+		{ "<leader>sdb", mode = "n", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Search Diagnostics" } },
+		{ "<leader>sr", mode = "n", "<cmd>Telescope lsp_references<CR>", { desc = "Search References" } },
+		{ "<leader>ss", mode = "n", "<cmd>Telescope lsp_document_symbols<CR>", { desc = "Search Symbles" } },
+		{ "<leader>sj", mode = "n", "<cmd>Telescope jumplist<CR>", { desc = "Search Jumplist" } },
+		{ "<leader>sm", mode = "n", "<cmd>Telescope marks<CR>", { desc = "Search Marks" } },
+		{ "<leader>so", mode = "n", "<cmd>Telescope oldfiles<CR>", { desc = "Search Old Files" } },
+		{ "<leader>s*", mode = "n", "<cmd>Telescope grep_string<CR>", { desc = "Search Current Word" } },
+		{ "<leader>s:", mode = "n", "<cmd>Telescope command_history<CR>", { desc = "Search Command History" } },
+		{
+			"<leader>z",
+			mode = "n",
+			"<cmd>Telescope spell_suggest<CR>",
+			{ desc = "Search Spell Suggestion's" },
+		},
+	},
 	config = function()
 		vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
-		local builtin = require("telescope.builtin")
 		local actions = require("telescope.actions")
-		vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "Search files" })
-		vim.keymap.set("n", "<leader>sw", builtin.live_grep, { desc = "Search Word" })
-		vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "Search Buffer" })
-		vim.keymap.set("n", "<leader>st", builtin.help_tags, { desc = "Search Help Tags" })
-		vim.keymap.set("n", "<leader>sk", ":Telescope keymaps<CR>", { desc = "Search Keymaps" })
-		vim.keymap.set("n", "<leader>sg", builtin.git_files, { desc = "Search Git" })
-		vim.keymap.set("n", "<leader>ch", builtin.colorscheme, { desc = "Change Color Scheme" })
-		vim.keymap.set("n", "<leader>sdw", builtin.diagnostics, { desc = "Search Workspace Diagnostics" })
-		vim.keymap.set("n", "<leader>sdb", "<cmd>Telescope diagnostics bufnr=0<CR>", { desc = "Search Diagnostics" })
-		vim.keymap.set("n", "<leader>sr", builtin.lsp_references, { desc = "Search References" })
-		vim.keymap.set("n", "<leader>ss", builtin.lsp_document_symbols, { desc = "Search Symbles" })
-		vim.keymap.set("n", "<leader>sj", builtin.jumplist, { desc = "Search Jumplist" })
-		vim.keymap.set("n", "<leader>sm", builtin.marks, { desc = "Search Marks" })
-		vim.keymap.set("n", "<leader>so", builtin.oldfiles, { desc = "Search Old Files" })
-		vim.keymap.set("n", "<leader>s*", builtin.grep_string, { desc = "Search Current Word" })
-		vim.keymap.set("n", "<leader>s:", builtin.command_history, { desc = "Search Command History" })
-		vim.keymap.set("n", "<leader>z", builtin.spell_suggest, { desc = "Search Spell Suggestion's" })
-		vim.keymap.set("n", "<leader>s/", function()
-			require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-				previewer = false,
-			}))
-		end, { desc = "Search Current Buffer" })
-
 		local open_with_trouble = function(...)
 			return require("trouble.providers.telescope").open_with_trouble(...)
 		end
