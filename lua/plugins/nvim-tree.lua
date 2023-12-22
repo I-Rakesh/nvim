@@ -2,7 +2,7 @@ return {
 	"nvim-tree/nvim-tree.lua",
 	cmd = "NvimTreeToggle",
 	keys = {
-		{ "<c-n>", mode = { "n" }, ":NvimTreeFindFileToggle<CR>", { desc = "Open File Tee" } },
+		{ "<c-n>", mode = { "n" }, "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Open File Tee" } },
 	},
 	config = function()
 		require("nvim-tree").setup({
@@ -13,7 +13,5 @@ return {
 				dotfiles = true,
 			},
 		})
-
-		vim.keymap.set("n", "<c-n>", ":NvimTreeFindFileToggle<CR>", { desc = "Open File Tee" })
 	end,
 }

@@ -20,8 +20,8 @@ vim.api.nvim_set_keymap(
 vim.keymap.set("n", "<S-u>", "<C-r>", { desc = "Redo" })
 
 -- to move selected text up or down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move Selected Down" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move Selected Up" })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Selected Down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Selected Up" })
 
 -- to keep the cursor in the middle while moving and searching
 vim.keymap.set("n", "J", "mzJ`z")
@@ -53,10 +53,10 @@ vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true, desc 
 
 -- to close the current buffer
 vim.keymap.set("n", "<leader>x", vim.cmd.bd, { desc = "Close Current Buffer" })
-vim.keymap.set("n", "<leader>X", ":%bd|edit#|bd#<CR>", { desc = "Close All Buffers Exept Current" })
+vim.keymap.set("n", "<leader>X", "<cmd>%bd|edit#|bd#<CR>", { desc = "Close All Buffers Exept Current" })
 
 -- to close tab
-vim.keymap.set("n", "<leader>tx", ":tabc<CR>", { desc = "Close Current Tab" })
+vim.keymap.set("n", "<leader>tx", "<cmd>tabc<CR>", { desc = "Close Current Tab" })
 
 -- to move between buffers
 vim.keymap.set("n", "<Tab>", vim.cmd.bnext, { desc = "Next Buffer" })
@@ -89,8 +89,8 @@ vim.keymap.set("n", "<leader>-", "<C-w>_", { desc = "Maxinize Horzantal Split" }
 vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equlize Splipts" })
 
 -- to open new panes
-vim.keymap.set("n", '<leader>"', ":new<CR>", { desc = "New Horzantal Split" })
-vim.keymap.set("n", "<leader>%", ":vnew<CR>", { desc = "New Vertical Split" })
+vim.keymap.set("n", '<leader>"', "<cmd>new<CR>", { desc = "New Horzantal Split" })
+vim.keymap.set("n", "<leader>%", "<cmd>vnew<CR>", { desc = "New Vertical Split" })
 
 --Function to toggle quickfix window
 vim.g.quickfix_opened = 0
@@ -108,6 +108,6 @@ end
 vim.api.nvim_set_keymap(
 	"n",
 	"<leader>q",
-	":lua ToggleQuickfix()<CR>",
+	"<cmd>lua ToggleQuickfix()<CR>",
 	{ noremap = true, silent = true, desc = "Toggle Quickfix list" }
 )

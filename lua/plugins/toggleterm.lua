@@ -18,20 +18,25 @@ return {
 			direction = "float",
 			autochdir = true,
 		})
-		vim.keymap.set({ "n" }, "<leader>tf", ":ToggleTerm direction=float<CR>", { desc = "Open Terminal In Float" })
+		vim.keymap.set(
+			{ "n" },
+			"<leader>tf",
+			"<cmd>ToggleTerm direction=float<CR>",
+			{ desc = "Open Terminal In Float" }
+		)
 		vim.keymap.set(
 			{ "n" },
 			"<leader>tv",
-			":ToggleTerm direction=vertical<CR>",
+			"<cmd>ToggleTerm direction=vertical<CR>",
 			{ desc = "Open Terminal In Vertical Split" }
 		)
 		vim.keymap.set(
 			{ "n" },
 			"<leader>th",
-			":ToggleTerm direction=horizontal<CR>",
+			"<cmd>ToggleTerm direction=horizontal<CR>",
 			{ desc = "Open Terminal In Horizontal Split" }
 		)
-		vim.keymap.set({ "n" }, "<leader>tt", ":ToggleTerm direction=tab<CR>", { desc = "Open Terminal In Tab" })
+		vim.keymap.set({ "n" }, "<leader>tt", "<cmd>ToggleTerm direction=tab<CR>", { desc = "Open Terminal In Tab" })
 
 		function _G.set_terminal_keymaps()
 			local opts = { buffer = 0 }

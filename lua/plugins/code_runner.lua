@@ -1,13 +1,13 @@
 return {
 	"CRAG666/code_runner.nvim",
 	keys = {
-		{ "<leader>rr", mode = "n", ":RunProject<CR>", desc = "Run Project" },
-		{ "<leader>rx", mode = "n", ":RunClose<CR>", desc = "Run Close" },
-		{ "<leader>rcf", mode = "n", ":CRFiletype<CR>" },
-		{ "<leader>rcp", mode = "n", ":CRProjects<CR>" },
-		{ "<leader>rr", mode = "n", ":RunFile term<CR>", desc = "Run Code In Horzantle Split" },
-		{ "<leader>rf", mode = "n", ":RunFile float<CR>", desc = "Run Code In Float" },
-		{ "<leader>rt", mode = "n", ":RunFile tab<CR>", desc = "Run Code In Tab" },
+		{ "<leader>rr", mode = "n", "<cmd>RunProject<CR>", desc = "Run Project" },
+		{ "<leader>rx", mode = "n", "<cmd>RunClose<CR>", desc = "Run Close" },
+		{ "<leader>rcf", mode = "n", "<cmd>CRFiletype<CR>" },
+		{ "<leader>rcp", mode = "n", "<cmd>CRProjects<CR>" },
+		{ "<leader>rr", mode = "n", "<cmd>RunFile term<CR>", desc = "Run Code In Horzantle Split" },
+		{ "<leader>rf", mode = "n", "<cmd>RunFile float<CR>", desc = "Run Code In Float" },
+		{ "<leader>rt", mode = "n", "<cmd>RunFile tab<CR>", desc = "Run Code In Tab" },
 	},
 	config = function()
 		require("code_runner").setup({

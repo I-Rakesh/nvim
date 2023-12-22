@@ -46,8 +46,8 @@ return {
 				map("v", "<leader>hs", function()
 					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
-				map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Git Stage Hunk" })
-				map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "Git Restore Hunk" })
+				map({ "n", "v" }, "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>", { desc = "Git Stage Hunk" })
+				map({ "n", "v" }, "<leader>hr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Git Restore Hunk" })
 				map("v", "<leader>hr", function()
 					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
@@ -66,7 +66,7 @@ return {
 				map("n", "<leader>htd", gs.toggle_deleted, { desc = "Git Toggle Delete" })
 
 				-- Text object
-				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git Select Hunk" })
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { silent = true, desc = "Git Select Hunk" })
 			end,
 		})
 	end,
