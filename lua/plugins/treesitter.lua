@@ -73,6 +73,8 @@ return {
 						["al"] = "@loop.outer",
 						["ii"] = "@conditional.inner",
 						["ai"] = "@conditional.outer",
+						["am"] = "@comment.outer",
+						["im"] = "@comment.inner",
 					},
 				},
 				move = {
