@@ -3,5 +3,5 @@ return {
 	opts = {
 		-- add any options here
 	},
-	event = { "BufReadPre", "BufNewFile" },
+	event = "VeryLazy",
 }
