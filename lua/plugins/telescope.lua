@@ -2,10 +2,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	cmd = "Telescope",
 	version = false,
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope-file-browser.nvim",
-  },
+  dependencies = { "nvim-lua/plenary.nvim" },
 	keys = {
     { "<leader>sf", mode = "n", "<cmd>Telescope find_files<CR>",  { desc = "Search files" } },
     { "<leader>sw", mode = "n", "<cmd>Telescope live_grep<CR>",   { desc = "Search Word" } },
@@ -14,12 +11,6 @@ return {
     { "<leader>sk", mode = "n", "<cmd>Telescope keymaps<CR>",     { desc = "Search Keymaps" } },
     { "<leader>sg", mode = "n", "<cmd>Telescope git_files<CR>",   { desc = "Search Git" } },
 		{ "<leader>ch", mode = "n", "<cmd>Telescope colorscheme<CR>", { desc = "Change Color Scheme" } },
-		{
-			"<leader>cd",
-			mode = "n",
-			"<cmd>Telescope file_browser path=%:p:h select_buffer=true<CR>",
-			{ noremap = true, desc = "Change Directory" },
-		},
 		{
 			"<leader>sdw",
 			mode = "n",
