@@ -25,6 +25,7 @@ return {
 		{ "<leader>so", mode = "n", "<cmd>Telescope oldfiles<CR>", { desc = "Search Old Files" } },
 		{ "<leader>s*", mode = "n", "<cmd>Telescope grep_string<CR>", { desc = "Search Current Word" } },
 		{ "<leader>s:", mode = "n", "<cmd>Telescope command_history<CR>", { desc = "Search Command History" } },
+		{ "<leader>sp", mode = "n", "<cmd>Telescope resume<CR>", { desc = "Previous Search" } },
 		{
 			"<leader>z",
 			mode = "n",
