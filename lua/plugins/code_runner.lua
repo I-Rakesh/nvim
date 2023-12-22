@@ -46,7 +46,7 @@ return {
 			},
 			mode = "float",
 			float = {
-				border = "single",
+				border = "rounded",
 				height = 0.5,
 				width = 0.5,
 				x = 0.5,

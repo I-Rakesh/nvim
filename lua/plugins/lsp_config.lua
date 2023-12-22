@@ -125,5 +125,6 @@ return {
 				end, { desc = "lsp Format" })
 			end,
 		})
+		require("lspconfig.ui.windows").default_options.border = "rounded"
 	end,
 }
