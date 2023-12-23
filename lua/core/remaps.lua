@@ -2,18 +2,18 @@ vim.g.mapleader = " "
 
 --tmux-sessions
 vim.keymap.set(
-	"n",
-	"<C-f>",
-	"<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer<CR>",
-	{ desc = "tmux-sessionizer" }
+  "n",
+  "<C-f>",
+  "<cmd>silent !tmux neww ~/.local/scripts/tmux-sessionizer<CR>",
+  { desc = "tmux-sessionizer" }
 )
 
 -- Color column
 vim.api.nvim_set_keymap(
-	"n",
-	"<Leader>cc",
-	':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR>',
-	{ noremap = true, silent = true, desc = "Toggle Color Column" }
+  "n",
+  "<Leader>cc",
+  ':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR>',
+  { noremap = true, silent = true, desc = "Toggle Color Column" }
 )
 
 -- Redo
@@ -42,7 +42,9 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Deleat Without Copi
 vim.keymap.set({ "n", "v" }, "X", [["_x]], { desc = "Deleat Letter Without Coping" })
 
 -- format code based on Lsp
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Formater" })
+vim.keymap.set("n", "<leader>f", function()
+  vim.lsp.buf.format({ async = true })
+end, { desc = "Formater" })
 
 -- to change the word at the cursor
 vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { desc = "Change Word" })
@@ -74,10 +76,10 @@ vim.keymap.set({ "n" }, "<leader>J", "<Esc><C-w>J", { desc = "Move Window Down" 
 vim.keymap.set({ "n" }, "<leader>K", "<Esc><C-w>K", { desc = "Move Window  Up" })
 vim.keymap.set({ "n" }, "<leader>L", "<Esc><C-w>L", { desc = "Move Window Right" })
 vim.keymap.set(
-	"n",
-	"<leader><C-" .. vim.g.mapleader .. ">",
-	"<Esc><C-w><C-r>",
-	{ noremap = true, desc = "Swap Window Positions" }
+  "n",
+  "<leader><C-" .. vim.g.mapleader .. ">",
+  "<Esc><C-w><C-r>",
+  { noremap = true, desc = "Swap Window Positions" }
 )
 
 -- to resize panes
@@ -95,19 +97,19 @@ vim.keymap.set("n", "<leader>%", "<cmd>vnew<CR>", { desc = "New Vertical Split" 
 --Function to toggle quickfix window
 vim.g.quickfix_opened = 0
 function ToggleQuickfix()
-	local wininfo = vim.fn.getwininfo()
-	if vim.tbl_isempty(vim.fn.filter(wininfo, "v:val.quickfix")) then
-		vim.cmd(":copen")
-		vim.g.quickfix_opened = 1
-	else
-		vim.cmd(":cclose")
-		vim.g.quickfix_opened = 0
-	end
+  local wininfo = vim.fn.getwininfo()
+  if vim.tbl_isempty(vim.fn.filter(wininfo, "v:val.quickfix")) then
+    vim.cmd(":copen")
+    vim.g.quickfix_opened = 1
+  else
+    vim.cmd(":cclose")
+    vim.g.quickfix_opened = 0
+  end
 end
 
 vim.api.nvim_set_keymap(
-	"n",
-	"<leader>q",
-	"<cmd>lua ToggleQuickfix()<CR>",
-	{ noremap = true, silent = true, desc = "Toggle Quickfix list" }
+  "n",
+  "<leader>q",
+  "<cmd>lua ToggleQuickfix()<CR>",
+  { noremap = true, silent = true, desc = "Toggle Quickfix list" }
 )
