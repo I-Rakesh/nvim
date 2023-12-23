@@ -1,8 +1,17 @@
 return {
 	"zbirenbaum/copilot.lua",
 	cmd = "Copilot",
-	event = "InsertEnter",
-	dependencies = { "zbirenbaum/copilot-cmp" },
+	keys = {
+		{
+			"<leader>cp",
+			mode = "n",
+			function()
+				require("copilot.suggestion").toggle_auto_trigger()
+			end,
+			{ desc = "Toggle Copilot Suggestion" },
+		},
+	},
+	-- dependencies = { "zbirenbaum/copilot-cmp" },
 	config = function()
 		local suggestion = require("copilot.suggestion")
 		vim.keymap.set("n", "<leader>cp", suggestion.toggle_auto_trigger, { desc = "Toggle Copilot Suggestion" })
@@ -15,12 +24,12 @@ return {
 					accept_line = "<C-l>",
 				},
 			},
-			panel = { enabled = false },
+			-- panel = { enabled = false },
 			filetypes = {
 				markdown = true,
 				help = true,
 			},
 		})
-		require("copilot_cmp").setup()
+		-- require("copilot_cmp").setup()
 	end,
 }

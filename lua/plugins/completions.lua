@@ -1,6 +1,32 @@
 return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
+	keys = {
+		{
+			"<tab>",
+			function()
+				return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+			end,
+			expr = true,
+			silent = true,
+			mode = "i",
+		},
+		{
+			"<tab>",
+			function()
+				require("luasnip").jump(1)
+			end,
+			mode = "s",
+		},
+		{
+			"<s-tab>",
+			function()
+				require("luasnip").jump(-1)
+			end,
+			mode = { "i", "s" },
+		},
+	},
+
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
@@ -19,7 +45,6 @@ return {
 		})
 		local cmp = require("cmp")
 		local lspkind = require("lspkind")
-		local luasnip = require("luasnip")
 
 		require("luasnip.loaders.from_vscode").lazy_load()
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -29,29 +54,8 @@ return {
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-				["<C-Space>"] = cmp.mapping.abort(),
+				["<C-e>"] = cmp.mapping.abort(),
 				["<CR>"] = cmp.mapping.confirm({ select = true }),
-				["<Tab>"] = function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_jumpable() then
-						vim.fn.feedkeys(
-							vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true),
-							""
-						)
-					else
-						fallback()
-					end
-				end,
-				["<S-Tab>"] = function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
-						vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-					else
-						fallback()
-					end
-				end,
 			}),
 			snippet = {
 				expand = function(args)
@@ -68,7 +72,7 @@ return {
 						end,
 					},
 				},
-				{ name = "copilot" },
+				-- { name = "copilot" },
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
@@ -80,6 +84,9 @@ return {
 					maxwidth = 50,
 					ellipsis_char = "...",
 				}),
+			},
+			experimental = {
+				ghost_text = true,
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
