@@ -1,10 +1,14 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+  lazy = true,
+  init = function()
+    require("core.utils").lazy_load("nvim-lspconfig")
+  end,
   dependencies = {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    "nvimtools/none-ls.nvim",
   },
   config = function()
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })

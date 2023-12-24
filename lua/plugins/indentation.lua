@@ -1,7 +1,10 @@
 return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
-		event = "VeryLazy",
+		lazy = true,
+		init = function()
+			require("core.utils").lazy_load("indent-blankline.nvim")
+		end,
 		dependencies = "echasnovski/mini.indentscope",
 		opts = {
 			indent = {
