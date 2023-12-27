@@ -8,6 +8,9 @@ vim.keymap.set(
   { desc = "tmux-sessionizer" }
 )
 
+--Macro
+vim.keymap.set({ "n", "v" }, "Q", "@@", { desc = "Replay a Macro" })
+
 -- Color column
 vim.api.nvim_set_keymap(
   "n",
