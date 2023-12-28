@@ -45,6 +45,8 @@ return {
         "shfmt",
         "shellcheck",
         "mypy",
+        --Debugger
+        "codelldb",
       },
     })
 
