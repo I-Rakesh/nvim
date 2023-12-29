@@ -2,14 +2,14 @@ return {
   "mfussenegger/nvim-dap",
   keys = {
     {
-      "<leader>dB",
+      "<leader>dM",
       function()
         require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
       end,
       desc = "Breakpoint Condition",
     },
     {
-      "<leader>db",
+      "<leader>dm",
       function()
         require("dap").toggle_breakpoint()
       end,
