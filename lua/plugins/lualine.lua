@@ -28,6 +28,12 @@ return {
 				lualine_b = { "branch", "diff", "diagnostics" },
 				lualine_c = { "filename" },
 				lualine_x = {
+          -- stylua: ignore
+          {
+            function() return require("noice").api.status.command.get() end,
+            cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+						color = { fg = "808080" },
+          },
 					{
 						lazy_status.updates,
 						cond = lazy_status.has_updates,
