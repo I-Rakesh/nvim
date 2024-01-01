@@ -46,7 +46,7 @@ return {
 			"filetype",
 			icon_only = true,
 			colored = true,
-			separator = { left = " ", right = " " },
+			separator = { left = "", right = "" },
 		}
 
 		require("lualine").setup({
@@ -71,7 +71,7 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff", "diagnostics" },
-				lualine_c = { "filename", filetype },
+				lualine_c = { filetype, "filename" },
 				lualine_x = {
           -- stylua: ignore
           {
