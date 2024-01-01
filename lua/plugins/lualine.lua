@@ -4,6 +4,51 @@ return {
 	event = "VeryLazy",
 	config = function()
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
+
+		local function getLspName()
+			local msg = "  No Active Lsp"
+			local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
+			local clients = vim.lsp.get_active_clients()
+
+			-- Find the first client other than null-ls that matches the filetype
+			local firstNonNullLsClient = nil
+			for _, client in ipairs(clients) do
+				if client.name ~= "null-ls" then
+					local filetypes = client.config.filetypes
+					if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+						firstNonNullLsClient = client
+						break
+					end
+				end
+			end
+
+			-- If a non-null-ls client was found, return it
+			if firstNonNullLsClient then
+				return "  " .. firstNonNullLsClient.name
+			end
+
+			-- If there's only null-ls, return it
+			if #clients == 1 and clients[1].name == "null-ls" then
+				return "  null-ls"
+			end
+
+			-- Otherwise, return the default message
+			return "" .. msg
+		end
+		local lsp = {
+			function()
+				return getLspName()
+			end,
+			separator = { left = "" },
+			color = { bg = "#98c379", fg = "#1e1e2e" },
+		}
+		local filetype = {
+			"filetype",
+			icon_only = true,
+			colored = true,
+			separator = { left = " ", right = " " },
+		}
+
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
@@ -26,7 +71,7 @@ return {
 			sections = {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff", "diagnostics" },
-				lualine_c = { "filename" },
+				lualine_c = { "filename", filetype },
 				lualine_x = {
           -- stylua: ignore
           {
@@ -44,12 +89,10 @@ return {
 						cond = require("noice").api.statusline.mode.has,
 						color = { fg = "#ff9e64" },
 					},
-					"encoding",
 					{ "fileformat", symbols = { unix = "" } },
-					"filetype",
 				},
 				lualine_y = { "progress" },
-				lualine_z = { "location" },
+				lualine_z = { lsp },
 			},
 			inactive_sections = {
 				lualine_a = {},

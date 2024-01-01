@@ -2,7 +2,6 @@ return {
 	"rcarriga/nvim-notify",
 	event = "VeryLazy",
 	opts = {
-		timeout = 3000,
 		max_height = function()
 			return math.floor(vim.o.lines * 0.75)
 		end,
@@ -16,6 +15,7 @@ return {
 	config = function()
 		vim.notify = require("notify")
 		require("notify").setup({
+			timeout = 3000,
 			stages = "fade",
 			background_colour = "#000000",
 		})
