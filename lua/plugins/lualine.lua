@@ -6,7 +6,6 @@ return {
 		local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
 		local function getLspName()
-			local msg = "  No Active Lsp"
 			local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 			local clients = vim.lsp.get_active_clients()
 
@@ -33,14 +32,12 @@ return {
 			end
 
 			-- Otherwise, return the default message
-			return "" .. msg
+			return ""
 		end
 		local lsp = {
 			function()
 				return getLspName()
 			end,
-			separator = { left = "" },
-			color = { bg = "#98c379", fg = "#1e1e2e" },
 		}
 		local filetype = {
 			"filetype",
@@ -91,13 +88,13 @@ return {
 					},
 					{ "fileformat", symbols = { unix = "" } },
 				},
-				lualine_y = { "progress" },
-				lualine_z = { lsp },
+				lualine_y = { lsp, "progress" },
+				lualine_z = { "location" },
 			},
 			inactive_sections = {
 				lualine_a = {},
 				lualine_b = {},
-				lualine_c = { "filename" },
+				lualine_c = { filetype, "filename" },
 				lualine_x = { "location" },
 				lualine_y = {},
 				lualine_z = {},
