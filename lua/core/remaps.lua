@@ -59,6 +59,7 @@ vim.keymap.set("n", "<leader>ex", "<cmd>!chmod +x %<CR>", { silent = true, desc 
 -- to close the current buffer
 vim.keymap.set("n", "<leader>x", vim.cmd.bd, { desc = "Close Current Buffer" })
 vim.keymap.set("n", "<leader>X", "<cmd>%bd|edit#|bd#<CR>", { desc = "Close All Buffers Exept Current" })
+vim.keymap.set("n", "<leader>bx", "<cmd>%bd<CR>", { desc = "Close All Buffers" })
 
 -- to close tab
 vim.keymap.set("n", "<leader>tx", "<cmd>tabc<CR>", { desc = "Close Current Tab" })
