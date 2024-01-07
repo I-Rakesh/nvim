@@ -148,36 +148,16 @@ return {
               -- Keep original functionality
               require("mason-nvim-dap").default_setup(config)
             end,
-            codelldb = function(config)
-              local dap = require("dap")
-              dap.configurations.cpp = {
-                {
-                  name = "Launch file",
-                  type = "codelldb",
-                  request = "launch",
-                  program = function()
-                    return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                  end,
-                  cwd = "${workspaceFolder}",
-                  stopOnEntry = false,
-                },
-              }
-              dap.adapters.codelldb = {
-                type = "server",
-                port = "${port}",
-                executable = {
-                  -- CHANGE THIS to your path!
-                  command = "/Users/rakesh/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb",
-                  args = { "--port", "${port}" },
-
-                  -- On windows you may have to uncomment this:
-                  -- detached = false,
-                },
-              }
-              require("mason-nvim-dap").default_setup(config)
-            end,
           },
         })
+        --Change icons
+        local sign = vim.fn.sign_define
+        sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+        sign(
+          "DapBreakpointCondition",
+          { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" }
+        )
+        sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
       end,
     },
   },
