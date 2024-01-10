@@ -48,8 +48,14 @@ return {
         mappings = {
           n = {
             ["<leader>q"] = actions.smart_send_to_qflist + actions.open_qflist,
-            ["<leader>tse"] = open_selected_with_trouble,
-            ["<leader>te"] = open_with_trouble,
+            ["<leader>ts"] = open_selected_with_trouble,
+            ["<leader>tt"] = open_with_trouble,
+            ["<A-Down>"] = actions.cycle_history_next,
+            ["<A-Up>"] = actions.cycle_history_prev,
+          },
+          i = {
+            ["<A-Down>"] = actions.cycle_history_next,
+            ["<A-Up>"] = actions.cycle_history_prev,
           },
         },
         vimgrep_arguments = {

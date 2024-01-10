@@ -15,7 +15,7 @@ vim.keymap.set({ "n", "v" }, "Q", "@@", { desc = "Replay a Macro" })
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>cc",
-  ':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR>',
+  ':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR><cmd>echo "Color Column Toggled"<CR>',
   { noremap = true, silent = true, desc = "Toggle Color Column" }
 )
 

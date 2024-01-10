@@ -15,7 +15,7 @@ return {
 	config = function()
 		vim.notify = require("notify")
 		require("notify").setup({
-			timeout = 3000,
+			timeout = 500,
 			stages = "fade",
 			background_colour = "#000000",
 		})

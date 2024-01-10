@@ -14,6 +14,7 @@ return {
         ["<CR>"] = "actions.select",
         ["<C-x>"] = "actions.select_vsplit",
         ["<C-h>"] = "actions.select_split",
+        ["<C-s>"] = "actions.change_sort",
         ["<C-t>"] = "actions.select_tab",
         ["<C-p>"] = "actions.preview",
       },
