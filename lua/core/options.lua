@@ -51,6 +51,9 @@ vim.opt.inccommand = "split"
 
 vim.opt.showmode = false
 
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
 vim.cmd("highlight Pmenu guibg=NONE")
 -- stylua: ignore
 vim.cmd([[autocmd TermOpen * setlocal nonumber norelativenumber]])
