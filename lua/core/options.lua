@@ -52,3 +52,6 @@ vim.opt.inccommand = "split"
 vim.opt.showmode = false
 
 vim.cmd("highlight Pmenu guibg=NONE")
+-- stylua: ignore
+vim.cmd([[autocmd TermOpen * setlocal nonumber norelativenumber]])
+vim.cmd([[au TermOpen * setlocal nospell]])
