@@ -1,6 +1,18 @@
 return {
-	"folke/flash.nvim",
-	opts = {},
+  "folke/flash.nvim",
+  opts = {
+    modes = {
+      char = {
+        highlight = { backdrop = false },
+        char_actions = function()
+          return {
+            [";"] = "next", -- set to `right` to always go right
+            [","] = "prev", -- set to `left` to always go left
+          }
+        end,
+      },
+    },
+  },
   -- stylua: ignore
   keys = {
     { "/" },
