@@ -1,4 +1,5 @@
 return {
-	"tpope/vim-repeat",
-	keys = { ".", mode = "n" },
+  "tpope/vim-repeat",
+  vscode = true,
+  keys = { ".", mode = "n" },
 }
