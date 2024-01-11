@@ -2,13 +2,26 @@ if not vim.g.vscode then
 	return {}
 end
 
+local enabled = {
+	"flash.nvim",
+	"Comment.nvim",
+	"nvim-treesitter",
+	"nvim-treesitter-textobjects",
+	"nvim-ts-context-commentstring",
+	"nvim-treesitter-refactor",
+	"vim-repeat",
+	"vim-surround",
+	"LazyVim",
+  "telescope.nvim",
+}
+
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 	},
 	defaults = {
 		cond = function(plugin)
-			return plugin.vscode
+			return vim.tbl_contains(enabled, plugin.name)
 		end,
 	},
 	checker = {

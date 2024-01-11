@@ -1,6 +1,5 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  vscode = true,
   lazy = true,
   init = function()
     require("core.utils").lazy_load("nvim-treesitter")

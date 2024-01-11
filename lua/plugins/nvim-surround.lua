@@ -1,6 +1,5 @@
 return {
   "tpope/vim-surround",
-  vscode = true,
   keys = {
     { "cs", mode = { "n" } },
     { "ds", mode = { "n" } },
