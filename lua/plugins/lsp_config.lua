@@ -47,6 +47,7 @@ return {
         "mypy",
         --Debugger
         "codelldb",
+        "debugpy",
       },
     })
 
