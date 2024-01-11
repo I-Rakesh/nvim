@@ -51,6 +51,8 @@ vim.opt.inccommand = "split"
 
 vim.opt.showmode = false
 
+vim.opt.pumheight = 10 --to set the limit for cmp-window
+
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
