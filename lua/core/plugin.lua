@@ -10,6 +10,11 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
+
+if vim.g.vscode then
+	return {}
+end
+
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
@@ -25,6 +30,21 @@ require("lazy").setup({
 		size = {
 			width = 0.8,
 			height = 0.8,
+		},
+	},
+	performance = {
+		rtp = {
+			-- disable some rtp plugins
+			disabled_plugins = {
+				"gzip",
+				-- "matchit",
+				-- "matchparen",
+				-- "netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
 		},
 	},
 })

@@ -1,5 +1,6 @@
 return {
   "folke/flash.nvim",
+  vscode = true,
   opts = {
     modes = {
       char = {
