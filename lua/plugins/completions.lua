@@ -86,7 +86,7 @@ return {
 				}),
 			},
 			experimental = {
-				ghost_text = true,
+				ghost_text = false,
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
@@ -109,7 +109,7 @@ return {
 				{
 					name = "cmdline",
 					option = {
-						ignore_cmds = { "Man", "!" },
+						ignore_cmds = { "Man" },
 					},
 				},
 			}),
