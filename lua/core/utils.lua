@@ -1,3 +1,172 @@
+--Numbered Registers
+
+local numbered = setmetatable({ "", "", "", "", "", "", "", "", "", "" }, { __index = table })
+
+local function numbered_get(index)
+  if numbered[index] == "" then
+    print(index .. " is empty")
+    return
+  end
+  vim.fn.setreg('"', numbered[index])
+  print("grabbed")
+end
+
+local function numbered_set(index)
+  local register_contents = vim.fn.getreg('"')
+  if register_contents == "" then
+    print("default register empty")
+    return
+  end
+  numbered[index] = register_contents
+  print("stabbed")
+end
+
+vim.keymap.set({ "n", "v" }, '"1', function()
+  numbered_get(1)
+end)
+vim.keymap.set({ "n", "v" }, '"2', function()
+  numbered_get(2)
+end)
+vim.keymap.set({ "n", "v" }, '"3', function()
+  numbered_get(3)
+end)
+vim.keymap.set({ "n", "v" }, '"4', function()
+  numbered_get(4)
+end)
+vim.keymap.set({ "n", "v" }, '"5', function()
+  numbered_get(5)
+end)
+vim.keymap.set({ "n", "v" }, '"6', function()
+  numbered_get(6)
+end)
+vim.keymap.set({ "n", "v" }, '"7', function()
+  numbered_get(7)
+end)
+vim.keymap.set({ "n", "v" }, '"8', function()
+  numbered_get(8)
+end)
+vim.keymap.set({ "n", "v" }, '"9', function()
+  numbered_get(9)
+end)
+vim.keymap.set({ "n", "v" }, '"0', function()
+  numbered_get(10)
+end)
+
+vim.keymap.set({ "n", "v" }, ",1", function()
+  numbered_set(1)
+end)
+vim.keymap.set({ "n", "v" }, ",2", function()
+  numbered_set(2)
+end)
+vim.keymap.set({ "n", "v" }, ",3", function()
+  numbered_set(3)
+end)
+vim.keymap.set({ "n", "v" }, ",4", function()
+  numbered_set(4)
+end)
+vim.keymap.set({ "n", "v" }, ",5", function()
+  numbered_set(5)
+end)
+vim.keymap.set({ "n", "v" }, ",6", function()
+  numbered_set(6)
+end)
+vim.keymap.set({ "n", "v" }, ",7", function()
+  numbered_set(7)
+end)
+vim.keymap.set({ "n", "v" }, ",8", function()
+  numbered_set(8)
+end)
+vim.keymap.set({ "n", "v" }, ",9", function()
+  numbered_set(9)
+end)
+vim.keymap.set({ "n", "v" }, ",0", function()
+  numbered_set(10)
+end)
+
+--Killring copied from Youtube-video(https://youtu.be/KCx4mwhXffk?si=g2FJVAhWoJm5RJdk) github(https://github.com/Axlefublr/dotfiles/blob/03f0037c0734bdafaa57ee123d42556f817be84b/neovim/registers/killring.lua)
+
+local killring = setmetatable({}, { __index = table })
+
+local function killring_push_tail()
+  local register_contents = vim.fn.getreg('"')
+  if register_contents == "" then
+    print("default register is empty")
+    return
+  end
+  killring:insert(1, register_contents)
+  print("pushed")
+end
+vim.keymap.set("n", ",R", killring_push_tail, { desc = "Killring Add at first" })
+
+local function killring_push()
+  local register_contents = vim.fn.getreg('"')
+  if register_contents == "" then
+    print("default register is empty")
+    return
+  end
+  killring:insert(register_contents)
+  print("pushed")
+end
+vim.keymap.set("n", ",r", killring_push, { desc = "Killring Add at last" })
+
+local function killring_pop_tail()
+  if #killring <= 0 then
+    print("killring empty")
+    return
+  end
+  local first_index = killring:remove(1)
+  vim.fn.setreg('"', first_index)
+  print("got tail")
+end
+vim.keymap.set("n", ",E", killring_pop_tail, { desc = "Killring take from top" })
+
+local function killring_pop()
+  if #killring <= 0 then
+    print("killring empty")
+    return
+  end
+  local first_index = killring:remove(#killring)
+  vim.fn.setreg('"', first_index)
+  print("got nose")
+end
+vim.keymap.set("n", ",e", killring_pop, { desc = "Killring take from last" })
+
+local function killring_kill()
+  killring = setmetatable({}, { __index = table })
+  print("ring killed")
+end
+vim.keymap.set({ "n", "v" }, ",z", killring_kill, { desc = "Killring remove all" })
+
+local function killring_compile()
+  local compiled_killring = killring:concat("")
+  vim.fn.setreg('"', compiled_killring)
+  killring = setmetatable({}, { __index = table })
+  print("killring compiled")
+end
+vim.keymap.set({ "n", "v" }, ",t", killring_compile, { desc = "Killring compile" })
+
+local function killring_compile_reversed()
+  local reversed_killring = ReverseTable(killring)
+  local compiled_killring = reversed_killring:concat("")
+  vim.fn.setreg('"', compiled_killring)
+  killring = setmetatable({}, { __index = table })
+  print("killring compiled in reverse")
+end
+function ReverseTable(table)
+  local reversed = setmetatable({}, { __index = table })
+  local length = #table
+
+  for i = length, 1, -1 do
+    table.insert(reversed, table[i])
+  end
+
+  return reversed
+end
+
+vim.keymap.set({ "n", "v" }, ",T", killring_compile_reversed, { desc = "Killring compile reversed" })
+
+-- For compiling and running code copied from Youtube-video(https://youtu.be/5HXINnalrAQ?si=e3txV-7vtiauIHtW) git(https://arc.net/l/quote/ulxqjqza)
+
 local build_commands = {
   c = "!g++ -std=c++17 -o %:p:r.o %",
   cpp = "!g++ -std=c++17 -Wall -O2 -o %:p:r.o %",
@@ -80,6 +249,8 @@ vim.keymap.set("n", "<leader>rb", "<cmd>Build<CR><cmd>echo 'Building file'<CR>",
 -- stylua: ignore
 vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR><cmd>echo 'DebugBuild file'<CR>",
   { desc = "DebugBuild Current file" })
+
+-- For lazy loading copied from Nvchad.nvim(https://arc.net/l/quote/rmgllvck)
 
 local M = {}
 
