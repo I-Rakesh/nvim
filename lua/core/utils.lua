@@ -1,3 +1,32 @@
+--Change Default register to selected registers Youtube-video(https://youtu.be/cz01rOOaLmA?si=7uNqwz0te4UU8zRs) gitbub()https://github.com/Axlefublr/dotfiles/blob/c2a3cabd4aa11a66da714f2c8c620e5b24e86e44/neovim/big.lua
+
+function GetChar(prompt)
+  vim.api.nvim_echo({ { prompt, "Input" } }, true, {})
+  local char = vim.fn.getcharstr()
+  -- That's the escape character (<Esc>). Not sure how to specify it smarter
+  -- In other words, if you pressed escape, we return nil
+  if char == "" then
+    char = nil
+  end
+  return char
+end
+
+function Validate_register(register)
+  return register
+end
+
+function Move_default_to_other()
+  local char = GetChar("Register: ")
+  if not char then
+    return
+  end
+  local register = Validate_register(char)
+  local default_contents = vim.fn.getreg('"')
+  vim.fn.setreg(register, default_contents)
+end
+
+vim.keymap.set("n", ",g", Move_default_to_other)
+
 --Numbered Registers
 
 local numbered = setmetatable({ "", "", "", "", "", "", "", "", "", "" }, { __index = table })
