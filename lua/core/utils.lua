@@ -11,18 +11,13 @@ function GetChar(prompt)
   return char
 end
 
-function Validate_register(register)
-  return register
-end
-
 function Move_default_to_other()
   local char = GetChar("Register: ")
   if not char then
     return
   end
-  local register = Validate_register(char)
   local default_contents = vim.fn.getreg('"')
-  vim.fn.setreg(register, default_contents)
+  vim.fn.setreg(char, default_contents)
 end
 
 vim.keymap.set("n", ",g", Move_default_to_other)
