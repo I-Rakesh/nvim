@@ -9,7 +9,8 @@ vim.keymap.set(
 )
 
 --Macro
-vim.keymap.set({ "n", "v" }, "Q", "@@", { desc = "Replay a Macro" })
+vim.keymap.set("n", "Q", "@@", { desc = "Replay a Macro" })
+vim.keymap.set("v", "Q", ":norm @@<CR>", { silent = true, desc = "Replay a Macro" })
 
 -- Color column
 vim.api.nvim_set_keymap(
