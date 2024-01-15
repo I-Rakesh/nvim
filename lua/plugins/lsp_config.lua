@@ -11,10 +11,11 @@ return {
     "nvimtools/none-ls.nvim",
   },
   config = function()
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    -- The below are handled by noice
+    -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
-    vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    -- vim.lsp.handlers["textDocument/signatureHelp"] =
+    --     vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
     require("mason").setup({
       ui = {
@@ -114,7 +115,8 @@ return {
         -- See `:help vim.lsp.*` for documentation on any of the below functions
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Documentation" })
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })
+        vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
         vim.keymap.set(
           "n",

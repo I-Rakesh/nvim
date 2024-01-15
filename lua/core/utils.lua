@@ -1,3 +1,36 @@
+local M = {}
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = "*",
+})
+
+--Function to toggle quickfix window
+vim.g.quickfix_opened = 0
+function ToggleQuickfix()
+  local wininfo = vim.fn.getwininfo()
+  if vim.tbl_isempty(vim.fn.filter(wininfo, "v:val.quickfix")) then
+    vim.cmd(":copen")
+    vim.g.quickfix_opened = 1
+  else
+    vim.cmd(":cclose")
+    vim.g.quickfix_opened = 0
+  end
+end
+
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>q",
+  "<cmd>lua ToggleQuickfix()<CR>",
+  { noremap = true, silent = true, desc = "Toggle Quickfix list" }
+)
+
 --Change Default register to selected registers Youtube-video(https://youtu.be/cz01rOOaLmA?si=7uNqwz0te4UU8zRs) gitbub()https://github.com/Axlefublr/dotfiles/blob/c2a3cabd4aa11a66da714f2c8c620e5b24e86e44/neovim/big.lua
 
 function GetChar(prompt)
@@ -275,8 +308,6 @@ vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR><cmd>echo 'DebugBuild file
   { desc = "DebugBuild Current file" })
 
 -- For lazy loading copied from Nvchad.nvim(https://arc.net/l/quote/rmgllvck)
-
-local M = {}
 
 M.lazy_load = function(plugin)
   vim.api.nvim_create_autocmd({ "BufRead", "BufWinEnter", "BufNewFile" }, {

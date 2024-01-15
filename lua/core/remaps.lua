@@ -97,23 +97,3 @@ vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equlize Splipts" })
 -- to open new panes
 vim.keymap.set("n", '<leader>"', "<cmd>new<CR>", { desc = "New Horzantal Split" })
 vim.keymap.set("n", "<leader>%", "<cmd>vnew<CR>", { desc = "New Vertical Split" })
-
---Function to toggle quickfix window
-vim.g.quickfix_opened = 0
-function ToggleQuickfix()
-  local wininfo = vim.fn.getwininfo()
-  if vim.tbl_isempty(vim.fn.filter(wininfo, "v:val.quickfix")) then
-    vim.cmd(":copen")
-    vim.g.quickfix_opened = 1
-  else
-    vim.cmd(":cclose")
-    vim.g.quickfix_opened = 0
-  end
-end
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>q",
-  "<cmd>lua ToggleQuickfix()<CR>",
-  { noremap = true, silent = true, desc = "Toggle Quickfix list" }
-)

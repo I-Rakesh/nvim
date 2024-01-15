@@ -51,6 +51,9 @@ return {
       },
       config = function()
         require("mason-nvim-dap").setup({
+
+          automatic_setup = true,
+
           handlers = {
             function(config)
               -- all sources with no handler get passed here
