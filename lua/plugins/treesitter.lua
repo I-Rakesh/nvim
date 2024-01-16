@@ -8,7 +8,6 @@ return {
   build = ":TSUpdate",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "nvim-treesitter/nvim-treesitter-refactor",
   },
   config = function()
     require("nvim-treesitter.configs").setup({
@@ -107,21 +106,6 @@ return {
           },
           swap_previous = {
             ["<leader>ep"] = "@parameter.inner",
-          },
-        },
-      },
-
-      --Treesitter_refactor
-      refactor = {
-        navigation = {
-          enable = true,
-          -- Assign keymaps to false to disable them, e.g. `goto_definition = false`.
-          keymaps = {
-            goto_definition = false,
-            list_definitions = false,
-            list_definitions_toc = false,
-            goto_next_usage = "]u",
-            goto_previous_usage = "[u",
           },
         },
       },

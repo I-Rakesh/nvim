@@ -7,6 +7,10 @@ return {
       flavour = "frappe",         -- latte, frappe, macchiato, mocha
       transparent_background = true, -- disables setting the background color.
       integrations = {
+        telescope = {
+          enabled = true,
+          style = "nvchad",
+        },
         noice = true,
       },
     })

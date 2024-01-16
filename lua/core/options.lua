@@ -7,6 +7,8 @@ vim.g.netrw_winsize = 25
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
+
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
