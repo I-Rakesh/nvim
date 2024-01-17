@@ -118,18 +118,8 @@ return {
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })
         vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-        vim.keymap.set(
-          "n",
-          "<space>wa",
-          vim.lsp.buf.add_workspace_folder,
-          { desc = "lsp Add Workspace Folder" }
-        )
-        vim.keymap.set(
-          "n",
-          "<space>wr",
-          vim.lsp.buf.remove_workspace_folder,
-          { desc = "lsp Rmove Workspace Folder" }
-        )
+        vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp Add Workspace Folder" })
+        vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, { desc = "lsp Rmove Workspace Folder" })
         vim.keymap.set("n", "<space>wl", function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, { desc = "lsp List Workspace Folders" })
