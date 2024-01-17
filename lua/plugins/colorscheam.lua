@@ -13,6 +13,9 @@ return {
         },
         noice = true,
       },
+      styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        conditionals = {},
+      },
     })
     vim.cmd([[colorscheme  catppuccin ]])
   end,
