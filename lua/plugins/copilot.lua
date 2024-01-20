@@ -1,35 +1,43 @@
 return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
+  -- stylua: ignore
   keys = {
-    {
-      "<leader>cp",
-      mode = "n",
-      function()
-        require("copilot.suggestion").toggle_auto_trigger()
-      end,
-      { desc = "Toggle Copilot Suggestion" },
-    },
+    { "<leader>cp", mode = "n", ToggleCopilot, { desc = "Copilot Toggle" }, },
   },
-  -- dependencies = { "zbirenbaum/copilot-cmp" },
   config = function()
-    local suggestion = require("copilot.suggestion")
-    vim.keymap.set("n", "<leader>cp", suggestion.toggle_auto_trigger, { desc = "Toggle Copilot Suggestion" })
+    function ToggleCopilot()
+      local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
+      if client == nil then
+        vim.cmd("Copilot enable")
+        vim.cmd("echo 'Copilot enabled'")
+      else
+        vim.cmd("Copilot disable")
+        vim.cmd("echo 'Copilot disabled'")
+      end
+    end
+
+    vim.keymap.set("n", "<leader>cp", ToggleCopilot, { desc = "Copilot" })
+    vim.keymap.set(
+      "n",
+      "<leader>cs",
+      "<cmd>Copilot suggestion toggle_auto_trigger<cr><cmd>echo 'Copilot  Toggle'<CR>",
+      { desc = "Copilot" }
+    )
     require("copilot").setup({
       suggestion = {
         enabled = true,
+        auto_trigger = true,
         keymap = {
           accept = "<C-Space>",
           accept_word = "<C-w>",
           accept_line = "<C-l>",
         },
       },
-      -- panel = { enabled = false },
       filetypes = {
         markdown = true,
         help = true,
       },
     })
-    -- require("copilot_cmp").setup()
   end,
 }

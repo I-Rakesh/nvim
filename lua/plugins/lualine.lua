@@ -45,7 +45,16 @@ return {
       colored = true,
       separator = { left = "", right = "" },
     }
-
+    local copilot_indicator = {
+      function()
+        local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
+        if client == nil then
+          return ""
+        else
+          return ""
+        end
+      end,
+    }
     require("lualine").setup({
       options = {
         icons_enabled = true,
@@ -86,7 +95,7 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
-          { "fileformat", symbols = { unix = "" } },
+          copilot_indicator,
         },
         lualine_y = { lsp, "progress" },
         lualine_z = { "location" },
