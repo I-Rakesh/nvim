@@ -98,3 +98,6 @@ vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equlize Splipts" })
 -- to open new panes
 vim.keymap.set("n", '<leader>"', "<cmd>new<CR>", { desc = "New Horzantal Split" })
 vim.keymap.set("n", "<leader>%", "<cmd>vnew<CR>", { desc = "New Vertical Split" })
+
+--to go to normal mood in terminal mood
+vim.keymap.set("t", "<leader><ESC>", "<C-\\><C-n>", { noremap = true })
