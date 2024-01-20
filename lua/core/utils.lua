@@ -1,16 +1,7 @@
 local M = {}
--- Terminal
-vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter", "BufEnter" }, {
-  pattern = { "term://*" },
-  callback = function()
-    vim.wo.relativenumber = false
-    vim.wo.number = false
-    vim.o.signcolumn = "no"
-    vim.wo.spell = false
 
-    vim.cmd([[ startinsert ]])
-  end,
-})
+-- Terminal
+vim.cmd([[autocmd TermOpen * setlocal nonumber norelativenumber nospell signcolumn=no ]])
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
@@ -324,7 +315,7 @@ vim.api.nvim_create_user_command("Run", function()
       vim.cmd("sp")
       vim.cmd("term " .. command)
       vim.cmd("resize 15")
-      local keys = vim.api.nvim_replace_termcodes("", true, false, true)
+      local keys = vim.api.nvim_replace_termcodes("i", true, false, true)
       vim.api.nvim_feedkeys(keys, "n", false)
       break
     end
