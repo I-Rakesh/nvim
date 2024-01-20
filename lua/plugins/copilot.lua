@@ -3,7 +3,7 @@ return {
   cmd = "Copilot",
   -- stylua: ignore
   keys = {
-    { "<leader>cp", mode = "n", ToggleCopilot, { desc = "Copilot Toggle" }, },
+    { "<leader>cp", mode = "n", ToggleCopilot, desc = "Copilot Toggle", },
   },
   config = function()
     function ToggleCopilot()
@@ -17,12 +17,12 @@ return {
       end
     end
 
-    vim.keymap.set("n", "<leader>cp", ToggleCopilot, { desc = "Copilot" })
+    vim.keymap.set("n", "<leader>cp", ToggleCopilot, { desc = "Copilot Toggle" })
     vim.keymap.set(
       "n",
       "<leader>cs",
       "<cmd>Copilot suggestion toggle_auto_trigger<cr><cmd>echo 'Copilot  Toggle'<CR>",
-      { desc = "Copilot" }
+      { desc = "Copilot Toggle Suggestion" }
     )
     require("copilot").setup({
       suggestion = {
