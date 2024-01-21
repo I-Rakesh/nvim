@@ -2,6 +2,7 @@ local M = {}
 
 -- Terminal
 vim.cmd([[autocmd TermOpen * setlocal nonumber norelativenumber nospell signcolumn=no ]])
+vim.cmd([[autocmd TermOpen * startinsert]])
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
