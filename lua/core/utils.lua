@@ -316,7 +316,7 @@ vim.api.nvim_create_user_command("Run", function()
       vim.cmd("sp")
       vim.cmd("term " .. command)
       vim.cmd("resize 15")
-      local keys = vim.api.nvim_replace_termcodes("i", true, false, true)
+      local keys = vim.api.nvim_replace_termcodes("", true, false, true)
       vim.api.nvim_feedkeys(keys, "n", false)
       break
     end
