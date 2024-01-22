@@ -5,9 +5,14 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
     -- stylua: ignore
-    { "<leader>sf",  mode = "n", "<cmd>Telescope find_files<CR>",           desc = "Search files" },
-    { "<leader>sw",  mode = "n", "<cmd>Telescope live_grep<CR>",            desc = "Search Word" },
-    { "<leader>sb",  mode = "n", "<cmd>Telescope buffers<CR>",              desc = "Search Buffer" },
+    { "<leader>sf", mode = "n", "<cmd>Telescope find_files<CR>", desc = "Search files" },
+    { "<leader>sw", mode = "n", "<cmd>Telescope live_grep<CR>",  desc = "Search Word" },
+    {
+      "<leader>sb",
+      mode = "n",
+      "<cmd>Telescope buffers sort_mru=true sort_lastused=true initial_mode=normal<CR>",
+      desc = "Search Buffer",
+    },
     { "<leader>st",  mode = "n", "<cmd>Telescope help_tags<CR>",            desc = "Search Help Tags" },
     { "<leader>sk",  mode = "n", "<cmd>Telescope keymaps<CR>",              desc = "Search Keymaps" },
     { "<leader>sg",  mode = "n", "<cmd>Telescope git_files<CR>",            desc = "Search Git" },
@@ -78,6 +83,9 @@ return {
               ["x"] = actions.delete_buffer,
             },
           },
+        },
+        oldfiles = {
+          path_display = formattedName,
         },
         colorscheme = {
           enable_preview = true,
