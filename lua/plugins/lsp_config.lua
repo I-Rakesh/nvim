@@ -64,6 +64,16 @@ return {
 
     lsp_defaults.capabilities =
         vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+    require("mason-lspconfig").setup({
+      handlers = {
+        function(server_name)
+          if server_name == "jdtls" then
+            return
+          end
+          require("lspconfig")[server_name].setup({})
+        end,
+      },
+    })
 
     require("lspconfig").lua_ls.setup({
       settings = {
@@ -87,9 +97,6 @@ return {
         "--offset-encoding=utf-16",
       },
     })
-    require("lspconfig").pyright.setup({})
-    require("lspconfig").bashls.setup({})
-    require("lspconfig").marksman.setup({})
 
     local diagnostic_goto = function(next, severity)
       local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
