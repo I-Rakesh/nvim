@@ -3,6 +3,7 @@ return {
   opts = {
     modes = {
       char = {
+        autohide = true,
         highlight = { backdrop = false },
         char_actions = function()
           return {
