@@ -8,6 +8,9 @@ vim.keymap.set(
   { desc = "tmux-sessionizer" }
 )
 
+--Remap to clear Highlight when searching
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
+
 --Macro
 vim.keymap.set("n", "Q", "@@", { desc = "Replay a Macro" })
 vim.keymap.set("v", "Q", ":norm @@<CR>", { silent = true, desc = "Replay a Macro" })
