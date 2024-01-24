@@ -68,6 +68,7 @@ vim.keymap.set("n", "<leader>tx", "<cmd>tabc<CR>", { desc = "Close Current Tab" 
 -- to move between buffers
 vim.keymap.set("n", "<Tab>", vim.cmd.bnext, { desc = "Next Buffer" })
 vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious, { desc = "Previous Buffer" })
+vim.keymap.set("n", "<leader>'", "<C-^>", { desc = "Previous Opened Buffer" })
 
 -- to move between windows
 vim.keymap.set({ "n", "i" }, "<C-j>", "<Esc><C-w>j", { desc = "Move Curser Down" })
