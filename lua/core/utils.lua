@@ -253,7 +253,7 @@ vim.keymap.set({ "n", "v" }, ",T", killring_compile_reversed, { desc = "Killring
 -- For compiling and running code copied from Youtube-video(https://youtu.be/5HXINnalrAQ?si=e3txV-7vtiauIHtW) git(https://arc.net/l/quote/ulxqjqza)
 
 local build_commands = {
-  c = "!g++ -std=c++17 -o %:p:r.o %",
+  c = "!gcc -std=c11 -o %:p:r.o %",
   cpp = "!g++ -std=c++17 -Wall -O2 -o %:p:r.o %",
   rust = "!cargo build --release",
   go = "!go build",
