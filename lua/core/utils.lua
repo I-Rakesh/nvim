@@ -257,27 +257,36 @@ local build_commands = {
   cpp = "!g++ -std=c++17 -Wall -O2 -o %:p:r.o %",
   rust = "!cargo build --release",
   go = "!go build",
-  -- tex = "pdflatex %",
   tex = "VimtexCompile",
-  javascript = "",
   java = "!javac %",
   sh = "!chmod +x %",
 }
 
 local debug_build_commands = {
-  c = "!g++ -std=c++17 -g -o %:p:r.o %",
+  c = "!gcc -std=c11 -g -o %:p:r.o %",
   cpp = "!g++ -std=c++17 -g -o %:p:r.o %",
   rust = "!cargo build",
   go = "!go build",
+}
+
+local run = {
+  c = "gcc -std=c11 -o %:p:r.o % && %:p:r.o",
+  cpp = "g++ -std=c++17 -Wall -O2 -o %:p:r.o % && %:p:r.o",
+  rust = "cargo build --release && cargo run --release",
+  go = "go build && go run .",
+  tex = "VimtexCompile",
+  javascript = "node %",
+  java = "javac % && java %",
+  python = "python3 %",
+  html = "open %",
+  sh = "chmod +x % && ./%",
 }
 
 local run_commands = {
   c = "%:p:r.o",
   cpp = "%:p:r.o",
   rust = "cargo run --release",
-  -- go = "%:p:r.o",
   go = "go run .",
-  -- tex = "open %:p:r.pdf",
   tex = "",
   javascript = "node %",
   java = "java %",
@@ -324,8 +333,18 @@ vim.api.nvim_create_user_command("Run", function()
 end, {})
 
 vim.api.nvim_create_user_command("Ha", function()
-  vim.cmd([[Build]])
-  vim.cmd([[Run]])
+  local filetype = vim.bo.filetype
+
+  for file, command in pairs(run) do
+    if filetype == file then
+      vim.cmd("sp")
+      vim.cmd("term " .. command)
+      vim.cmd("resize 15")
+      local keys = vim.api.nvim_replace_termcodes("", true, false, true)
+      vim.api.nvim_feedkeys(keys, "n", false)
+      break
+    end
+  end
 end, {})
 
 --Keymaps
