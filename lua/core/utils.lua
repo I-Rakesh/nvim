@@ -291,7 +291,7 @@ vim.api.nvim_create_user_command("Build", function()
 
   for file, command in pairs(build_commands) do
     if filetype == file then
-      vim.cmd("silent " .. command)
+      vim.cmd(command)
       break
     end
   end
@@ -302,7 +302,7 @@ vim.api.nvim_create_user_command("DebugBuild", function()
 
   for file, command in pairs(debug_build_commands) do
     if filetype == file then
-      vim.cmd("silent " .. command)
+      vim.cmd(command)
       break
     end
   end
