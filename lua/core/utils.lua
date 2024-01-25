@@ -297,23 +297,37 @@ local run_commands = {
 
 vim.api.nvim_create_user_command("Build", function()
   local filetype = vim.bo.filetype
+  local supported = false
 
   for file, command in pairs(build_commands) do
     if filetype == file then
-      vim.cmd(command)
+      vim.cmd(":w")
+      vim.cmd("silent " .. command)
+      print("Building file")
+      supported = true
       break
     end
+  end
+  if not supported then
+    print("Unsupported file type for Build")
   end
 end, {})
 
 vim.api.nvim_create_user_command("DebugBuild", function()
   local filetype = vim.bo.filetype
+  local supported = false
 
   for file, command in pairs(debug_build_commands) do
     if filetype == file then
-      vim.cmd(command)
+      vim.cmd(":w")
+      vim.cmd("silent " .. command)
+      print("DebugBuild file")
+      supported = true
       break
     end
+  end
+  if not supported then
+    print("Unsupported file type for DebugBuild")
   end
 end, {})
 
@@ -337,6 +351,7 @@ vim.api.nvim_create_user_command("Ha", function()
 
   for file, command in pairs(run) do
     if filetype == file then
+      vim.cmd(":w")
       vim.cmd("sp")
       vim.cmd("term " .. command)
       vim.cmd("resize 15")
@@ -349,9 +364,9 @@ end, {})
 
 --Keymaps
 vim.keymap.set("n", "<leader>rr", "<cmd>Ha<CR>", { desc = "Run Current file" })
-vim.keymap.set("n", "<leader>rb", "<cmd>Build<CR><cmd>echo 'Building file'<CR>", { desc = "Build Current file" })
+vim.keymap.set("n", "<leader>rb", "<cmd>Build<CR>", { desc = "Build Current file" })
 -- stylua: ignore
-vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR><cmd>echo 'DebugBuild file'<CR>",
+vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR>",
   { desc = "DebugBuild Current file" })
 
 -- For lazy loading copied from Nvchad.nvim(https://arc.net/l/quote/rmgllvck)

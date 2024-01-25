@@ -17,6 +17,7 @@ return {
         ["gs"] = "actions.change_sort",
         ["gt"] = "actions.select_tab",
         ["<C-p>"] = "actions.preview",
+        ["<A-r>"] = "actions.refresh",
       },
     })
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
