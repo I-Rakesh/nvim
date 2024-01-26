@@ -15,7 +15,19 @@ return {
     { "<leader>t2", mode = "n", function() require("harpoon.term").gotoTerminal(2) end,       desc = "Harpoon Terminal 2", },
     { "<leader>t3", mode = "n", function() require("harpoon.term").gotoTerminal(3) end,       desc = "Harpoon Terminal 3", },
     { "<leader>hc", mode = "n", function() require('harpoon.cmd-ui').toggle_quick_menu() end, desc = "Open Harpoon CMD", },
-    { "<leader>tc", mode = "n", ":lua require('harpoon.tmux').sendCommand()<Left>",           desc = "Harpoon Send CMD", },
+    {
+      "<leader>tc",
+      mode = "n",
+      function()
+        local firstInput = vim.fn.input("Enter tmux pane number: ")
+        local secondInput = vim.fn.input("Enter command number: ")
+
+        if firstInput and secondInput and tonumber(firstInput) and tonumber(secondInput) then
+          require('harpoon.tmux').sendCommand(tonumber(firstInput), tonumber(secondInput))
+        end
+      end,
+      desc = "Harpoon Send CMD",
+    },
   },
   config = function()
     require("telescope").load_extension("harpoon")
