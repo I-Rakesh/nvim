@@ -47,6 +47,8 @@ return {
         "shellcheck",
         "mypy",
         --Debugger
+        "java-debug-adapter",
+        "java-test",
         "codelldb",
         "debugpy",
       },

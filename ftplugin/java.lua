@@ -60,16 +60,6 @@ local config = {
       },
       configuration = {
         updateBuildConfiguration = "interactive",
-        -- runtimes = {
-        --   {
-        --     name = "JavaSE-11",
-        --     path = "~/.sdkman/candidates/java/11.0.17-tem",
-        --   },
-        --   {
-        --     name = "JavaSE-18",
-        --     path = "~/.sdkman/candidates/java/18.0.2-sem",
-        --   },
-        -- },
       },
       maven = {
         downloadSources = true,
@@ -96,14 +86,20 @@ local config = {
     bundles = bundles,
   },
 }
-config["on_attach"] = function(client, bufnr)
+config["on_attach"] = function()
   local _, _ = pcall(vim.lsp.codelens.refresh)
   require("jdtls").setup_dap({ hotcodereplace = "auto" })
-  require("lsp-config").on_attach(client, bufnr)
   local status_ok, jdtls_dap = pcall(require, "jdtls.dap")
   if status_ok then
     jdtls_dap.setup_dap_main_class_configs()
   end
 end
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.java" },
+  callback = function()
+    local _, _ = pcall(vim.lsp.codelens.refresh)
+  end,
+})
 
 require("jdtls").start_or_attach(config)
