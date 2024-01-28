@@ -77,7 +77,7 @@ return {
       },
     })
 
-    require("lspconfig").lua_ls.setup({
+    lspconfig.lua_ls.setup({
       settings = {
         Lua = {
           diagnostics = {
@@ -93,7 +93,7 @@ return {
       },
     })
 
-    require("lspconfig").clangd.setup({
+    lspconfig.clangd.setup({
       cmd = {
         "clangd",
         "--offset-encoding=utf-16",
