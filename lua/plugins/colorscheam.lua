@@ -16,6 +16,16 @@ return {
       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
         conditionals = {},
       },
+      highlight_overrides = {
+        all = function(colors)
+          return {
+            DiagnosticVirtualTextError = { bg = colors.none },
+            DiagnosticVirtualTextWarn = { bg = colors.none },
+            DiagnosticVirtualTextHint = { bg = colors.none },
+            DiagnosticVirtualTextInfo = { bg = colors.none },
+          }
+        end,
+      },
     })
     vim.cmd([[colorscheme  catppuccin ]])
   end,
