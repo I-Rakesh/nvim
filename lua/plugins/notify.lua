@@ -17,7 +17,7 @@ return {
     require("notify").setup({
       timeout = 1000,
       stages = "fade",
-      -- background_colour = "#000000",
+      background_colour = "#000000",
     })
   end,
 }
