@@ -6,6 +6,9 @@ return {
 
       keymaps = {
         ["H"] = "actions.toggle_hidden",
+        ["<A-t>"] = "actions.select_tab",
+        ["<A-s>"] = "actions.select_split",
+        ["<A-v>"] = "actions.select_vsplit",
         ["<A-r>"] = "actions.refresh",
       },
     })
