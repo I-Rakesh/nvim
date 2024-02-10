@@ -291,7 +291,7 @@ local run = {
   java = "javac % && java %",
   python = "python3 %",
   html = "open %",
-  sh = "chmod +x % && ./%",
+  sh = "chmod +x % && ([[ -f ./% ]] && ./% || %)",
 }
 
 local run_commands = {
@@ -304,7 +304,7 @@ local run_commands = {
   java = "java %",
   python = "python3 %",
   html = "open %",
-  sh = "./%",
+  sh = "([[ -f ./% ]] && ./% || %)",
 }
 
 vim.api.nvim_create_user_command("Build", function()
