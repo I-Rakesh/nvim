@@ -193,7 +193,7 @@ local function killring_push_tail()
   killring:insert(1, register_contents)
   print("pushed")
 end
-vim.keymap.set("n", ",R", killring_push_tail, { desc = "Killring Add at first" })
+vim.keymap.set("n", "'R", killring_push_tail, { desc = "Killring Add at first" })
 
 local function killring_push()
   local register_contents = vim.fn.getreg('"')
@@ -204,7 +204,7 @@ local function killring_push()
   killring:insert(register_contents)
   print("pushed")
 end
-vim.keymap.set("n", ",r", killring_push, { desc = "Killring Add at last" })
+vim.keymap.set("n", "'r", killring_push, { desc = "Killring Add at last" })
 
 local function killring_pop_tail()
   if #killring <= 0 then
@@ -215,7 +215,7 @@ local function killring_pop_tail()
   vim.fn.setreg('"', first_index)
   print("got tail")
 end
-vim.keymap.set("n", ",E", killring_pop_tail, { desc = "Killring take from top" })
+vim.keymap.set("n", "'E", killring_pop_tail, { desc = "Killring take from top" })
 
 local function killring_pop()
   if #killring <= 0 then
@@ -226,13 +226,13 @@ local function killring_pop()
   vim.fn.setreg('"', first_index)
   print("got nose")
 end
-vim.keymap.set("n", ",e", killring_pop, { desc = "Killring take from last" })
+vim.keymap.set("n", "'e", killring_pop, { desc = "Killring take from last" })
 
 local function killring_kill()
   killring = setmetatable({}, { __index = table })
   print("ring killed")
 end
-vim.keymap.set({ "n", "v" }, ",z", killring_kill, { desc = "Killring remove all" })
+vim.keymap.set({ "n", "v" }, "'z", killring_kill, { desc = "Killring remove all" })
 
 local function killring_compile()
   local compiled_killring = killring:concat("")
@@ -240,7 +240,7 @@ local function killring_compile()
   killring = setmetatable({}, { __index = table })
   print("killring compiled")
 end
-vim.keymap.set({ "n", "v" }, ",t", killring_compile, { desc = "Killring compile" })
+vim.keymap.set({ "n", "v" }, "'t", killring_compile, { desc = "Killring compile" })
 
 local function killring_compile_reversed()
   local reversed_killring = ReverseTable(killring)
@@ -260,7 +260,7 @@ function ReverseTable(table)
   return reversed
 end
 
-vim.keymap.set({ "n", "v" }, ",T", killring_compile_reversed, { desc = "Killring compile reversed" })
+vim.keymap.set({ "n", "v" }, "'T", killring_compile_reversed, { desc = "Killring compile reversed" })
 
 -- For compiling and running code copied from Youtube-video(https://youtu.be/5HXINnalrAQ?si=e3txV-7vtiauIHtW) git(https://arc.net/l/quote/ulxqjqza)
 
