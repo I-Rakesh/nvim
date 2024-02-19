@@ -136,7 +136,7 @@ return {
         },
         file_sorter = require("telescope.sorters").get_fuzzy_file,
         file_ignore_patterns = { "node_modules", ".class" },
-        generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+        -- generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter, //causing problems with Telescope current_buffer_fuzzy_find (have to find what it is used for)
         path_display = { "truncate" },
         winblend = 0,
         border = {},
