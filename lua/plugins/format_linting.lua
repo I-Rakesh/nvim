@@ -12,7 +12,7 @@ return {
           java = { "clang_format" },
           python = { "isort", "black" },
           sh = { "shfmt" },
-          md = { "prettier" },
+          markdown = { "prettier" },
         },
         format_on_save = {
           -- These options will be passed to conform.format()

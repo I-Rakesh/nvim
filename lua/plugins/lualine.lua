@@ -9,31 +9,28 @@ return {
       local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
       local clients = vim.lsp.get_active_clients()
 
-      -- Find the first client other than null-ls that matches the filetype
-      local firstNonNullLsClient = nil
-      for _, client in ipairs(clients) do
-        if client.name ~= "null-ls" then
+      -- Check if the current file is a Java file
+      if buf_ft == "java" then
+        -- Check if jdtls is among the active clients
+        for _, client in ipairs(clients) do
+          if client.name == "jdtls" then
+            return "  jdtls"
+          end
+        end
+      else
+        -- Iterate through other clients
+        for _, client in ipairs(clients) do
           local filetypes = client.config.filetypes
           if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            firstNonNullLsClient = client
-            break
+            return "  " .. client.name
           end
         end
       end
 
-      -- If a non-null-ls client was found, return it
-      if firstNonNullLsClient then
-        return "  " .. firstNonNullLsClient.name
-      end
-
-      -- If there's only null-ls, return it
-      if #clients == 1 and clients[1].name == "null-ls" then
-        return "  null-ls"
-      end
-
-      -- Otherwise, return the default message
+      -- If no specific client found, return the default message
       return ""
     end
+
     local lsp = {
       function()
         return getLspName()
