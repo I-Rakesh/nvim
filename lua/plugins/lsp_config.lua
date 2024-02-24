@@ -8,7 +8,8 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    "nvimtools/none-ls.nvim",
+    "stevearc/conform.nvim",
+    "mfussenegger/nvim-lint",
   },
   config = function()
     -- The below are handled by noice
@@ -42,6 +43,7 @@ return {
         "ruff",
         "black",
         "prettier",
+        "isort",
         -- Linters
         "shfmt",
         "shellcheck",
@@ -128,7 +130,7 @@ return {
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })
         vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
-        vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
+        vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
         vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp Add Workspace Folder" })
         vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "lsp Rmove Workspace Folder" })
         vim.keymap.set("n", "<leader>wl", function()
@@ -137,9 +139,9 @@ return {
         vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "lsp Rename" })
         vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "lsp Code Actions" })
-        vim.keymap.set("n", "<leader>f", function()
-          vim.lsp.buf.format({ async = true })
-        end, { desc = "lsp Format" })
+        -- vim.keymap.set("n", "<leader>f", function()
+        --   vim.lsp.buf.format({ async = true })
+        -- end, { desc = "lsp Format" })
       end,
     })
     require("lspconfig.ui.windows").default_options.border = "rounded"
