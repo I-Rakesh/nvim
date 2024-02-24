@@ -67,7 +67,7 @@ return {
     end
 
     lsp_defaults.capabilities =
-        vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+      vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
     require("mason-lspconfig").setup({
       handlers = {
         function(server_name)
