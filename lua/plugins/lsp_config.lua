@@ -102,6 +102,15 @@ return {
       },
     })
 
+    lspconfig.bashls.setup({
+      settings = {
+        bashIde = {
+          -- Disable shellcheck in bash-language-server. It conflicts with linter settings. And it is slow compared conform.nvim
+          shellcheckPath = "",
+        },
+      },
+    })
+
     local diagnostic_goto = function(next, severity)
       local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
       severity = severity and vim.diagnostic.severity[severity] or nil
