@@ -17,7 +17,6 @@ return {
     require("notify").setup({
       timeout = 1000,
       stages = "fade_in_slide_out",
-      render = "compact",
       background_colour = "#000000",
     })
   end,
