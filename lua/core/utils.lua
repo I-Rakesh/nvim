@@ -101,21 +101,21 @@ local numbered = setmetatable({ "", "", "", "", "", "", "", "", "", "" }, { __in
 
 local function numbered_get(index)
   if numbered[index] == "" then
-    print(index .. " is empty")
+    vim.notify(index .. " is empty")
     return
   end
   vim.fn.setreg('"', numbered[index])
-  print("grabbed")
+  vim.notify("grabbed")
 end
 
 local function numbered_set(index)
   local register_contents = vim.fn.getreg('"')
   if register_contents == "" then
-    print("default register empty")
+    vim.notify("default register empty")
     return
   end
   numbered[index] = register_contents
-  print("stabbed")
+  vim.notify("stabbed")
 end
 
 vim.keymap.set({ "n", "v" }, '"1', function()
@@ -187,50 +187,50 @@ local killring = setmetatable({}, { __index = table })
 local function killring_push_tail()
   local register_contents = vim.fn.getreg('"')
   if register_contents == "" then
-    print("default register is empty")
+    vim.notify("default register is empty")
     return
   end
   killring:insert(1, register_contents)
-  print("pushed")
+  vim.notify("pushed")
 end
 vim.keymap.set("n", "'R", killring_push_tail, { desc = "Killring Add at first" })
 
 local function killring_push()
   local register_contents = vim.fn.getreg('"')
   if register_contents == "" then
-    print("default register is empty")
+    vim.notify("default register is empty")
     return
   end
   killring:insert(register_contents)
-  print("pushed")
+  vim.notify("pushed")
 end
 vim.keymap.set("n", "'r", killring_push, { desc = "Killring Add at last" })
 
 local function killring_pop_tail()
   if #killring <= 0 then
-    print("killring empty")
+    vim.notify("killring empty")
     return
   end
   local first_index = killring:remove(1)
   vim.fn.setreg('"', first_index)
-  print("got tail")
+  vim.notify("got tail")
 end
 vim.keymap.set("n", "'E", killring_pop_tail, { desc = "Killring take from top" })
 
 local function killring_pop()
   if #killring <= 0 then
-    print("killring empty")
+    vim.notify("killring empty")
     return
   end
   local first_index = killring:remove(#killring)
   vim.fn.setreg('"', first_index)
-  print("got nose")
+  vim.notify("got nose")
 end
 vim.keymap.set("n", "'e", killring_pop, { desc = "Killring take from last" })
 
 local function killring_kill()
   killring = setmetatable({}, { __index = table })
-  print("ring killed")
+  vim.notify("ring killed")
 end
 vim.keymap.set({ "n", "v" }, "'z", killring_kill, { desc = "Killring remove all" })
 
@@ -238,7 +238,7 @@ local function killring_compile()
   local compiled_killring = killring:concat("")
   vim.fn.setreg('"', compiled_killring)
   killring = setmetatable({}, { __index = table })
-  print("killring compiled")
+  vim.notify("killring compiled")
 end
 vim.keymap.set({ "n", "v" }, "'t", killring_compile, { desc = "Killring compile" })
 
@@ -247,7 +247,7 @@ local function killring_compile_reversed()
   local compiled_killring = reversed_killring:concat("")
   vim.fn.setreg('"', compiled_killring)
   killring = setmetatable({}, { __index = table })
-  print("killring compiled in reverse")
+  vim.notify("killring compiled in reverse")
 end
 function ReverseTable(table)
   local reversed = setmetatable({}, { __index = table })
@@ -313,7 +313,7 @@ vim.api.nvim_create_user_command("Build", function()
 
   for file, command in pairs(build_commands) do
     if filetype == file then
-      print("Building file")
+      vim.notify("Building file")
       vim.cmd(":w")
       vim.cmd("silent " .. command)
       supported = true
@@ -321,7 +321,7 @@ vim.api.nvim_create_user_command("Build", function()
     end
   end
   if not supported then
-    print("File type '" .. filetype .. "' is not configured to Build.")
+    vim.notify("File type '" .. filetype .. "' is not configured to Build.", "error")
   end
 end, {})
 
@@ -331,7 +331,7 @@ vim.api.nvim_create_user_command("DebugBuild", function()
 
   for file, command in pairs(debug_build_commands) do
     if filetype == file then
-      print("DebugBuild file")
+      vim.notify("DebugBuild file")
       vim.cmd(":w")
       vim.cmd("silent " .. command)
       supported = true
@@ -339,7 +339,7 @@ vim.api.nvim_create_user_command("DebugBuild", function()
     end
   end
   if not supported then
-    print("File type '" .. filetype .. "' is not configured to DebugBuild.")
+    vim.notify("File type '" .. filetype .. "' is not configured to DebugBuild.", "error")
   end
 end, {})
 
@@ -359,7 +359,7 @@ vim.api.nvim_create_user_command("Run", function()
     end
   end
   if not supported then
-    print("File type '" .. filetype .. "' is not configured to run.")
+    vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
   end
 end, {})
 
@@ -380,7 +380,7 @@ vim.api.nvim_create_user_command("CompileRun", function()
     end
   end
   if not supported then
-    print("File type '" .. filetype .. "' is not configured to run.")
+    vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
   end
 end, {})
 

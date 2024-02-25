@@ -16,12 +16,15 @@ vim.keymap.set("n", "Q", "@@", { desc = "Replay a Macro" })
 vim.keymap.set("v", "Q", ":norm @@<CR>", { silent = true, desc = "Replay a Macro" })
 
 -- Color column
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>cc",
-  ':let &colorcolumn = empty(&colorcolumn) ? "80" : ""<CR><cmd>echo "Color Column Toggled"<CR>',
-  { noremap = true, silent = true, desc = "Toggle Color Column" }
-)
+vim.keymap.set("n", "<Leader>cc", function()
+  if vim.o.colorcolumn == "" then
+    vim.cmd("let &colorcolumn = '80'")
+    vim.notify("Color Column Enabled")
+  else
+    vim.cmd("let &colorcolumn = ''")
+    vim.notify("Color Column Disabled")
+  end
+end, { noremap = true, silent = true, desc = "Toggle Color Column" })
 
 -- Redo
 vim.keymap.set("n", "<S-u>", "<C-r>", { desc = "Redo" })
