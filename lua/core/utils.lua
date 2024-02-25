@@ -321,7 +321,7 @@ vim.api.nvim_create_user_command("Build", function()
     end
   end
   if not supported then
-    print("Unsupported file type for Build")
+    print("File type '" .. filetype .. "' is not configured to Build.")
   end
 end, {})
 
@@ -339,12 +339,13 @@ vim.api.nvim_create_user_command("DebugBuild", function()
     end
   end
   if not supported then
-    print("Unsupported file type for DebugBuild")
+    print("File type '" .. filetype .. "' is not configured to DebugBuild.")
   end
 end, {})
 
 vim.api.nvim_create_user_command("Run", function()
   local filetype = vim.bo.filetype
+  local supported = false
 
   for file, command in pairs(run_commands) do
     if filetype == file then
@@ -353,13 +354,18 @@ vim.api.nvim_create_user_command("Run", function()
       vim.cmd("resize 15")
       local keys = vim.api.nvim_replace_termcodes("", true, false, true)
       vim.api.nvim_feedkeys(keys, "n", false)
+      supported = true
       break
     end
   end
+  if not supported then
+    print("File type '" .. filetype .. "' is not configured to run.")
+  end
 end, {})
 
-vim.api.nvim_create_user_command("Ha", function()
+vim.api.nvim_create_user_command("CompileRun", function()
   local filetype = vim.bo.filetype
+  local supported = false
 
   for file, command in pairs(run) do
     if filetype == file then
@@ -369,13 +375,17 @@ vim.api.nvim_create_user_command("Ha", function()
       vim.cmd("resize 15")
       local keys = vim.api.nvim_replace_termcodes("", true, false, true)
       vim.api.nvim_feedkeys(keys, "n", false)
+      supported = true
       break
     end
+  end
+  if not supported then
+    print("File type '" .. filetype .. "' is not configured to run.")
   end
 end, {})
 
 --Keymaps
-vim.keymap.set("n", "<leader>rr", "<cmd>Ha<CR>", { desc = "Run Current file" })
+vim.keymap.set("n", "<leader>rr", "<cmd>CompileRun<CR>", { desc = "Run Current file" })
 vim.keymap.set("n", "<leader>rb", "<cmd>Build<CR>", { desc = "Build Current file" })
 -- stylua: ignore
 vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR>",
