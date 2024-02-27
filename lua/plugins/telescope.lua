@@ -20,9 +20,9 @@ return {
     { "<leader>sdw", mode = "n", "<cmd>Telescope diagnostics<CR>", desc = "Search Workspace Diagnostics" },
     { "<leader>sdb", mode = "n", "<cmd>Telescope diagnostics bufnr=0<CR>", desc = "Search Diagnostics" },
     { "<leader>sr", mode = "n", "<cmd>Telescope lsp_references<CR>", desc = "Search References" },
-    { "<leader>sbs", mode = "n", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Search Symbles" },
+    { "<leader>ssb", mode = "n", "<cmd>Telescope lsp_document_symbols<CR>", desc = "Search Symbles" },
     {
-      "<leader>sws",
+      "<leader>ssw",
       mode = "n",
       "<cmd>Telescope lsp_dynamic_workspace_symbols <CR>",
       desc = "Search Workspace Symbles",
