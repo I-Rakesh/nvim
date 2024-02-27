@@ -33,7 +33,7 @@ vim.opt.sidescrolloff = 10
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 50
+vim.opt.updatetime = 250
 
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0
