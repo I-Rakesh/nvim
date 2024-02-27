@@ -29,7 +29,15 @@ return {
     { "<leader>sp", mode = "n", "<cmd>Telescope resume<CR>", desc = "Previous Search" },
     { "<leader>z", mode = "n", "<cmd>Telescope spell_suggest<CR>", desc = "Search Spell Suggestion's" },
     {
-      "<leader>s/",
+      "<leader>sc",
+      mode = "n",
+      function()
+        require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
+      end,
+      desc = "Search Neovim Config",
+    },
+    {
+      "<leader>s.",
       mode = "n",
       function()
         require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -37,6 +45,17 @@ return {
         }))
       end,
       desc = "Search Current Buffer",
+    },
+    {
+      "<leader>s/",
+      mode = "n",
+      function()
+        require("telescope.builtin").live_grep({
+          grep_open_files = true,
+          prompt_title = "Live Grep in Open Files",
+        })
+      end,
+      desc = "Search Word Current Buffer",
     },
   },
   config = function()
