@@ -9,7 +9,7 @@ vim.opt.relativenumber = true
 
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 
-vim.opt.cursorline = true
+vim.opt.cursorline = false
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
