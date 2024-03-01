@@ -12,6 +12,15 @@ local M = {}
 --   { pattern = "*", command = "set nocursorline", group = cursorGrp }
 -- )
 
+-- Strip trailing spaces before write
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  group = vim.api.nvim_create_augroup("strip_space", { clear = true }),
+  pattern = { "*" },
+  callback = function()
+    vim.cmd([[ %s/\s\+$//e ]])
+  end,
+})
+
 -- Terminal
 vim.cmd([[autocmd TermOpen * setlocal nonumber norelativenumber nospell signcolumn=no ]])
 -- vim.cmd([[autocmd TermOpen * startinsert]])
