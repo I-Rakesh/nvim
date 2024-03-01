@@ -7,9 +7,9 @@ return {
   },
   opts = {
     cmdline = {
-      enabled = true,         -- enables the Noice cmdline UI
+      enabled = true, -- enables the Noice cmdline UI
       view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-      opts = {},              -- global options for the cmdline. See section on views
+      opts = {}, -- global options for the cmdline. See section on views
       format = {
         -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
         -- view: (default is cmdline view)
@@ -35,8 +35,8 @@ return {
       hover = {
         enabled = true,
         silent = false, -- set to true to not show a message if hover is not available
-        view = nil,     -- when nil, use defaults from documentation
-        opts = {},      -- merged with defaults from documentation
+        view = nil, -- when nil, use defaults from documentation
+        opts = {}, -- merged with defaults from documentation
       },
       signature = {
         enabled = true,
