@@ -1,32 +1,6 @@
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
-  keys = {
-    {
-      "<tab>",
-      function()
-        return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-      end,
-      expr = true,
-      silent = true,
-      mode = "i",
-    },
-    {
-      "<tab>",
-      function()
-        require("luasnip").jump(1)
-      end,
-      mode = "s",
-    },
-    {
-      "<s-tab>",
-      function()
-        require("luasnip").jump(-1)
-      end,
-      mode = { "i", "s" },
-    },
-  },
-
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-path",
@@ -55,8 +29,19 @@ return {
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-l>"] = cmp.mapping(function()
+          if require("luasnip").expand_or_locally_jumpable() then
+            require("luasnip").expand_or_jump()
+          end
+        end, { "i", "s" }),
+        ["<C-h>"] = cmp.mapping(function()
+          if require("luasnip").locally_jumpable(-1) then
+            require("luasnip").jump(-1)
+          end
+        end, { "i", "s" }),
       }),
+
       snippet = {
         expand = function(args)
           require("luasnip").lsp_expand(args.body)
