@@ -8,7 +8,6 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    "stevearc/conform.nvim",
     "mfussenegger/nvim-lint",
   },
   config = function()
