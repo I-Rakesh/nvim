@@ -115,6 +115,12 @@ return {
         colorscheme = {
           enable_preview = true,
         },
+        lsp_dynamic_workspace_symbols = {
+          path_display = formattedName,
+        },
+        lsp_document_symbols = {
+          path_display = formattedName,
+        },
       },
       defaults = {
         mappings = {
