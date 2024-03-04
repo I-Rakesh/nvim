@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     vim.opt_local.spell = false
     vim.opt_local.signcolumn = "no"
     vim.opt_local.laststatus = 0
-    vim.api.nvim_command("startinsert")
+    -- vim.api.nvim_command("startinsert") --to start terminal in insert mood
   end,
 })
 vim.api.nvim_create_autocmd({ "TermClose" }, {
