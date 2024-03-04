@@ -18,6 +18,14 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     vim.opt_local.relativenumber = false
     vim.opt_local.spell = false
     vim.opt_local.signcolumn = "no"
+    vim.opt_local.laststatus = 0
+    vim.api.nvim_command("startinsert")
+  end,
+})
+vim.api.nvim_create_autocmd({ "TermClose" }, {
+  desc = "Make Termainal took good",
+  callback = function()
+    vim.opt_local.laststatus = 2
   end,
 })
 
