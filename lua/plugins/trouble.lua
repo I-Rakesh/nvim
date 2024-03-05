@@ -40,5 +40,5 @@ return {
       desc = "Next trouble/quickfix item",
     },
   },
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { "kyazdani42/nvim-web-devicons" },
 }
