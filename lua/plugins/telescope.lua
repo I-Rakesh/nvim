@@ -43,16 +43,6 @@ return {
       desc = "Search Neovim Config",
     },
     {
-      "<leader>s.",
-      mode = "n",
-      function()
-        require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-          previewer = false,
-        }))
-      end,
-      desc = "Search Current Buffer",
-    },
-    {
       "<leader>s/",
       mode = "n",
       function()
@@ -61,7 +51,29 @@ return {
           prompt_title = "Live Grep in Open Files",
         })
       end,
-      desc = "Search Word Current Buffer",
+      desc = "Search Word in Current Buffer",
+    },
+    {
+      "<leader>s*",
+      mode = "v",
+      function()
+        vim.cmd(':normal! "sy')
+        local selected_text = vim.fn.getreg("s")
+        local escaped_text = vim.fn.escape(selected_text, " ")
+        vim.cmd(":Telescope live_grep default_text=" .. escaped_text)
+      end,
+      desc = "Search Highlighted Word",
+    },
+    {
+      "<leader>s/",
+      mode = "v",
+      function()
+        vim.cmd(':normal! "sy')
+        local selected_text = vim.fn.getreg("s")
+        local escaped_text = vim.fn.escape(selected_text, " ")
+        vim.cmd(":Telescope live_grep grep_open_files=ture default_text=" .. escaped_text)
+      end,
+      desc = "Search Highlighted Word in Current Buffer",
     },
   },
   config = function()
