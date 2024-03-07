@@ -1,9 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
-  lazy = true,
-  init = function()
-    require("core.utils").lazy_load("gitsigns.nvim")
-  end,
+  event = "User FilePost",
   config = function()
     require("gitsigns").setup({
       signs = {

@@ -1,6 +1,10 @@
 vim.g.mapleader = " "
 vim.opt.guicursor = ""
 
+-- vim.opt.fillchars = { eob = " " } -- to remove "~" at end of the file
+
+vim.opt.shortmess:append("sI") --to remove nvim into
+
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25

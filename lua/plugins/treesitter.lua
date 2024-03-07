@@ -1,9 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  lazy = true,
-  init = function()
-    require("core.utils").lazy_load("nvim-treesitter")
-  end,
+  event = { "BufReadPost", "BufNewFile" },
   cmd = { "TSInstall", "TSBufEnable", "TSBufDisable", "TSModuleInfo" },
   build = ":TSUpdate",
   dependencies = {
