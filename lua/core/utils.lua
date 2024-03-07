@@ -131,6 +131,8 @@ end)
 
 --Killring copied from Youtube-video(https://youtu.be/KCx4mwhXffk?si=g2FJVAhWoJm5RJdk) github(https://github.com/Axlefublr/dotfiles/blob/03f0037c0734bdafaa57ee123d42556f817be84b/neovim/registers/killring.lua)
 
+-- due to the remaps for this feature we can use local marks(r,e,t,z,g) and global marks(R,T,Z,E)
+
 local killring = setmetatable({}, { __index = table })
 
 local function killring_push_tail()

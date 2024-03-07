@@ -35,6 +35,9 @@ return {
   {
     "mfussenegger/nvim-lint",
     lazy = true,
+    init = function()
+      require("core.utils").lazy_load("nvim-lint")
+    end,
     config = function()
       require("lint").linters_by_ft = {
         python = { "mypy", "ruff" },

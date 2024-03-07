@@ -1,6 +1,9 @@
 return {
   "lewis6991/gitsigns.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = true,
+  init = function()
+    require("core.utils").lazy_load("gitsigns.nvim")
+  end,
   config = function()
     require("gitsigns").setup({
       signs = {
