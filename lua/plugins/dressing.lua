@@ -17,6 +17,7 @@ return {
     require("dressing").setup({
       input = {
         buf_options = {},
+        insert_only = false,
         win_options = {
           winblend = 0,
         },

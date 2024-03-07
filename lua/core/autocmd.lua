@@ -19,15 +19,16 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
     vim.opt_local.spell = false
     vim.opt_local.signcolumn = "no"
     vim.opt_local.laststatus = 0
-    -- vim.api.nvim_command("startinsert") --to start terminal in insert mood
+    vim.api.nvim_command("startinsert") --to start terminal in insert mood
   end,
 })
-vim.api.nvim_create_autocmd({ "TermClose" }, {
+vim.api.nvim_create_autocmd({ "TermLeave" }, {
   desc = "Make Termainal took good",
   callback = function()
     vim.opt_local.laststatus = 2
   end,
 })
+vim.keymap.set({ "n" }, "<leader>cl", "<cmd>set ls=2<cr>", { desc = "Make Status Line Visible" })
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
