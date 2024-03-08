@@ -5,8 +5,8 @@ return {
   -- stylua: ignore
   keys = {
     { "<leader>t;", "<cmd>TroubleToggle<cr>",                       desc = " Toggle Trouble" },
-    { "<leader>td", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
-    { "<leader>tw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+    { "<leader>tdb", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
+    { "<leader>tdw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
     { "<leader>tl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
     { "<leader>tq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
     { "<leader>tr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "Lsp reference (Trouble)" },

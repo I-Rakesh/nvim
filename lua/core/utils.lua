@@ -292,6 +292,18 @@ vim.api.nvim_create_user_command("DebugBuild", function()
   end
 end, {})
 
+-- Testing to debug build when setting up breakpoints
+--[[ vim.api.nvim_create_user_command("DapBuild", function()
+  local filetype = vim.bo.filetype
+  for file, command in pairs(debug_build_commands) do
+    if filetype == file then
+      vim.cmd(":w")
+      vim.cmd("silent " .. command)
+      break
+    end
+  end
+end, {}) ]]
+
 vim.api.nvim_create_user_command("Run", function()
   local filetype = vim.bo.filetype
   local supported = false
