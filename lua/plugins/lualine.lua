@@ -69,7 +69,7 @@ return {
         always_divide_middle = true,
         globalstatus = false,
         refresh = {
-          statusline = 1000,
+          statusline = 10,
           tabline = 1000,
           winbar = 1000,
         },
@@ -77,14 +77,14 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { filetype, "filename" },
+        lualine_c = { filetype, { "filename", path = 1 } },
         lualine_x = {
           -- stylua: ignore
-          {
-            function() return require("noice").api.status.command.get() end,
-            cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-            color = { fg = "808080" },
-          },
+          -- {
+          --   function() return require("noice").api.status.command.get() end,
+          --   cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+          --   color = { fg = "808080" },
+          -- },
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
