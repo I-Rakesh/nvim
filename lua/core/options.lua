@@ -65,4 +65,5 @@ vim.opt.pumheight = 10 --to set the limit for cmp-window
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
-vim.cmd("highlight Pmenu guibg=NONE")
+vim.cmd("highlight Pmenu guibg=none")
+vim.cmd("highlight MatchParen guibg=none")
