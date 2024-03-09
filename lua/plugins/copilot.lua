@@ -28,8 +28,8 @@ return {
         auto_trigger = true,
         keymap = {
           accept = "<C-Space>",
-          accept_word = "<C-w>",
-          accept_line = "<C-l>",
+          -- accept_word = "<C-w>",
+          -- accept_line = "<C-l>",
         },
       },
       filetypes = {

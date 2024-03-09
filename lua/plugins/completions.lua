@@ -28,9 +28,9 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-        ["<C-x>"] = cmp.mapping.abort(),
+        ["<C-e>"] = cmp.mapping.abort(),
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-e>"] = cmp.mapping.complete({}),
+        ["<C-j>"] = cmp.mapping.complete({}),
         ["<C-l>"] = cmp.mapping(function()
           if require("luasnip").expand_or_locally_jumpable() then
             require("luasnip").expand_or_jump()
