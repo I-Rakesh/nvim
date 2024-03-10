@@ -16,11 +16,6 @@ return {
       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
         conditionals = {},
       },
-      custom_highlights = function()
-        return {
-          MatchParen = { fg = "#ED6B21" }, -- Replace 'teal' with your desired color
-        }
-      end,
       highlight_overrides = {
         all = function(colors)
           return {
@@ -28,6 +23,7 @@ return {
             DiagnosticVirtualTextWarn = { bg = colors.none },
             DiagnosticVirtualTextHint = { bg = colors.none },
             DiagnosticVirtualTextInfo = { bg = colors.none },
+            MatchParen = { fg = "#ED6B21" }, -- Replace 'teal' with your desired color
           }
         end,
       },
