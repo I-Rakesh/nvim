@@ -22,6 +22,7 @@ return {
           "notify",
           "toggleterm",
           "lazyterm",
+          "oil_preview",
         },
       },
     },
@@ -49,6 +50,7 @@ return {
           "notify",
           "toggleterm",
           "lazyterm",
+          "oil_preview",
         },
         callback = function()
           vim.b.miniindentscope_disable = true
