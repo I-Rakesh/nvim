@@ -23,7 +23,8 @@ return {
             DiagnosticVirtualTextWarn = { bg = colors.none },
             DiagnosticVirtualTextHint = { bg = colors.none },
             DiagnosticVirtualTextInfo = { bg = colors.none },
-            MatchParen = { fg = "#ED6B21" }, -- Replace 'teal' with your desired color
+            MatchParen = { fg = "#ED6B21", bg = colors.none }, -- Replace 'teal' with your desired color
+            Pmenu = { bg = colors.none },
           }
         end,
       },
