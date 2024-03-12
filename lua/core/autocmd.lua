@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 })
 
 -- Terminal
-vim.api.nvim_create_autocmd({ "TermOpen" }, {
+vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
   desc = "Make Termainal took good",
   callback = function()
     vim.opt_local.number = false
