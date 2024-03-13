@@ -28,12 +28,6 @@ vim.api.nvim_create_autocmd({ "TermLeave" }, {
     vim.opt_local.laststatus = 2
   end,
 })
-vim.keymap.set(
-  { "n" },
-  "<leader>cl",
-  "<cmd>set ls=2<cr><cmd>echo 'Status Line Enabled '<cr>",
-  { desc = "Make Status Line Visible" }
-)
 
 -- resize splits if window got resized
 vim.api.nvim_create_autocmd({ "VimResized" }, {
