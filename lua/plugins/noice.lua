@@ -1,5 +1,7 @@
 return {
   "folke/noice.nvim",
+  -- if you want to enable this plugin then uncommon notify component in lualine (lualine_x)
+  enabled = false,
   event = "VeryLazy",
   dependencies = {
     "MunifTanjim/nui.nvim",

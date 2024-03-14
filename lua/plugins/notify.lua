@@ -1,5 +1,7 @@
 return {
   "rcarriga/nvim-notify",
+  -- If u want to enable the plugin change all print statements into vim.notify so you will have all notification through this plugin
+  enabled = false,
   event = "VeryLazy",
   opts = {
     max_height = function()
