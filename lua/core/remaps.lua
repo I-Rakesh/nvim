@@ -41,7 +41,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- to Preserve copied text to past without loosing
-vim.keymap.set("n", "<leader>p", [["+p]], { desc = "Past To System Clipbord" })
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Past To System Clipbord" })
 
 -- to copy into system clipboard or vim buffer
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Copy Selected To System Clipbord" })
