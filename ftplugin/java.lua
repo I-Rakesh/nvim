@@ -103,3 +103,25 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 })
 
 require("jdtls").start_or_attach(config)
+
+vim.keymap.set("n", "<leader>jo", "<Cmd>lua require'jdtls'.organize_imports()<CR>", { desc = "Organize Imports" })
+vim.keymap.set("n", "<leader>jv", "<Cmd>lua require('jdtls').extract_variable()<CR>", { desc = "Extract Variable" })
+vim.keymap.set(
+  "v",
+  "<leader>jv",
+  "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>",
+  { desc = "Extract Variable" }
+)
+vim.keymap.set("n", "<leader>jc", "<Cmd>lua require('jdtls').extract_constant()<CR>", { desc = "Extract Constant" })
+vim.keymap.set(
+  "v",
+  "<leader>jc",
+  "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>",
+  { desc = "Extract Constant" }
+)
+vim.keymap.set(
+  "v",
+  "<leader>jm",
+  "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>",
+  { desc = "Extract Method" }
+)
