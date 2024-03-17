@@ -23,6 +23,7 @@ return {
           "toggleterm",
           "lazyterm",
           "oil_preview",
+          "lspinfo",
         },
       },
     },
@@ -51,6 +52,7 @@ return {
           "toggleterm",
           "lazyterm",
           "oil_preview",
+          "lspinfo",
         },
         callback = function()
           vim.b.miniindentscope_disable = true
