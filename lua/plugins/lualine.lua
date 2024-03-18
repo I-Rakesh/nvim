@@ -63,7 +63,7 @@ return {
         section_separators = { left = "", right = "" },
 
         disabled_filetypes = {
-          statusline = {},
+          statusline = { "DiffviewFiles" },
           winbar = {},
         },
         ignore_focus = {},
@@ -104,7 +104,7 @@ return {
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { filetype, "filename" },
+        lualine_c = { filetype, { "filename", padding = { right = 0 } } },
         lualine_x = { "location" },
         lualine_y = {},
         lualine_z = {},
