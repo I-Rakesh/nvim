@@ -41,6 +41,7 @@ return {
       icon_only = true,
       colored = true,
       separator = { left = "", right = "" },
+      padding = { left = 1 },
     }
     local copilot_indicator = {
       function()
@@ -77,7 +78,7 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { filetype, { "filename", path = 1 } },
+        lualine_c = { filetype, { "filename", path = 1, padding = { right = 0 } } },
         lualine_x = {
           -- stylua: ignore
           -- {
