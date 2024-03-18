@@ -24,6 +24,7 @@ return {
           "lazyterm",
           "oil_preview",
           "lspinfo",
+          "DiffviewFiles",
         },
       },
     },
@@ -53,6 +54,7 @@ return {
           "lazyterm",
           "oil_preview",
           "lspinfo",
+          "DiffviewFiles",
         },
         callback = function()
           vim.b.miniindentscope_disable = true

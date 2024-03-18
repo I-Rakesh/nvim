@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.opt.guicursor = ""
 
--- vim.opt.fillchars = { eob = " " } -- to remove "~" at end of the file
+vim.opt.fillchars = { eob = " " } -- to remove "~" at end of the file
 
 vim.opt.shortmess:append("sI") --to remove nvim into
 
