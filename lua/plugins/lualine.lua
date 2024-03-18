@@ -41,7 +41,7 @@ return {
       icon_only = true,
       colored = true,
       separator = { left = "", right = "" },
-      padding = { left = 1 },
+      padding = { left = 0 },
     }
     local copilot_indicator = {
       function()
@@ -60,7 +60,7 @@ return {
         -- component_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
         component_separators = { left = "|", right = "|" },
-        section_separators = { left = "", right = "" },
+        section_separators = { left = " ", right = "" },
 
         disabled_filetypes = {
           statusline = { "DiffviewFiles" },
