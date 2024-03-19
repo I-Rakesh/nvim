@@ -4,6 +4,7 @@ return {
     event = "User FilePost",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
+      { "folke/neodev.nvim", opts = {} },
     },
     config = function()
       -- The below are handled by noice
