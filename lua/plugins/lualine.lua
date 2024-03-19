@@ -68,6 +68,7 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
+          copilot_indicator,
         },
         lualine_y = { lsp, "progress" },
         lualine_z = { "location" },
