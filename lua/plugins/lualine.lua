@@ -53,6 +53,35 @@ return {
         end
       end,
     }
+    local oil = {
+      sections = {
+        lualine_a = { "mode" },
+        lualine_c = { filetype, "filename" },
+        lualine_x = {
+          {
+            lazy_status.updates,
+            cond = lazy_status.has_updates,
+            color = { fg = "#ff9e64" },
+          },
+          {
+            require("noice").api.statusline.mode.get,
+            cond = require("noice").api.statusline.mode.has,
+            color = { fg = "#ff9e64" },
+          },
+        },
+        lualine_y = { lsp, "progress" },
+        lualine_z = { "location" },
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { filetype, { "filename", padding = { right = 0 } } },
+        lualine_x = { "location" },
+        lualine_y = {},
+        lualine_z = {},
+      },
+      filetypes = { "oil" },
+    }
     require("lualine").setup({
       options = {
         icons_enabled = true,
@@ -112,7 +141,7 @@ return {
       tabline = {},
       winbar = {},
       inactive_winbar = {},
-      extensions = {},
+      extensions = { "fugitive", "quickfix", "trouble", "nvim-dap-ui", oil },
     })
   end,
 }
