@@ -83,7 +83,7 @@ vim.keymap.set({ "n" }, "<leader>K", "<Esc><C-w>K", { desc = "Move Window  Up" }
 vim.keymap.set({ "n" }, "<leader>L", "<Esc><C-w>L", { desc = "Move Window Right" })
 vim.keymap.set(
   "n",
-  "<leader><C-" .. vim.g.mapleader .. ">",
+  "<C-" .. vim.g.mapleader .. ">",
   "<Esc><C-w><C-r>",
   { noremap = true, desc = "Swap Window Positions" }
 )
