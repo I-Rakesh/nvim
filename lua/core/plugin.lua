@@ -31,6 +31,7 @@ require("lazy").setup({
       width = 0.8,
       height = 0.8,
     },
+    backdrop = 100,
   },
   performance = {
     rtp = {
