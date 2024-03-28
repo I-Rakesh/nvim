@@ -1,23 +1,3 @@
---Function to toggle quickfix window
-vim.g.quickfix_opened = 0
-function ToggleQuickfix()
-  local wininfo = vim.fn.getwininfo()
-  if vim.tbl_isempty(vim.fn.filter(wininfo, "v:val.quickfix")) then
-    vim.cmd(":copen")
-    vim.g.quickfix_opened = 1
-  else
-    vim.cmd(":cclose")
-    vim.g.quickfix_opened = 0
-  end
-end
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader>q",
-  "<cmd>lua ToggleQuickfix()<CR>",
-  { noremap = true, silent = true, desc = "Toggle Quickfix list" }
-)
-
 --Change Default register to selected registers Youtube-video(https://youtu.be/cz01rOOaLmA?si=7uNqwz0te4UU8zRs) gitbub()https://github.com/Axlefublr/dotfiles/blob/c2a3cabd4aa11a66da714f2c8c620e5b24e86e44/neovim/big.lua
 
 function GetChar(prompt)
@@ -211,89 +191,110 @@ end
 
 vim.keymap.set({ "n", "v" }, "'T", killring_compile_reversed, { desc = "Killring compile reversed" })
 
--- For compiling and running code copied from Youtube-video(https://youtu.be/5HXINnalrAQ?si=e3txV-7vtiauIHtW) git(https://arc.net/l/quote/ulxqjqza)
-
-local build_commands = {
-  c = "!gcc -std=c11 -o %:p:r.o %",
-  cpp = "!g++ -std=c++17 -Wall -O2 -o %:p:r.o %",
-  rust = "!cargo build --release",
-  go = "!go build",
-  tex = "VimtexCompile",
-  java = "!javac %",
-  sh = "!chmod +x %",
-}
-
-local debug_build_commands = {
-  c = "!gcc -std=c11 -g -o %:p:r.o %",
-  cpp = "!g++ -std=c++17 -g -o %:p:r.o %",
-  rust = "!cargo build",
-  go = "!go build",
-}
-
-local run = {
-  c = "gcc -std=c11 -o %:p:r.o % && %:p:r.o",
-  cpp = "g++ -std=c++17 -Wall -O2 -o %:p:r.o % && %:p:r.o",
-  rust = "cargo build --release && cargo run --release",
-  go = "go build && go run .",
-  tex = "VimtexCompile",
-  javascript = "node %",
-  java = "javac % && java %",
-  python = "python3 %",
-  html = "open %",
-  sh = "chmod +x % && ([[ -f ./% ]] && ./% || %)",
-}
-
-local run_commands = {
-  c = "%:p:r.o",
-  cpp = "%:p:r.o",
-  rust = "cargo run --release",
-  go = "go run .",
-  tex = "",
-  javascript = "node %",
-  java = "java %",
-  python = "python3 %",
-  html = "open %",
-  sh = "([[ -f ./% ]] && ./% || %)",
-}
-
-vim.api.nvim_create_user_command("Build", function()
-  local filetype = vim.bo.filetype
-  local supported = false
-
-  for file, command in pairs(build_commands) do
-    if filetype == file then
-      vim.notify("Building file")
-      vim.cmd(":w")
-      vim.cmd("silent " .. command)
-      supported = true
-      break
+if not vim.g.vscode then
+  --Function to toggle quickfix window
+  vim.g.quickfix_opened = 0
+  function ToggleQuickfix()
+    local wininfo = vim.fn.getwininfo()
+    if vim.tbl_isempty(vim.fn.filter(wininfo, "v:val.quickfix")) then
+      vim.cmd(":copen")
+      vim.g.quickfix_opened = 1
+    else
+      vim.cmd(":cclose")
+      vim.g.quickfix_opened = 0
     end
   end
-  if not supported then
-    vim.notify("File type '" .. filetype .. "' is not configured to Build.", "error")
-  end
-end, {})
 
-vim.api.nvim_create_user_command("DebugBuild", function()
-  local filetype = vim.bo.filetype
-  local supported = false
+  vim.api.nvim_set_keymap(
+    "n",
+    "<leader>q",
+    "<cmd>lua ToggleQuickfix()<CR>",
+    { noremap = true, silent = true, desc = "Toggle Quickfix list" }
+  )
 
-  for file, command in pairs(debug_build_commands) do
-    if filetype == file then
-      vim.notify("DebugBuild file")
-      vim.cmd(":w")
-      vim.cmd("silent " .. command)
-      supported = true
-      break
+  -- For compiling and running code copied from Youtube-video(https://youtu.be/5HXINnalrAQ?si=e3txV-7vtiauIHtW) git(https://arc.net/l/quote/ulxqjqza)
+
+  local build_commands = {
+    c = "!gcc -std=c11 -o %:p:r.o %",
+    cpp = "!g++ -std=c++17 -Wall -O2 -o %:p:r.o %",
+    rust = "!cargo build --release",
+    go = "!go build",
+    tex = "VimtexCompile",
+    java = "!javac %",
+    sh = "!chmod +x %",
+  }
+
+  local debug_build_commands = {
+    c = "!gcc -std=c11 -g -o %:p:r.o %",
+    cpp = "!g++ -std=c++17 -g -o %:p:r.o %",
+    rust = "!cargo build",
+    go = "!go build",
+  }
+
+  local run = {
+    c = "gcc -std=c11 -o %:p:r.o % && %:p:r.o",
+    cpp = "g++ -std=c++17 -Wall -O2 -o %:p:r.o % && %:p:r.o",
+    rust = "cargo build --release && cargo run --release",
+    go = "go build && go run .",
+    tex = "VimtexCompile",
+    javascript = "node %",
+    java = "javac % && java %",
+    python = "python3 %",
+    html = "open %",
+    sh = "chmod +x % && ([[ -f ./% ]] && ./% || %)",
+  }
+
+  local run_commands = {
+    c = "%:p:r.o",
+    cpp = "%:p:r.o",
+    rust = "cargo run --release",
+    go = "go run .",
+    tex = "",
+    javascript = "node %",
+    java = "java %",
+    python = "python3 %",
+    html = "open %",
+    sh = "([[ -f ./% ]] && ./% || %)",
+  }
+
+  vim.api.nvim_create_user_command("Build", function()
+    local filetype = vim.bo.filetype
+    local supported = false
+
+    for file, command in pairs(build_commands) do
+      if filetype == file then
+        vim.notify("Building file")
+        vim.cmd(":w")
+        vim.cmd("silent " .. command)
+        supported = true
+        break
+      end
     end
-  end
-  if not supported then
-    vim.notify("File type '" .. filetype .. "' is not configured to DebugBuild.", "error")
-  end
-end, {})
+    if not supported then
+      vim.notify("File type '" .. filetype .. "' is not configured to Build.", "error")
+    end
+  end, {})
 
--- Testing to debug build when setting up breakpoints
---[[ vim.api.nvim_create_user_command("DapBuild", function()
+  vim.api.nvim_create_user_command("DebugBuild", function()
+    local filetype = vim.bo.filetype
+    local supported = false
+
+    for file, command in pairs(debug_build_commands) do
+      if filetype == file then
+        vim.notify("DebugBuild file")
+        vim.cmd(":w")
+        vim.cmd("silent " .. command)
+        supported = true
+        break
+      end
+    end
+    if not supported then
+      vim.notify("File type '" .. filetype .. "' is not configured to DebugBuild.", "error")
+    end
+  end, {})
+
+  -- Testing to debug build when setting up breakpoints
+  --[[ vim.api.nvim_create_user_command("DapBuild", function()
   local filetype = vim.bo.filetype
   for file, command in pairs(debug_build_commands) do
     if filetype == file then
@@ -304,50 +305,51 @@ end, {})
   end
 end, {}) ]]
 
-vim.api.nvim_create_user_command("Run", function()
-  local filetype = vim.bo.filetype
-  local supported = false
+  vim.api.nvim_create_user_command("Run", function()
+    local filetype = vim.bo.filetype
+    local supported = false
 
-  for file, command in pairs(run_commands) do
-    if filetype == file then
-      vim.cmd("sp")
-      vim.cmd("term " .. command)
-      vim.cmd("resize 15")
-      local keys = vim.api.nvim_replace_termcodes("", true, false, true)
-      vim.api.nvim_feedkeys(keys, "n", false)
-      supported = true
-      break
+    for file, command in pairs(run_commands) do
+      if filetype == file then
+        vim.cmd("sp")
+        vim.cmd("term " .. command)
+        vim.cmd("resize 15")
+        local keys = vim.api.nvim_replace_termcodes("", true, false, true)
+        vim.api.nvim_feedkeys(keys, "n", false)
+        supported = true
+        break
+      end
     end
-  end
-  if not supported then
-    vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
-  end
-end, {})
-
-vim.api.nvim_create_user_command("CompileRun", function()
-  local filetype = vim.bo.filetype
-  local supported = false
-
-  for file, command in pairs(run) do
-    if filetype == file then
-      vim.cmd(":w")
-      vim.cmd("sp")
-      vim.cmd("term " .. command)
-      vim.cmd("resize 15")
-      local keys = vim.api.nvim_replace_termcodes("", true, false, true)
-      vim.api.nvim_feedkeys(keys, "n", false)
-      supported = true
-      break
+    if not supported then
+      vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
     end
-  end
-  if not supported then
-    vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
-  end
-end, {})
+  end, {})
 
---Keymaps
-vim.keymap.set("n", "<leader>rr", "<cmd>CompileRun<CR>", { desc = "Run Current file" })
-vim.keymap.set("n", "<leader>rb", "<cmd>Build<CR>", { desc = "Build Current file" })
+  vim.api.nvim_create_user_command("CompileRun", function()
+    local filetype = vim.bo.filetype
+    local supported = false
+
+    for file, command in pairs(run) do
+      if filetype == file then
+        vim.cmd(":w")
+        vim.cmd("sp")
+        vim.cmd("term " .. command)
+        vim.cmd("resize 15")
+        local keys = vim.api.nvim_replace_termcodes("", true, false, true)
+        vim.api.nvim_feedkeys(keys, "n", false)
+        supported = true
+        break
+      end
+    end
+    if not supported then
+      vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
+    end
+  end, {})
+
+  --Keymaps
+  vim.keymap.set("n", "<leader>rr", "<cmd>CompileRun<CR>", { desc = "Run Current file" })
+  vim.keymap.set("n", "<leader>rb", "<cmd>Build<CR>", { desc = "Build Current file" })
 -- stylua: ignore
 vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR>",
   { desc = "DebugBuild Current file" })
+end
