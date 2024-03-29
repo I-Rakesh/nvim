@@ -97,6 +97,7 @@ return {
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })
           vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
           vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
+          vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to Reference's" })
           vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp Add Workspace Folder" })
           vim.keymap.set(
             "n",
@@ -110,6 +111,9 @@ return {
           vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
           vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "lsp Rename" })
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "lsp Code Actions" })
+          vim.keymap.set("n", "<leader>f", function()
+            vim.lsp.buf.format({ async = true })
+          end, opts)
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
