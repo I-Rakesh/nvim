@@ -17,7 +17,7 @@ return {
     require("notify").setup({
       timeout = 1000,
       stages = "fade_in_slide_out",
-      background_colour = "#000000",
+      -- background_colour = "#000000",
     })
     vim.keymap.set("n", "<leader>sn", "<Cmd>Telescope notify<CR>", { desc = "Notification History" })
   end,
