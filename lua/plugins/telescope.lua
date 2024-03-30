@@ -10,7 +10,7 @@ return {
     {
       "<leader>sb",
       mode = "n",
-      "<cmd>Telescope buffers sort_mru=true sort_lastused=true<CR>",
+      "<cmd>Telescope buffers sort_mru=true<CR>",
       desc = "Search Buffer",
     },
     { "<leader>st", mode = "n", "<cmd>Telescope help_tags<CR>", desc = "Search Help Tags" },
