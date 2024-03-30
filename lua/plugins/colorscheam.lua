@@ -4,7 +4,7 @@ return {
   priority = 1000,
   config = function()
     require("catppuccin").setup({
-      flavour = "mocha", -- latte, frappe, macchiato, mocha
+      flavour = "macchiato", -- latte, frappe, macchiato, mocha
       transparent_background = false, -- disables setting the background color.
       integrations = {
         telescope = {
@@ -24,7 +24,7 @@ return {
             DiagnosticVirtualTextHint = { bg = colors.none },
             DiagnosticVirtualTextInfo = { bg = colors.none },
             MatchParen = { fg = "#ED6B21", bg = colors.none }, -- Replace 'teal' with your desired color
-            Pmenu = { bg = colors.none },
+            -- Pmenu = { bg = colors.none }, -- for transparent completion menu
           }
         end,
       },

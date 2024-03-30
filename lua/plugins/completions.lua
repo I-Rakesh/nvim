@@ -23,6 +23,7 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
     cmp.setup({
+      completion = { completeopt = "menu,menuone,noinsert" },
       mapping = cmp.mapping.preset.insert({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
@@ -73,9 +74,10 @@ return {
       experimental = {
         ghost_text = false,
       },
+      -- for border around completion menu
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        -- completion = cmp.config.window.bordered(),
+        -- documentation = cmp.config.window.bordered(),
       },
     })
     vim.api.nvim_create_autocmd("FileType", {
