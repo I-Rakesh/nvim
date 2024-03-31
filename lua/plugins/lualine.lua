@@ -56,7 +56,7 @@ return {
     local oil = {
       sections = {
         lualine_a = { "mode" },
-        lualine_c = { filetype, "filename" },
+        lualine_c = { filetype, { "filename", padding = { right = 0 } } },
         lualine_x = {
           {
             lazy_status.updates,
