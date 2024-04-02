@@ -349,7 +349,5 @@ end, {}) ]]
   --Keymaps
   vim.keymap.set("n", "<leader>rr", "<cmd>CompileRun<CR>", { desc = "Run Current file" })
   vim.keymap.set("n", "<leader>rb", "<cmd>Build<CR>", { desc = "Build Current file" })
--- stylua: ignore
-vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR>",
-  { desc = "DebugBuild Current file" })
+  vim.keymap.set("n", "<leader>rd", "<cmd>DebugBuild<CR>", { desc = "DebugBuild Current file" })
 end
