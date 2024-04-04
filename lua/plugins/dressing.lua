@@ -19,6 +19,7 @@ return {
         buf_options = {},
         insert_only = false,
         win_options = {
+          winhighlight = "Normal:MyNormal",
           winblend = 0,
         },
       },
