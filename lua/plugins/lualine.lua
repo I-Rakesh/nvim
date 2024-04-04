@@ -107,7 +107,18 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_b = {
+          "branch",
+          {
+            "diff",
+            symbols = {
+              added = " ",
+              modified = " ",
+              removed = " ",
+            },
+          },
+          "diagnostics",
+        },
         lualine_c = { filetype, { "filename", path = 1, padding = { right = 0 } } },
         lualine_x = {
           -- stylua: ignore
