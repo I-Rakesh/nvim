@@ -3,7 +3,11 @@ return {
   config = function()
     require("oil").setup({
       use_default_keymaps = false,
-
+      preview = {
+        win_options = {
+          winhl = "Normal:Normal,Float:Float",
+        },
+      },
       keymaps = {
         ["H"] = "actions.toggle_hidden",
         ["<A-t>"] = "actions.select_tab",
