@@ -55,8 +55,7 @@ return {
     }
     local oil = {
       sections = {
-        lualine_a = { "mode" },
-        lualine_c = { filetype, { "filename", padding = { right = 0 } } },
+        lualine_c = { { "filename", path = 1, padding = { left = 1 } } },
         lualine_x = {
           {
             lazy_status.updates,
@@ -68,10 +67,8 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
-          copilot_indicator,
+          "location",
         },
-        lualine_y = { lsp, "progress" },
-        lualine_z = { "location" },
       },
       inactive_sections = {
         lualine_a = {},
@@ -145,7 +142,7 @@ return {
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { filetype, { "filename", padding = { right = 0 } } },
+        lualine_c = { filetype, { "filename", path = 1, padding = { right = 0 } } },
         lualine_x = { "location" },
         lualine_y = {},
         lualine_z = {},
