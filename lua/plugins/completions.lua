@@ -9,7 +9,7 @@ return {
     "saadparwaiz1/cmp_luasnip",
     "onsails/lspkind.nvim",
     "rafamadriz/friendly-snippets",
-    "L3MON4D3/LuaSnip",
+    { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
   },
   config = function()
     require("lspkind").init({
