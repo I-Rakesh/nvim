@@ -64,6 +64,7 @@ return {
           return " 󰝰 " .. filtered_directory .. " [+]"
         end
       end,
+      color = { fg = "#6E738D" },
       padding = { left = 0 },
     }
     local copilot_indicator = {
