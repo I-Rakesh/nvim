@@ -41,18 +41,26 @@ return {
       icon_only = true,
       colored = true,
       separator = { left = "", right = "" },
-      padding = { left = 0 },
+      padding = { left = 1.5 },
     }
-    local test = {
+    local oil_path = {
       function()
         local current_directory = vim.fn.expand("%:p:h")
-        local filter_out = "oil:///Users/rakesh/?"
-        local filtered_directory = string.gsub(current_directory, "^" .. filter_out, "")
+        local replacements = {
+          ["^oil:///Users/rakesh/?"] = "~/",
+          ["^oil:///Users?$"] = "/Users",
+          ["^oil:?$"] = "/",
+        }
+        local filtered_directory = current_directory
+        for pattern, replacement in pairs(replacements) do
+          filtered_directory = string.gsub(filtered_directory, pattern, replacement)
+        end
+
         local modified = vim.api.nvim_buf_get_option(0, "modified")
         if not modified then
-          return "󰝰 ~/" .. filtered_directory
+          return " 󰝰 " .. filtered_directory
         else
-          return "󰝰 ~/" .. filtered_directory .. " [+]"
+          return " 󰝰 " .. filtered_directory .. " [+]"
         end
       end,
       padding = { left = 0 },
@@ -69,8 +77,7 @@ return {
     }
     local oil = {
       sections = {
-        lualine_a = { "mode" },
-        lualine_c = { test },
+        lualine_c = { "mode", oil_path },
         lualine_x = {
           {
             lazy_status.updates,
@@ -82,13 +89,14 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
+          copilot_indicator,
+          { "location", padding = { left = 0 } },
         },
-        lualine_z = { "location" },
       },
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { filetype, { "filename", padding = { right = 0 } } },
+        lualine_c = { oil_path },
         lualine_x = { "location" },
         lualine_y = {},
         lualine_z = {},
@@ -101,7 +109,7 @@ return {
         theme = "auto",
         -- component_separators = { left = "", right = "" },
         -- section_separators = { left = "", right = "" },
-        component_separators = { left = "|", right = "|" },
+        component_separators = { left = "", right = "" },
         section_separators = { left = " ", right = "" },
 
         disabled_filetypes = {
@@ -118,8 +126,10 @@ return {
         },
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {
+          "mode",
           "branch",
           {
             "diff",
@@ -130,8 +140,9 @@ return {
             },
           },
           "diagnostics",
+          filetype,
+          { "filename", path = 1, padding = { right = 0 } },
         },
-        lualine_c = { filetype, { "filename", path = 1, padding = { right = 0 } } },
         lualine_x = {
           -- stylua: ignore
           -- {
@@ -150,9 +161,12 @@ return {
             color = { fg = "#ff9e64" },
           },
           copilot_indicator,
+          lsp,
+          "progress",
+          { "location", padding = { left = 0 } },
         },
-        lualine_y = { lsp, "progress" },
-        lualine_z = { "location" },
+        lualine_y = {},
+        lualine_z = {},
       },
       inactive_sections = {
         lualine_a = {},
