@@ -43,6 +43,20 @@ return {
       separator = { left = "", right = "" },
       padding = { left = 0 },
     }
+    local test = {
+      function()
+        local current_directory = vim.fn.expand("%:p:h")
+        local filter_out = "oil:///Users/rakesh/?"
+        local filtered_directory = string.gsub(current_directory, "^" .. filter_out, "")
+        local modified = vim.api.nvim_buf_get_option(0, "modified")
+        if not modified then
+          return "󰝰 ~/" .. filtered_directory
+        else
+          return "󰝰 ~/" .. filtered_directory .. " [+]"
+        end
+      end,
+      padding = { left = 0 },
+    }
     local copilot_indicator = {
       function()
         local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
@@ -55,7 +69,8 @@ return {
     }
     local oil = {
       sections = {
-        lualine_c = { { "filename", path = 1, padding = { left = 1 } } },
+        lualine_a = { "mode" },
+        lualine_c = { test },
         lualine_x = {
           {
             lazy_status.updates,
@@ -67,8 +82,8 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
-          "location",
         },
+        lualine_z = { "location" },
       },
       inactive_sections = {
         lualine_a = {},
