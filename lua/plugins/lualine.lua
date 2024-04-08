@@ -35,6 +35,7 @@ return {
       function()
         return getLspName()
       end,
+      color = { fg = "#6E738D" },
     }
     local filetype = {
       "filetype",
@@ -107,10 +108,8 @@ return {
       options = {
         icons_enabled = true,
         theme = "auto",
-        -- component_separators = { left = "", right = "" },
-        -- section_separators = { left = "", right = "" },
         component_separators = { left = "", right = "" },
-        section_separators = { left = " ", right = "" },
+        section_separators = { left = "", right = "" },
 
         disabled_filetypes = {
           statusline = { "DiffviewFiles" },
@@ -160,8 +159,8 @@ return {
             cond = require("noice").api.statusline.mode.has,
             color = { fg = "#ff9e64" },
           },
-          copilot_indicator,
           lsp,
+          copilot_indicator,
           "progress",
           { "location", padding = { left = 0 } },
         },
