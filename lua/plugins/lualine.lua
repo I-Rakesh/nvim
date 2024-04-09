@@ -110,7 +110,7 @@ return {
         icons_enabled = true,
         theme = "auto",
         component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        section_separators = { left = " ", right = "" },
 
         disabled_filetypes = {
           statusline = { "DiffviewFiles" },
@@ -130,7 +130,10 @@ return {
         lualine_b = {},
         lualine_c = {
           "mode",
-          "branch",
+          filetype,
+          { "filename", path = 1, padding = { right = 1 } },
+          "diagnostics",
+          { "branch", color = { fg = "#6E738D" }, icon = "", padding = { left = 1.5 } },
           {
             "diff",
             symbols = {
@@ -138,10 +141,12 @@ return {
               modified = " ",
               removed = " ",
             },
+            diff_color = {
+              added = { fg = "#5E7B54" },
+              modified = { fg = "#7C6E53" },
+              removed = { fg = "#A75F69" },
+            },
           },
-          "diagnostics",
-          filetype,
-          { "filename", path = 1, padding = { right = 0 } },
         },
         lualine_x = {
           -- stylua: ignore
