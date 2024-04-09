@@ -181,10 +181,13 @@ return {
         lualine_y = {},
         lualine_z = {},
       },
-      tabline = {},
+      tabline = {
+        lualine_b = { { "tabs", mode = 2 } },
+      },
       winbar = {},
       inactive_winbar = {},
       extensions = { "fugitive", "quickfix", "trouble", "nvim-dap-ui", oil },
     })
+    vim.opt.showtabline = 1
   end,
 }
