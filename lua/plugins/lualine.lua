@@ -71,7 +71,7 @@ return {
       function()
         local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
         if client == nil then
-          return ""
+          return ""
         else
           return ""
         end
