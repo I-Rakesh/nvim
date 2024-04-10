@@ -71,16 +71,16 @@ vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious, { desc = "Previous Buffer" })
 vim.keymap.set("n", "<leader>'", "<C-^>", { desc = "Previous Opened Buffer" })
 
 -- to move between windows
-vim.keymap.set({ "n" }, "<C-j>", "<Esc><C-w>j", { desc = "Move focus to the down window" })
-vim.keymap.set({ "n" }, "<C-k>", "<Esc><C-w>k", { desc = "Move focus to the up window" })
-vim.keymap.set({ "n" }, "<C-l>", "<Esc><C-w>l", { desc = "Move focus to the right window" })
-vim.keymap.set({ "n" }, "<C-h>", "<Esc><C-w>h", { desc = "Move focus to the left window" })
+vim.keymap.set({ "n" }, "<C-j>", "<C-w>j", { desc = "Move focus to the down window" })
+vim.keymap.set({ "n" }, "<C-k>", "<C-w>k", { desc = "Move focus to the up window" })
+vim.keymap.set({ "n" }, "<C-l>", "<C-w>l", { desc = "Move focus to the right window" })
+vim.keymap.set({ "n" }, "<C-h>", "<C-w>h", { desc = "Move focus to the left window" })
 
 -- to rearrange window
-vim.keymap.set({ "n" }, "<leader>H", "<Esc><C-w>H", { desc = "Move Window Left" })
-vim.keymap.set({ "n" }, "<leader>J", "<Esc><C-w>J", { desc = "Move Window Down" })
-vim.keymap.set({ "n" }, "<leader>K", "<Esc><C-w>K", { desc = "Move Window  Up" })
-vim.keymap.set({ "n" }, "<leader>L", "<Esc><C-w>L", { desc = "Move Window Right" })
+vim.keymap.set({ "n" }, "<leader>H", "<C-w>H", { desc = "Move Window Left" })
+vim.keymap.set({ "n" }, "<leader>J", "<C-w>J", { desc = "Move Window Down" })
+vim.keymap.set({ "n" }, "<leader>K", "<C-w>K", { desc = "Move Window  Up" })
+vim.keymap.set({ "n" }, "<leader>L", "<C-w>L", { desc = "Move Window Right" })
 vim.keymap.set(
   "n",
   "<C-" .. vim.g.mapleader .. ">",
