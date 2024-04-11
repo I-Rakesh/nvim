@@ -24,6 +24,11 @@ return {
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
     cmp.setup({
       -- completion = { completeopt = "menu,menuone,noinsert" },
+      -- view = {
+      --   entries = {
+      --     follow_cursor = true,
+      --   },
+      -- },
       mapping = cmp.mapping.preset.insert({
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
