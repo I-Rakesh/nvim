@@ -56,13 +56,7 @@ return {
         for pattern, replacement in pairs(replacements) do
           filtered_directory = string.gsub(filtered_directory, pattern, replacement)
         end
-
-        local modified = vim.api.nvim_buf_get_option(0, "modified")
-        if not modified then
-          return " 󰝰 " .. filtered_directory
-        else
-          return " 󰝰 " .. filtered_directory .. " [+]"
-        end
+        return " 󰝰 " .. filtered_directory .. " %m"
       end,
       color = { fg = "#6E738D" },
       padding = { left = 0 },
