@@ -40,8 +40,9 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 })
 
 -- don't auto comment new line
-vim.api.nvim_create_autocmd({ "BufEnter" }, {
+vim.api.nvim_create_autocmd({ "FileType" }, {
   desc = "Disables auto commenting next line",
+  pattern = "*",
   callback = function()
     vim.cmd("set formatoptions-=cro")
   end,
