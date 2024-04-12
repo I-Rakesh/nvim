@@ -47,15 +47,11 @@ return {
     local oil_path = {
       function()
         local current_directory = vim.fn.expand("%:p:h")
-        local replacements = {
-          ["^oil:///Users/rakesh/?"] = "~/",
-          ["^oil:///Users?$"] = "/Users",
-          ["^oil:?$"] = "/",
-        }
         local filtered_directory = current_directory
-        for pattern, replacement in pairs(replacements) do
-          filtered_directory = string.gsub(filtered_directory, pattern, replacement)
-        end
+          :gsub("^oil:///Users/rakesh/", "~/")
+          :gsub("^oil:///Users/rakesh", "~/")
+          :gsub("^oil:///", "/")
+          :gsub("^oil:", "/")
         return " 󰝰 " .. filtered_directory .. " %m"
       end,
       color = { fg = "#6E738D" },
