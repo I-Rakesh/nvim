@@ -19,8 +19,22 @@ return {
       "<leader>tc",
       mode = "n",
       function()
-        local firstInput = vim.fn.input("Enter tmux pane number: ")
-        local secondInput = vim.fn.input("Enter command number: ")
+        local firstInput = vim.fn.input("Enter tmux pane number (default 1): ")
+        if firstInput == "0" then
+          return
+        end
+
+        local secondInput = vim.fn.input("Enter command number (default 1): ")
+        if secondInput == "0" then
+          return
+        end
+
+        if firstInput == "" then
+          firstInput = "1"
+        end
+        if secondInput == "" then
+          secondInput = "1"
+        end
 
         if firstInput and secondInput and tonumber(firstInput) and tonumber(secondInput) then
           require('harpoon.tmux').sendCommand(tonumber(firstInput), tonumber(secondInput))
