@@ -19,12 +19,12 @@ return {
       "<leader>tc",
       mode = "n",
       function()
-        local firstInput = vim.fn.input("Enter tmux pane number (default 1): ")
+        local firstInput = vim.fn.input("Tmux pane number (0 To Exit)(default 1): ")
         if firstInput == "0" then
           return
         end
 
-        local secondInput = vim.fn.input("Enter command number (default 1): ")
+        local secondInput = vim.fn.input("Command number (0 To Exit)(default 1): ")
         if secondInput == "0" then
           return
         end
