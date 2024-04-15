@@ -82,7 +82,7 @@ return {
       vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
       vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
       vim.keymap.set("n", "[t", diagnostic_goto(false, "HINT"), { desc = "Prev Hint" })
-      vim.keymap.set("n", "]t", diagnostic_goto(true, "HINT"), { desc = "Prev Hint" })
+      vim.keymap.set("n", "]t", diagnostic_goto(true, "HINT"), { desc = "Next Hint" })
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
