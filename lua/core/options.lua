@@ -59,7 +59,7 @@ vim.opt.splitright = true
 vim.opt.virtualedit = "block"
 vim.opt.inccommand = "split"
 
-vim.opt.showmode = false
+-- vim.opt.showmode = false
 
 vim.opt.pumheight = 10 --to set the limit for cmp-window
 

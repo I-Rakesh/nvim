@@ -69,18 +69,20 @@ return {
     }
     local oil = {
       sections = {
-        lualine_c = { "mode", oil_path },
+        lualine_c = { --[[ "mode", ]]
+          oil_path,
+        },
         lualine_x = {
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
             color = { fg = "#ff9e64" },
           },
-          {
-            require("noice").api.statusline.mode.get,
-            cond = require("noice").api.statusline.mode.has,
-            color = { fg = "#ff9e64" },
-          },
+          -- {
+          --   require("noice").api.statusline.mode.get,
+          --   cond = require("noice").api.statusline.mode.has,
+          --   color = { fg = "#ff9e64" },
+          -- },
           copilot_indicator,
           { "location", padding = { left = 0 } },
         },
@@ -119,7 +121,7 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = {
-          "mode",
+          -- "mode",
           filetype,
           { "filename", path = 1, padding = { right = 1 } },
           "diagnostics",
@@ -150,11 +152,11 @@ return {
             cond = lazy_status.has_updates,
             color = { fg = "#ff9e64" },
           },
-          {
-            require("noice").api.statusline.mode.get,
-            cond = require("noice").api.statusline.mode.has,
-            color = { fg = "#ff9e64" },
-          },
+          -- {
+          --   require("noice").api.statusline.mode.get,
+          --   cond = require("noice").api.statusline.mode.has,
+          --   color = { fg = "#ff9e64" },
+          -- },
           lsp,
           copilot_indicator,
           "progress",
