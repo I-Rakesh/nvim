@@ -277,9 +277,9 @@ if not vim.g.vscode then
 
     for file, command in pairs(build_commands) do
       if filetype == file then
+        vim.cmd(":w")
         print("Building file")
         -- vim.notify("Building file")
-        vim.cmd(":w")
         vim.cmd("silent " .. command)
         supported = true
         break
@@ -297,9 +297,9 @@ if not vim.g.vscode then
 
     for file, command in pairs(debug_build_commands) do
       if filetype == file then
+        vim.cmd(":w")
         print("DebugBuild file")
         -- vim.notify("DebugBuild file")
-        vim.cmd(":w")
         vim.cmd("silent " .. command)
         supported = true
         break
