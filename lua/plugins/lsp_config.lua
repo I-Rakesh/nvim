@@ -94,6 +94,12 @@ return {
           -- See `:help vim.lsp.*` for documentation on any of the below functions
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+          vim.keymap.set(
+            "n",
+            "<leader>gd",
+            "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>",
+            { desc = "Go to Definition in split screen" }
+          )
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })
           vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
           vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
