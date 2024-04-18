@@ -63,6 +63,7 @@ return {
           gs.diffthis("~")
         end, { desc = "Git Difftool ~" })
         map("n", "<leader>htd", gs.toggle_deleted, { desc = "Git Toggle Delete" })
+        map("n", "<leader>hw", "<cmd>Gitsigns toggle_word_diff<CR> ", { desc = "Git Toggle Word Diff" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { silent = true, desc = "Git Select Hunk" })
