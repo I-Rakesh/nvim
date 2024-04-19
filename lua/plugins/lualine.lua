@@ -30,13 +30,13 @@ return {
       -- If no specific client found, return the default message
       return ""
     end
-
     local lsp = {
       function()
         return getLspName()
       end,
       color = { fg = "#6E738D" },
     }
+
     local filetype = {
       "filetype",
       icon_only = true,
@@ -44,19 +44,7 @@ return {
       separator = { left = "", right = "" },
       padding = { left = 1.5 },
     }
-    local oil_path = {
-      function()
-        local current_directory = vim.fn.expand("%:p:h")
-        local filtered_directory = current_directory
-          :gsub("^oil:///Users/rakesh/", "~/")
-          :gsub("^oil:///Users/rakesh", "~/")
-          :gsub("^oil:///", "/")
-          :gsub("^oil:", "/")
-        return " 󰝰 " .. filtered_directory .. " %m"
-      end,
-      color = { fg = "#6E738D" },
-      padding = { left = 0 },
-    }
+
     local copilot_indicator = {
       function()
         local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
@@ -66,6 +54,23 @@ return {
           return ""
         end
       end,
+    }
+
+    local oil_path = {
+      function()
+        local ok, oil = pcall(require, "oil")
+        if ok then
+          local current_dir = oil.get_current_dir()
+          if current_dir:sub(-1) == "/" and #current_dir > 1 then
+            current_dir = current_dir:sub(1, -2)
+          end
+          return " 󰝰 " .. vim.fn.fnamemodify(current_dir, ":~") .. " %m"
+        else
+          return ""
+        end
+      end,
+      color = { fg = "#6E738D" },
+      padding = { left = 0 },
     }
     local oil = {
       sections = {
@@ -84,19 +89,89 @@ return {
           --   color = { fg = "#ff9e64" },
           -- },
           copilot_indicator,
-          { "location", padding = { left = 0 } },
+          "location",
+          "progress",
         },
       },
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
         lualine_c = { oil_path },
-        lualine_x = { "location" },
+        lualine_x = {
+          "location",
+          "progress",
+        },
         lualine_y = {},
         lualine_z = {},
       },
       filetypes = { "oil" },
     }
+
+    local function fugitive_branch()
+      local icon = ""
+      return icon .. " " .. vim.fn.FugitiveHead()
+    end
+    local fugitive = {
+      sections = {
+        lualine_c = { fugitive_branch },
+        lualine_x = { "location", "progress" },
+      },
+      filetypes = { "fugitive" },
+    }
+
+    local function is_loclist()
+      return vim.fn.getloclist(0, { filewinid = 1 }).filewinid ~= 0
+    end
+    local function label()
+      return is_loclist() and "Location List" or "Quickfix List"
+    end
+    local function title()
+      if is_loclist() then
+        return vim.fn.getloclist(0, { title = 0 }).title
+      end
+      return vim.fn.getqflist({ title = 0 }).title
+    end
+    local quickfix = {
+      sections = {
+        lualine_b = { label },
+        lualine_c = { title },
+        lualine_x = { "progress" },
+      },
+      filetypes = { "qf" },
+    }
+
+    local function get_trouble_mode()
+      local opts = require("trouble.config").options
+      local words = vim.split(opts.mode, "[%W]")
+      for i, word in ipairs(words) do
+        words[i] = word:sub(1, 1):upper() .. word:sub(2)
+      end
+      return table.concat(words, " ")
+    end
+    local trouble = {
+      sections = {
+        lualine_b = {
+          get_trouble_mode,
+        },
+        lualine_x = { "progress" },
+      },
+      filetypes = { "Trouble" },
+    }
+
+    local nvim_dap_ui = {
+      sections = {
+        lualine_b = { { "filename", file_status = false } },
+      },
+      filetypes = {
+        "dap-repl",
+        "dapui_console",
+        "dapui_watches",
+        "dapui_stacks",
+        "dapui_breakpoints",
+        "dapui_scopes",
+      },
+    }
+
     require("lualine").setup({
       options = {
         icons_enabled = true,
@@ -159,8 +234,8 @@ return {
           -- },
           lsp,
           copilot_indicator,
+          "location",
           "progress",
-          { "location", padding = { left = 0 } },
         },
         lualine_y = {},
         lualine_z = {},
@@ -169,7 +244,10 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = { filetype, { "filename", path = 1, padding = { right = 0 } } },
-        lualine_x = { "location" },
+        lualine_x = {
+          "location",
+          "progress",
+        },
         lualine_y = {},
         lualine_z = {},
       },
@@ -178,7 +256,7 @@ return {
       },
       winbar = {},
       inactive_winbar = {},
-      extensions = { "fugitive", "quickfix", "trouble", "nvim-dap-ui", oil },
+      extensions = { fugitive, quickfix, trouble, nvim_dap_ui, oil },
     })
     vim.opt.showtabline = 1
   end,
