@@ -89,35 +89,28 @@ return {
       return require("trouble.providers.telescope").open_selected_with_trouble(...)
     end
 
-    local function formattedName(_, path)
-      local tail = vim.fs.basename(path)
-      local parent = vim.fs.dirname(path)
-      if parent == "." then
-        return tail
-      end
-      return string.format("%s\t\t%s", tail, parent)
-    end
-
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "TelescopeResults",
-      callback = function(ctx)
-        vim.api.nvim_buf_call(ctx.buf, function()
-          vim.fn.matchadd("TelescopeParent", "\t\t.*$")
-          vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
-        end)
-      end,
-    })
-
     require("telescope").setup({
       pickers = {
         find_files = {
-          path_display = formattedName,
+          path_display = {
+            filename_first = {
+              reverse_directories = false,
+            },
+          },
         },
         git_files = {
-          path_display = formattedName,
+          path_display = {
+            filename_first = {
+              reverse_directories = false,
+            },
+          },
         },
         buffers = {
-          path_display = formattedName,
+          path_display = {
+            filename_first = {
+              reverse_directories = false,
+            },
+          },
           mappings = {
             n = {
               ["x"] = actions.delete_buffer,
@@ -125,7 +118,11 @@ return {
           },
         },
         oldfiles = {
-          path_display = formattedName,
+          path_display = {
+            filename_first = {
+              reverse_directories = false,
+            },
+          },
         },
         colorscheme = {
           enable_preview = true,
