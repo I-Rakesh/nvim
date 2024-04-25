@@ -57,7 +57,7 @@ return {
       desc = "Search Word in Current Buffer",
     },
     {
-      "<leader>s*",
+      "<leader>sw",
       mode = "v",
       function()
         vim.cmd(':normal! "sy')
