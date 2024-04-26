@@ -23,6 +23,7 @@ return {
           python = { "isort", "black" },
           sh = { "shfmt" },
           markdown = { "prettier" },
+          javascript = { "prettier" },
         },
         format_on_save = {
           -- These options will be passed to conform.format()
@@ -39,6 +40,7 @@ return {
       require("lint").linters_by_ft = {
         python = { "mypy", "ruff" },
         sh = { "Shellcheck" },
+        javascript = { "eslint" },
       }
 
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

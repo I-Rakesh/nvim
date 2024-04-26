@@ -181,6 +181,7 @@ return {
           "jdtls",
           "bashls",
           "marksman",
+          "tsserver",
           --Formatters
           "stylua",
           "clang-format",
@@ -192,11 +193,13 @@ return {
           "shfmt",
           "shellcheck",
           "mypy",
+          "eslint",
           --Debugger
           "java-debug-adapter",
           "java-test",
           "codelldb",
           "debugpy",
+          "js-debug-adapter",
         },
       })
     end,
