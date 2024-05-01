@@ -19,12 +19,10 @@ vim.keymap.set("v", "Q", ":norm @@<CR>", { silent = true, desc = "Replay a Macro
 vim.keymap.set("n", "<Leader>cc", function()
   if vim.o.colorcolumn == "" then
     vim.cmd("let &colorcolumn = '80'")
-    print("Color Column Enabled")
-    -- vim.notify("Color Column Enabled")
+    vim.notify("Color Column Enabled")
   else
     vim.cmd("let &colorcolumn = ''")
-    print("Color Column Disabled")
-    -- vim.notify("Color Column Disabled")
+    vim.notify("Color Column Disabled")
   end
 end, { noremap = true, silent = true, desc = "Toggle Color Column" })
 

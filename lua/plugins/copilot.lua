@@ -10,20 +10,17 @@ return {
       local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
       if client == nil then
         vim.cmd("Copilot enable")
-        print("Copilot enabled")
-      -- vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
+        vim.notify("Copilot enabled")
       else
         vim.cmd("Copilot disable")
-        print("Copilot disabled")
-        -- vim.notify("Copilot disabled")
+        vim.notify("Copilot disabled")
       end
     end
 
     vim.keymap.set("n", "<leader>cp", ToggleCopilot, { desc = "Copilot Toggle" })
     vim.keymap.set("n", "<leader>cs", function()
       vim.cmd("Copilot suggestion toggle_auto_trigger")
-      print("Copilot  Toggle Suggestion")
-      -- vim.notify("Copilot  Toggle Suggestion")
+      vim.notify("Copilot  Toggle Suggestion")
     end, { desc = "Copilot Toggle Suggestion" })
     require("copilot").setup({
       suggestion = {
