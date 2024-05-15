@@ -6,5 +6,6 @@ return {
   end,
   config = function()
     vim.keymap.set("n", "<C-p>", "<cmd>MarkdownPreviewToggle<CR>", { desc = "Open Markdown Preview" })
+    vim.g.mkdp_auto_close = 0
   end,
 }

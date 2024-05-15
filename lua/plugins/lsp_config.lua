@@ -101,7 +101,7 @@ return {
             { desc = "Go to Definition in split screen" }
           )
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })
-          vim.keymap.set("n", "gk", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
+          vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
           vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
           vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to Reference's" })
           vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp Add Workspace Folder" })
