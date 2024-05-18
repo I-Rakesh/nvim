@@ -6,7 +6,7 @@ function GetChar(prompt)
   -- That's the escape character (<Esc>). Not sure how to specify it smarter
   -- In other words, if you pressed escape, we return nil
   if char == "" then
-    char = nil
+    return nil
   end
   return char
 end
