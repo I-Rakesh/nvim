@@ -84,16 +84,12 @@ return {
         -- completion = cmp.config.window.bordered(),
         -- documentation = cmp.config.window.bordered(),
       },
-    })
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "sql", "mysql", "oracle", "plsql" },
-      callback = function()
-        cmp.setup.buffer({
-          sources = {
-            { name = "vim-dadbod-completion" },
-          },
-        })
-      end,
+      cmp.setup.filetype({ "sql" }, {
+        sources = {
+          { name = "vim-dadbod-completion" },
+          { name = "buffer" },
+        },
+      }),
     })
   end,
 }

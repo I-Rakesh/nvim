@@ -75,8 +75,6 @@ return {
           go({ severity = severity })
         end
       end
-      vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-      vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
       vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
       vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
       vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
@@ -100,7 +98,6 @@ return {
             "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>",
             { desc = "Go to Definition in split screen" }
           )
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Show Hover Documentation" })
           vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
           vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
           vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to Reference's" })
