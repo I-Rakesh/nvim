@@ -72,6 +72,7 @@ require("lazy").setup({
 vim.keymap.set("n", "<leader>sf", "<cmd>Find<cr>")
 vim.keymap.set("n", "<leader>/", [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
 vim.keymap.set("n", "<leader>ss", [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
+vim.keymap.set("n", "<leader>sb", [[<cmd>call VSCodeNotify('workbench.action.showAllEditors')<cr>]])
 vim.keymap.set("n", "<leader>bm", [[<cmd>call VSCodeNotify('editor.debug.action.toggleInlineBreakpoint')<cr>]])
 vim.keymap.set("n", "<leader>rr", [[<cmd>call VSCodeNotify('code-runner.run')<cr>]])
 vim.keymap.set("n", "<leader>tj", [[<cmd>call VSCodeNotify('workbench.action.terminal.toggleTerminal')<cr>]])
