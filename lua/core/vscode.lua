@@ -2,6 +2,9 @@ if not vim.g.vscode then
   return {}
 end
 
+-- Option's
+vim.opt.spell = false
+
 local enabled = {
   "flash.nvim",
   "Comment.nvim",
@@ -65,11 +68,10 @@ require("lazy").setup({
   },
 })
 
-vim.api.nvim_create_autocmd("User", {
-  pattern = "LazyVimKeymaps",
-  callback = function()
-    vim.keymap.set("n", "<leader>sf", "<cmd>Find<cr>")
-    vim.keymap.set("n", "<leader>/", [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
-    vim.keymap.set("n", "<leader>ss", [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
-  end,
-})
+-- Keymaps
+vim.keymap.set("n", "<leader>sf", "<cmd>Find<cr>")
+vim.keymap.set("n", "<leader>/", [[<cmd>call VSCodeNotify('workbench.action.findInFiles')<cr>]])
+vim.keymap.set("n", "<leader>ss", [[<cmd>call VSCodeNotify('workbench.action.gotoSymbol')<cr>]])
+vim.keymap.set("n", "<leader>bm", [[<cmd>call VSCodeNotify('editor.debug.action.toggleInlineBreakpoint')<cr>]])
+vim.keymap.set("n", "<leader>rr", [[<cmd>call VSCodeNotify('code-runner.run')<cr>]])
+vim.keymap.set("n", "<leader>tj", [[<cmd>call VSCodeNotify('workbench.action.terminal.toggleTerminal')<cr>]])
