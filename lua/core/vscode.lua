@@ -77,3 +77,7 @@ vim.keymap.set("n", "<leader>bm", [[<cmd>call VSCodeNotify('editor.debug.action.
 vim.keymap.set("n", "<leader>rr", [[<cmd>call VSCodeNotify('code-runner.run')<cr>]])
 vim.keymap.set("n", "<leader>tj", [[<cmd>call VSCodeNotify('workbench.action.terminal.toggleTerminal')<cr>]])
 vim.keymap.set("n", "<leader>x", [[<cmd>call VSCodeNotify('workbench.action.closeActiveEditor')<cr>]])
+vim.keymap.set("n", "<C-h>", [[<cmd>call VSCodeNotify('workbench.action.navigateLeft')<cr>]])
+vim.keymap.set("n", "<C-l>", [[<cmd>call VSCodeNotify('workbench.action.navigateRight')<cr>]])
+vim.keymap.set("n", "<C-j>", [[<cmd>call VSCodeNotify('workbench.action.navigateDown')<cr>]])
+vim.keymap.set("n", "<C-k>", [[<cmd>call VSCodeNotify('workbench.action.navigateUp')<cr>]])
