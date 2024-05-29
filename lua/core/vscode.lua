@@ -81,3 +81,5 @@ vim.keymap.set("n", "<C-h>", [[<cmd>call VSCodeNotify('workbench.action.navigate
 vim.keymap.set("n", "<C-l>", [[<cmd>call VSCodeNotify('workbench.action.navigateRight')<cr>]])
 vim.keymap.set("n", "<C-j>", [[<cmd>call VSCodeNotify('workbench.action.navigateDown')<cr>]])
 vim.keymap.set("n", "<C-k>", [[<cmd>call VSCodeNotify('workbench.action.navigateUp')<cr>]])
+vim.keymap.set("n", "-", [[<cmd>call VSCodeNotify('workbench.view.explorer')<cr>]])
+vim.keymap.set("n", "<leader>gs", [[<cmd>call VSCodeNotify('workbench.view.scm')<cr>]])
