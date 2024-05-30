@@ -68,7 +68,6 @@ vim.keymap.set("n", "<leader>tx", "<cmd>tabc<CR>", { desc = "Close Current Tab" 
 -- to move between buffers
 vim.keymap.set("n", "<Tab>", vim.cmd.bnext, { desc = "Next Buffer" })
 vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious, { desc = "Previous Buffer" })
-vim.keymap.set("n", "<leader>'", "<C-^>", { desc = "Previous Opened Buffer" })
 
 -- to move between windows
 vim.keymap.set({ "n" }, "<C-j>", "<C-w>j", { desc = "Move focus to the down window" })
@@ -81,12 +80,7 @@ vim.keymap.set({ "n" }, "<leader>H", "<C-w>H", { desc = "Move Window Left" })
 vim.keymap.set({ "n" }, "<leader>J", "<C-w>J", { desc = "Move Window Down" })
 vim.keymap.set({ "n" }, "<leader>K", "<C-w>K", { desc = "Move Window  Up" })
 vim.keymap.set({ "n" }, "<leader>L", "<C-w>L", { desc = "Move Window Right" })
-vim.keymap.set(
-  "n",
-  "<C-" .. vim.g.mapleader .. ">",
-  "<Esc><C-w><C-r>",
-  { noremap = true, desc = "Swap Window Positions" }
-)
+vim.keymap.set("n", "<leader>'", "<Esc><C-w><C-r>", { noremap = true, desc = "Swap Window Positions" })
 
 -- to resize panes
 vim.keymap.set("n", "<A-p>", [[<cmd>vertical resize +5<cr>]], { desc = "Resize Window Vertical+" })
