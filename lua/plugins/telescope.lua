@@ -82,12 +82,6 @@ return {
   config = function()
     vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
     local actions = require("telescope.actions")
-    local open_with_trouble = function(...)
-      return require("trouble.providers.telescope").open_with_trouble(...)
-    end
-    local open_selected_with_trouble = function(...)
-      return require("trouble.providers.telescope").open_selected_with_trouble(...)
-    end
 
     require("telescope").setup({
       pickers = {
@@ -132,8 +126,6 @@ return {
         mappings = {
           n = {
             ["<leader>q"] = actions.smart_send_to_qflist + actions.open_qflist,
-            ["<leader>ts"] = open_selected_with_trouble,
-            ["<leader>tt"] = open_with_trouble,
             ["<A-Down>"] = actions.cycle_history_next,
             ["<A-Up>"] = actions.cycle_history_prev,
           },
