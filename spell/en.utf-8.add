@@ -61,3 +61,4 @@ lualine
 
 zshrc
 vim
+live_config_reload
