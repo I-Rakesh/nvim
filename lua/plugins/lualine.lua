@@ -56,6 +56,16 @@ return {
       end,
     }
 
+    local macro = {
+      function()
+        local reg = vim.fn.reg_recording()
+        if reg == "" then
+          return ""
+        end -- not recording
+        return "recording @" .. reg
+      end,
+    }
+
     local oil_path = {
       function()
         local ok, oil = pcall(require, "oil")
@@ -74,6 +84,7 @@ return {
     }
     local oil = {
       sections = {
+        lualine_b = { "mode" },
         lualine_c = { --[[ "mode", ]]
           oil_path,
         },
@@ -88,6 +99,7 @@ return {
           --   cond = require("noice").api.statusline.mode.has,
           --   color = { fg = "#ff9e64" },
           -- },
+          macro,
           copilot_indicator,
           "location",
           "progress",
@@ -140,24 +152,6 @@ return {
       filetypes = { "qf" },
     }
 
-    local function get_trouble_mode()
-      local opts = require("trouble.config").options
-      local words = vim.split(opts.mode, "[%W]")
-      for i, word in ipairs(words) do
-        words[i] = word:sub(1, 1):upper() .. word:sub(2)
-      end
-      return table.concat(words, " ")
-    end
-    local trouble = {
-      sections = {
-        lualine_b = {
-          get_trouble_mode,
-        },
-        lualine_x = { "progress" },
-      },
-      filetypes = { "Trouble" },
-    }
-
     local nvim_dap_ui = {
       sections = {
         lualine_b = { { "filename", file_status = false } },
@@ -194,7 +188,7 @@ return {
       },
       sections = {
         lualine_a = {},
-        lualine_b = {},
+        lualine_b = { "mode" },
         lualine_c = {
           -- "mode",
           filetype,
@@ -232,6 +226,7 @@ return {
           --   cond = require("noice").api.statusline.mode.has,
           --   color = { fg = "#ff9e64" },
           -- },
+          macro,
           lsp,
           copilot_indicator,
           "location",
@@ -256,7 +251,7 @@ return {
       },
       winbar = {},
       inactive_winbar = {},
-      extensions = { fugitive, quickfix, trouble, nvim_dap_ui, oil },
+      extensions = { fugitive, quickfix, nvim_dap_ui, oil },
     })
     vim.opt.showtabline = 1
   end,

@@ -10,6 +10,8 @@ vim.g.netrw_winsize = 25
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
+vim.opt.cmdheight = 0
+
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 
 vim.opt.cursorline = true
