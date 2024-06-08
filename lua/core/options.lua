@@ -11,6 +11,7 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 
 vim.opt.cmdheight = 0
+vim.opt.diffopt = vim.list_extend(vim.opt.diffopt:get(), { "algorithm:histogram", "linematch:60" })
 
 vim.opt.confirm = true -- confirm to save changes before exiting modified buffer
 

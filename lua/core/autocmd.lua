@@ -99,6 +99,17 @@ vim.api.nvim_create_autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+  callback = function()
+    vim.defer_fn(function()
+      if vim.v.hlsearch == 1 then
+        vim.fn.searchcount({ recompute = 1, maxcount = 0 })
+        vim.cmd("redrawstatus")
+      end
+    end, 0)
+  end,
+})
+
 -- show cursor line only in active window
 local cursorGrp = vim.api.nvim_create_augroup("CursorLine", { clear = true })
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {

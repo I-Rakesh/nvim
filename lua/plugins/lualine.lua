@@ -30,9 +30,34 @@ return {
       -- If no specific client found, return the default message
       return ""
     end
+
+    local function count()
+      local result = vim.fn.searchcount({ recompute = 1 })
+
+      if vim.tbl_isempty(result) then
+        return getLspName()
+      end
+
+      if result.incomplete == 1 then -- timed out
+        return string.format(" /%s [?/??]", vim.fn.getreg("/"))
+      elseif result.incomplete == 2 then -- max count exceeded
+        if result.total > result.maxcount and result.current > result.maxcount then
+          return string.format(" /%s [>%d/>%d]", vim.fn.getreg("/"), result.current, result.total)
+        elseif result.total > result.maxcount then
+          return string.format(" /%s [%d/>%d]", vim.fn.getreg("/"), result.current, result.total)
+        end
+      end
+      if result.total ~= 0 then
+        if vim.v.hlsearch == 1 then
+          return string.format(" %s [%d/%d]", vim.fn.getreg("/"), result.current, result.total)
+        end
+      end
+      return getLspName()
+    end
+
     local lsp = {
       function()
-        return getLspName()
+        return count()
       end,
       color = { fg = "#6E738D" },
     }
@@ -210,22 +235,11 @@ return {
           },
         },
         lualine_x = {
-          -- stylua: ignore
-          -- {
-          --   function() return require("noice").api.status.command.get() end,
-          --   cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-          --   color = { fg = "808080" },
-          -- },
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
             color = { fg = "#ff9e64" },
           },
-          -- {
-          --   require("noice").api.statusline.mode.get,
-          --   cond = require("noice").api.statusline.mode.has,
-          --   color = { fg = "#ff9e64" },
-          -- },
           macro,
           lsp,
           copilot_indicator,
