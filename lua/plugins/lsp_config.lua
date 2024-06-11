@@ -42,6 +42,7 @@ return {
             diagnostics = {
               globals = { "vim" },
             },
+            hint = { enable = true },
             workspace = {
               library = {
                 [vim.fn.expand("$VIMRUNTIME/lua")] = true,
@@ -66,6 +67,33 @@ return {
             shellcheckPath = "",
           },
         },
+        lspconfig.tsserver.setup({
+          settings = {
+            javascript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = false,
+              },
+            },
+
+            typescript = {
+              inlayHints = {
+                includeInlayEnumMemberValueHints = true,
+                includeInlayFunctionLikeReturnTypeHints = true,
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayVariableTypeHints = false,
+              },
+            },
+          },
+        }),
       })
 
       local diagnostic_goto = function(next, severity)
@@ -84,9 +112,9 @@ return {
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
+        callback = function(event)
           -- Enable completion triggered by <c-x><c-o>
-          vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+          vim.bo[event.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
           -- Buffer local mappings.
           -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -118,26 +146,12 @@ return {
             vim.lsp.buf.format({ async = true })
           end, opts)
 
-          -- The following two autocommands are used to highlight references of the
-          -- word under your cursor when your cursor rests there for a little while.
-          --    See `:help CursorHold` for information about when this is executed
-          --
-          -- When you move your cursor, the highlights will be cleared (the second autocommand).
-
-          -- Activate if needed
-
-          --[[ local client = vim.lsp.get_client_by_id(ev.data.client_id)
-          if client and client.server_capabilities.documentHighlightProvider then
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-              buffer = ev.buf,
-              callback = vim.lsp.buf.document_highlight,
-            })
-
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-              buffer = ev.buf,
-              callback = vim.lsp.buf.clear_references,
-            })
-          end ]]
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            vim.keymap.set("n", "<leader>gi", function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({}))
+            end, { desc = "[T]oggle Inlay [H]ints" })
+          end
         end,
       })
       require("lspconfig.ui.windows").default_options.border = "rounded"
