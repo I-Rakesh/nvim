@@ -10,6 +10,9 @@ return {
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
       },
+      numhl = true,
+      word_diff = true,
+      attach_to_untracked = true,
       current_line_blame = false,
       on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
@@ -63,6 +66,8 @@ return {
           gs.diffthis("~")
         end, { desc = "Git Difftool ~" })
         map("n", "<leader>htd", gs.toggle_deleted, { desc = "Git Toggle Delete" })
+        map("n", "<leader>htw", gs.toggle_word_diff, { desc = "Git Toggle Word Diff" })
+        map("n", "<leader>htn", gs.toggle_numhl, { desc = "Git Toggle Number Highlight" })
         map("n", "<leader>hw", "<cmd>Gitsigns toggle_word_diff<CR> ", { desc = "Git Toggle Word Diff" })
 
         -- Text object
