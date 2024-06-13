@@ -4,6 +4,7 @@ return {
   config = function()
     require("oil").setup({
       use_default_keymaps = false,
+      delete_to_trash = true,
       preview = {
         win_options = {
           winhl = "Normal:Normal,Float:Float",
