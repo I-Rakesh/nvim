@@ -86,6 +86,7 @@ return {
     require("telescope").setup({
       pickers = {
         find_files = {
+          hidden = true,
           path_display = {
             filename_first = {
               reverse_directories = false,
@@ -145,6 +146,7 @@ return {
         },
         file_ignore_patterns = {
           "node_modules",
+          "git",
         },
         prompt_prefix = "  ",
         selection_caret = "󰁕 ",
