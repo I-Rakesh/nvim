@@ -4,6 +4,7 @@ end
 
 -- Option's
 vim.opt.spell = false
+vim.opt.cmdheight = 1
 
 local enabled = {
   "flash.nvim",
