@@ -2,12 +2,13 @@ return {
   {
     "stevearc/conform.nvim",
     event = "BufWrite",
+    cmd = "ConformInfo",
     keys = {
       {
         "<leader>f",
         mode = { "n", "v" },
         function()
-          require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
+          require("conform").format({ lsp_fallback = "fallback", async = false, timeout_ms = 1000 })
         end,
         desc = "Format file or range (in visual mode)",
       },
@@ -28,7 +29,7 @@ return {
         format_on_save = {
           -- These options will be passed to conform.format()
           timeout_ms = 1000,
-          lsp_fallback = true,
+          lsp_format = "fallback",
         },
       })
     end,
