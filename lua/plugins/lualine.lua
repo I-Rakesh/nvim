@@ -6,8 +6,8 @@ return {
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
     local function getLspName()
-      local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-      local clients = vim.lsp.get_active_clients()
+      local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
+      local clients = vim.lsp.get_clients()
 
       -- Check if the current file is a Java file
       if buf_ft == "java" then
@@ -72,7 +72,7 @@ return {
 
     local copilot_indicator = {
       function()
-        local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
+        local client = vim.lsp.get_clients({ name = "copilot" })[1]
         if client == nil then
           return ""
         else

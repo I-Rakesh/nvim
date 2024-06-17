@@ -7,7 +7,7 @@ return {
   },
   config = function()
     function ToggleCopilot()
-      local client = vim.lsp.get_active_clients({ name = "copilot" })[1]
+      local client = vim.lsp.get_clients({ name = "copilot" })[1]
       if client == nil then
         vim.cmd("Copilot enable")
         vim.notify("Copilot enabled")
