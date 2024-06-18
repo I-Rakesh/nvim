@@ -87,20 +87,12 @@ local config = {
   },
 }
 config["on_attach"] = function()
-  local _, _ = pcall(vim.lsp.codelens.refresh)
   require("jdtls").setup_dap({ hotcodereplace = "auto" })
   local status_ok, jdtls_dap = pcall(require, "jdtls.dap")
   if status_ok then
     jdtls_dap.setup_dap_main_class_configs()
   end
 end
-
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*.java" },
-  callback = function()
-    local _, _ = pcall(vim.lsp.codelens.refresh)
-  end,
-})
 
 require("jdtls").start_or_attach(config)
 
