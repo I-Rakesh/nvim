@@ -324,7 +324,7 @@ end, {}) ]]
       end
     end
     if not supported then
-      vim.notify("File type '" .. filetype .. "' is not configured to run.", "error")
+      vim.notify("File type '" .. filetype .. "' is not configured to run.", vim.log.levels.ERROR)
     end
   end, {})
 
