@@ -144,7 +144,7 @@ return {
           vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "lsp Code Actions" })
           vim.keymap.set("n", "<leader>f", function()
             vim.lsp.buf.format({ async = true })
-          end)
+          end, { desc = "Format the current file" })
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then

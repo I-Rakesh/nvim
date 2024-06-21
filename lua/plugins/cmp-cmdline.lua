@@ -1,9 +1,9 @@
 return {
   "hrsh7th/cmp-cmdline",
   keys = {
-    "/",
-    ":",
-    "?",
+    { "/", desc = "Search Forward" },
+    { ":", desc = "Cmdline" },
+    { "?", desc = "Search Backward" },
   },
   config = function()
     local cmp = require("cmp")

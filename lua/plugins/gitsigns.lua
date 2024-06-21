@@ -32,7 +32,7 @@ return {
             gs.next_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
+        end, { expr = true, desc = "Go no next diff" })
 
         map("n", "[h", function()
           if vim.wo.diff then
@@ -42,7 +42,7 @@ return {
             gs.prev_hunk()
           end)
           return "<Ignore>"
-        end, { expr = true })
+        end, { expr = true, desc = "Go no previous diff" })
 
         -- Actions
         map("n", "<leader>hS", gs.stage_buffer, { desc = "Git Stage Buffer" })

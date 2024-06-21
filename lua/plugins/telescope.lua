@@ -146,7 +146,7 @@ return {
         },
         file_ignore_patterns = {
           "node_modules",
-          "git",
+          ".git/",
         },
         prompt_prefix = "  ",
         selection_caret = "󰁕 ",
