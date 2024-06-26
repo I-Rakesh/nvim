@@ -107,12 +107,42 @@ return {
       color = { fg = "#6E738D" },
       padding = { left = 0 },
     }
+
+    local mode_colors = {
+      n = "#91ACEE",
+      no = "#91ACEE",
+      cv = "#91ACEE",
+      ce = "#91ACEE",
+      ["!"] = "#91ACEE",
+      t = "#91ACEE",
+      i = "#B1D99C",
+      v = "#BA9DE9",
+      [""] = "#BA9DE9",
+      V = "#BA9DE9",
+      c = "#BA9DE9",
+      s = "#BA9DE9",
+      S = "#BA9DE9",
+      [""] = "#BA9DE9",
+      ic = "#BA9DE9",
+      R = "#DD8B96",
+      Rv = "#BA9DE9",
+      r = "#BA9DE9",
+      rm = "#BA9DE9",
+      ["r?"] = "#BA9DE9",
+    }
+
+    local mode = {
+      function()
+        return ""
+      end,
+      color = function()
+        return { fg = mode_colors[vim.fn.mode()] }
+      end,
+    }
     local oil = {
       sections = {
-        lualine_b = { "mode" },
-        lualine_c = { --[[ "mode", ]]
-          oil_path,
-        },
+        lualine_b = {},
+        lualine_c = { mode, oil_path },
         lualine_x = {
           {
             lazy_status.updates,
@@ -213,9 +243,9 @@ return {
       },
       sections = {
         lualine_a = {},
-        lualine_b = { "mode" },
+        lualine_b = {},
         lualine_c = {
-          -- "mode",
+          mode,
           filetype,
           { "filename", path = 1, padding = { right = 1 } },
           "diagnostics",
