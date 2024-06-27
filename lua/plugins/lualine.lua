@@ -131,18 +131,42 @@ return {
       ["r?"] = "#BA9DE9",
     }
 
-    local mode = {
+    -- local mode = {
+    --   function()
+    --     return ""
+    --   end,
+    --   color = function()
+    --     return { fg = mode_colors[vim.fn.mode()] }
+    --   end,
+    -- }
+
+    local left_line = {
       function()
-        return ""
+        return "▊"
       end,
       color = function()
         return { fg = mode_colors[vim.fn.mode()] }
       end,
+      padding = { left = 0, right = 0 }, -- We don't need space before this
     }
+    local right_line = {
+      function()
+        return "▊"
+      end,
+      color = function()
+        return { fg = mode_colors[vim.fn.mode()] }
+      end,
+      padding = { left = 0, right = 0 }, -- We don't need space before this
+    }
+
     local oil = {
       sections = {
         lualine_b = {},
-        lualine_c = { mode, oil_path },
+        lualine_c = {
+          left_line,
+          -- mode,
+          oil_path,
+        },
         lualine_x = {
           {
             lazy_status.updates,
@@ -158,6 +182,7 @@ return {
           copilot_indicator,
           "location",
           "progress",
+          right_line,
         },
       },
       inactive_sections = {
@@ -245,7 +270,8 @@ return {
         lualine_a = {},
         lualine_b = {},
         lualine_c = {
-          mode,
+          left_line,
+          -- mode,
           filetype,
           { "filename", path = 1, padding = { right = 1 } },
           "diagnostics",
@@ -275,6 +301,7 @@ return {
           copilot_indicator,
           "location",
           "progress",
+          right_line,
         },
         lualine_y = {},
         lualine_z = {},
