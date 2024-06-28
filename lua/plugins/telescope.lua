@@ -147,6 +147,7 @@ return {
         file_ignore_patterns = {
           "node_modules",
           ".git/",
+          ".mypy_cache",
         },
         prompt_prefix = "  ",
         selection_caret = "󰁕 ",
