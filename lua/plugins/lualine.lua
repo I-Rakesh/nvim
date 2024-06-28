@@ -18,6 +18,7 @@ return {
         exclude = {
           "some_lsp",
           "another_lsp",
+          "copilot",
         }, -- List of LSP servers to exclude
         server_to_name_map = {
           -- ["pyright"] = "Python",
