@@ -5,30 +5,57 @@ return {
   config = function()
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
-    local function getLspName()
-      local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-      local clients = vim.lsp.get_clients()
-
-      -- Check if the current file is a Java file
-      if buf_ft == "java" then
-        -- Check if jdtls is among the active clients
-        for _, client in ipairs(clients) do
-          if client.name == "jdtls" then
-            return "  jdtls"
-          end
-        end
-      else
-        -- Iterate through other clients
-        for _, client in ipairs(clients) do
-          local filetypes = client.config.filetypes
-          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            return "  " .. client.name
-          end
+    local function is_value_in_array(value, array)
+      for _, v in ipairs(array) do
+        if v == value then
+          return true
         end
       end
+      return false
+    end
+    local config = {
+      lsp = {
+        exclude = {
+          "some_lsp",
+          "another_lsp",
+        }, -- List of LSP servers to exclude
+        server_to_name_map = {
+          -- ["pyright"] = "Python",
+          -- ["tsserver"] = "TypeScript",
+        },
+        icons = {
+          server = " ",
+        },
+      },
+    }
+    local function getLspName()
+      local active_clients = vim.lsp.get_clients({ bufnr = 0 })
 
-      -- If no specific client found, return the default message
-      return ""
+      table.sort(active_clients, function(a, b)
+        return a.name < b.name
+      end)
+
+      local index = 0
+      local lsp_names = ""
+      for _, lsp_config in ipairs(active_clients) do
+        if is_value_in_array(lsp_config.name, config.lsp.exclude) then
+          goto continue
+        end
+
+        local lsp_name = config.lsp.server_to_name_map[lsp_config.name] == nil and lsp_config.name
+          or config.lsp.server_to_name_map[lsp_config.name]
+
+        index = index + 1
+        if index == 1 then
+          lsp_names = config.lsp.icons.server .. " " .. lsp_name
+        else
+          lsp_names = lsp_names .. "  " .. config.lsp.icons.server .. " " .. lsp_name
+        end
+
+        ::continue::
+      end
+
+      return lsp_names
     end
 
     local function count()
