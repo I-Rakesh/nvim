@@ -110,3 +110,6 @@ vim.keymap.set("n", "]q", function()
     vim.notify(err, vim.log.levels.ERROR)
   end
 end, { desc = "Next quickfix item" })
+
+-- Fun remap to open file in vs_code
+vim.keymap.set("n", "<leader>vs", "<cmd>!code %<cr>", { desc = "To open file in vscode" })
