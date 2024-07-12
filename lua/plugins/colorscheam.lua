@@ -5,7 +5,7 @@ return {
   config = function()
     require("catppuccin").setup({
       flavour = "macchiato", -- latte, frappe, macchiato, mocha
-      transparent_background = true, -- disables setting the background color.
+      transparent_background = false, -- disables setting the background color.
       integrations = {
         telescope = {
           enabled = true,
