@@ -148,6 +148,7 @@ return {
           "node_modules",
           ".git/",
           ".mypy_cache",
+          ".DS_Store",
         },
         prompt_prefix = "  ",
         selection_caret = "󰁕 ",
