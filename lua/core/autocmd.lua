@@ -1,5 +1,31 @@
 --Auto commands
 
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+  desc = "Hilight when Yanking",
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = "*",
+})
+
+-- don't auto comment new line
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  desc = "Disables auto commenting next line",
+  pattern = "*",
+  callback = function()
+    vim.cmd("set formatoptions-=cro")
+  end,
+})
+
+-- Auto commands below does not work in vs code
+if vim.g.vscode then
+  return {}
+end
+
 -- Strip trailing spaces before write
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   desc = "Strip trailing spaces before saving",
@@ -39,15 +65,6 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
   end,
 })
 
--- don't auto comment new line
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  desc = "Disables auto commenting next line",
-  pattern = "*",
-  callback = function()
-    vim.cmd("set formatoptions-=cro")
-  end,
-})
-
 -- go to last loc when opening a buffer
 -- this mean that when you open a file, you will be at the last position
 vim.api.nvim_create_autocmd("BufReadPost", {
@@ -59,18 +76,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
   end,
-})
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Hilight when Yanking",
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = "*",
 })
 
 -- user event that loads after UIEnter + only if file buf is there
