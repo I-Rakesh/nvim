@@ -195,7 +195,7 @@ return {
           "jdtls",
           "bashls",
           "marksman",
-          "tsserver",
+          "ts_ls",
           --Formatters
           "stylua",
           "clang-format",

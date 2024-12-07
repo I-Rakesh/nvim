@@ -22,7 +22,7 @@ return {
         }, -- List of LSP servers to exclude
         server_to_name_map = {
           -- ["pyright"] = "Python",
-          -- ["tsserver"] = "TypeScript",
+          -- ["ts_ls"] = "TypeScript",
         },
         icons = {
           server = " ",
