@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 --Remap to clear Highlight when searching
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Clear hlsearch" })
 
@@ -34,8 +36,6 @@ vim.keymap.set("n", "<leader>cw", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], 
 vim.keymap.set("v", "<leader>cw", '"hy:%s/<C-r>h//g<left><left>', { desc = "Change Word" })
 
 if not vim.g.vscode then
-  vim.g.mapleader = " "
-
   --tmux-sessions
   vim.keymap.set(
     "n",
