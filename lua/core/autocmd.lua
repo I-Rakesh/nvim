@@ -144,3 +144,22 @@ vim.api.nvim_create_autocmd({ "Colorscheme" }, {
     vim.g.SCHEME = params.match
   end,
 })
+
+-- For vim-dadbod-ui plugin
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  desc = "Make vim-dadbod-ui took good",
+  pattern = { "*.dbout" },
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.spell = false
+    vim.opt_local.laststatus = 0
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufLeave" }, {
+  desc = "Make vim-dadbod-ui took good",
+  pattern = { "*.dbout" },
+  callback = function()
+    vim.opt_local.laststatus = 2
+  end,
+})
