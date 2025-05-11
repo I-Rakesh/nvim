@@ -51,6 +51,8 @@ return {
       },
       config = function()
         require("mason-nvim-dap").setup({
+          automatic_installation = false,
+          ensure_installed = {},
 
           automatic_setup = true,
 

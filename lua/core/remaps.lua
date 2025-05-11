@@ -104,14 +104,6 @@ if not vim.g.vscode then
     require("core.custom_functions").toggle_numbering()
   end, { desc = "Toggle line numbering" })
 
-  -- To navigate quickfix list
-  vim.keymap.set("n", "[q", function()
-    require("core.custom_functions").quickfixlist_prev()
-  end, { desc = "Previous quickfix item" })
-  vim.keymap.set("n", "]q", function()
-    require("core.custom_functions").quickfixlist_next()
-  end, { desc = "Next quickfix item" })
-
   -- Change content of Default register to selected registers
   vim.keymap.set("n", "'g", function()
     require("core.custom_functions").move_default_to_other()

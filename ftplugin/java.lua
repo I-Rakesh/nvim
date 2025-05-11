@@ -87,7 +87,10 @@ local config = {
   },
 }
 config["on_attach"] = function()
-  require("jdtls").setup_dap({ hotcodereplace = "auto" })
+  require("jdtls").setup_dap({
+    hotcodereplace = "auto",
+    config_overrides = {},
+  })
   local status_ok, jdtls_dap = pcall(require, "jdtls.dap")
   if status_ok then
     jdtls_dap.setup_dap_main_class_configs()

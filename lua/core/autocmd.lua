@@ -6,7 +6,7 @@ local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = t
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Hilight when Yanking",
   callback = function()
-    vim.highlight.on_yank()
+    vim.hl.on_yank()
   end,
   group = highlight_group,
   pattern = "*",
@@ -40,10 +40,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
   desc = "Make Termainal took good",
   callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
     vim.opt_local.spell = false
-    vim.opt_local.signcolumn = "no"
     vim.opt_local.laststatus = 0
     vim.api.nvim_command("startinsert") --to start terminal in insert mood
   end,

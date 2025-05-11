@@ -26,41 +26,21 @@ return {
       lsp_defaults.capabilities =
         vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
       require("mason-lspconfig").setup({
-        handlers = {
-          function(server_name)
-            if server_name == "jdtls" then
-              return
-            end
-            require("lspconfig")[server_name].setup({})
-          end,
-        },
-      })
-
-      lspconfig.lua_ls.setup({
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            },
-            hint = { enable = true },
-            workspace = {
-              library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.stdpath("config") .. "/lua"] = true,
-              },
-            },
+        ensure_installed = {},
+        automatic_enable = {
+          exclude = {
+            "jdtls",
           },
         },
       })
-
-      lspconfig.clangd.setup({
+      vim.lsp.config("clangd", {
         cmd = {
           "clangd",
           "--offset-encoding=utf-16",
         },
       })
 
-      lspconfig.bashls.setup({
+      vim.lsp.config("bashls", {
         settings = {
           bashIde = {
             -- Disable shellcheck in bash-language-server. It conflicts with linter settings. And it is slow compared conform.nvim
@@ -69,7 +49,7 @@ return {
         },
       })
 
-      lspconfig.ts_ls.setup({
+      vim.lsp.config("ts_ls", {
         settings = {
           javascript = {
             inlayHints = {
@@ -97,21 +77,21 @@ return {
         },
       })
 
-      local diagnostic_goto = function(next, severity)
-        local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+      local diagnostic_jump = function(next, severity)
+        local count = next and 1 or -1
         severity = severity and vim.diagnostic.severity[severity] or nil
         return function()
-          go({ severity = severity })
+          vim.diagnostic.jump({ count = count, float = true, severity = severity })
         end
       end
-      vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-      vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-      vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-      vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-      vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-      vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-      vim.keymap.set("n", "[t", diagnostic_goto(false, "HINT"), { desc = "Prev Hint" })
-      vim.keymap.set("n", "]t", diagnostic_goto(true, "HINT"), { desc = "Next Hint" })
+      vim.keymap.set("n", "]d", diagnostic_jump(true), { desc = "Next Diagnostic" })
+      vim.keymap.set("n", "[d", diagnostic_jump(false), { desc = "Prev Diagnostic" })
+      vim.keymap.set("n", "]e", diagnostic_jump(true, "ERROR"), { desc = "Next Error" })
+      vim.keymap.set("n", "[e", diagnostic_jump(false, "ERROR"), { desc = "Prev Error" })
+      vim.keymap.set("n", "]w", diagnostic_jump(true, "WARN"), { desc = "Next Warning" })
+      vim.keymap.set("n", "[w", diagnostic_jump(false, "WARN"), { desc = "Prev Warning" })
+      vim.keymap.set("n", "[t", diagnostic_jump(false, "HINT"), { desc = "Prev Hint" })
+      vim.keymap.set("n", "]t", diagnostic_jump(true, "HINT"), { desc = "Next Hint" })
 
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -121,8 +101,8 @@ return {
 
           -- Buffer local mappings.
           -- See `:help vim.lsp.*` for documentation on any of the below functions
-          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
-          vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
+          vim.keymap.set("n", "grD", vim.lsp.buf.declaration, { desc = "Go to Declaration" })
+          vim.keymap.set("n", "grd", vim.lsp.buf.definition, { desc = "Go to Definition" })
           vim.keymap.set(
             "n",
             "<leader>gd",
@@ -130,8 +110,8 @@ return {
             { desc = "Go to Definition in split screen" }
           )
           vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
-          vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-          vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to Reference's" })
+          -- vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
+          -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to Reference's" })
           vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp Add Workspace Folder" })
           vim.keymap.set(
             "n",
@@ -143,8 +123,8 @@ return {
             vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()))
           end, { desc = "lsp List Workspace Folders" })
           vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition)
-          vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "lsp Rename" })
-          vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "lsp Code Actions" })
+          -- vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "lsp Rename" })
+          -- vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "lsp Code Actions" })
           vim.keymap.set("n", "<leader>f", function()
             vim.lsp.buf.format({ async = true })
           end, { desc = "Format the current file" })
