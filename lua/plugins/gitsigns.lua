@@ -10,8 +10,8 @@ return {
         topdelete = { text = "‾" },
         changedelete = { text = "~" },
       },
-      numhl = true,
-      -- word_diff = true,
+      numhl = false,
+      word_diff = false,
       attach_to_untracked = true,
       current_line_blame = false,
       on_attach = function(bufnr)
