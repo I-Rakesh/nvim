@@ -124,15 +124,18 @@ return {
         local ok, oil = pcall(require, "oil")
         if ok then
           local current_dir = oil.get_current_dir()
+          if not current_dir then
+            return ""
+          end
           if current_dir:sub(-1) == "/" and #current_dir > 1 then
             current_dir = current_dir:sub(1, -2)
           end
-          return " 󰝰 " .. vim.fn.fnamemodify(current_dir, ":~") .. " %m"
+          return " 󰝰 " .. vim.fn.fnamemodify(current_dir, ":~") .. " %m"
         else
           return ""
         end
       end,
-      color = { fg = "#6E738D" },
+      -- color = { fg = "#6E738D" },
       padding = { left = 0 },
     }
 

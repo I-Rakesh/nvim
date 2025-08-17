@@ -5,6 +5,10 @@ return {
   config = function()
     require("catppuccin").setup({
       flavour = "macchiato", -- latte, frappe, macchiato, mocha
+      float = {
+        transparent = true, -- enable transparent floating windows
+        solid = false, -- use solid styling for floating windows, see |winborder|
+      },
       transparent_background = false, -- disables setting the background color.
       integrations = {
         telescope = {

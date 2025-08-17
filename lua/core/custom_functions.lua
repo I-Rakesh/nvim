@@ -122,6 +122,7 @@ local run = {
   python = "python3 %",
   html = "open %",
   sh = "chmod +x % && ([[ -f ./% ]] && ./% || %)",
+  php = "open http://localhost:8000 && cd %:p:h && php -S localhost:8000",
 }
 
 local run_commands = {

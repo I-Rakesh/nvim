@@ -8,6 +8,11 @@ return {
   },
   config = function()
     require("nvim-treesitter.configs").setup({
+
+      ignore_install = {},
+
+      modules = {},
+
       -- A list of parser names, or "all" (the five listed parsers should always be installed)
       ensure_installed = { "c", "lua", "vim", "query", "python", "cpp", "java", "bash", "markdown" },
 

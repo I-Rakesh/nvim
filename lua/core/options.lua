@@ -70,3 +70,4 @@ vim.opt.undofile = true
 vim.diagnostic.config({
   virtual_text = true,
 })
+vim.opt.winborder = "rounded"

@@ -82,6 +82,18 @@ return {
                 }
               end
 
+              dap.listeners.after.event_stopped["force-normal-mode"] = function()
+                vim.cmd("stopinsert")
+              end
+
+              dap.listeners.after.event_terminated["restore-statusline"] = function()
+                vim.o.laststatus = 3
+              end
+
+              dap.listeners.after.event_exited["restore-statusline"] = function()
+                vim.o.laststatus = 3
+              end
+
               -- Keep original functionality
               require("mason-nvim-dap").default_setup(config)
             end,
