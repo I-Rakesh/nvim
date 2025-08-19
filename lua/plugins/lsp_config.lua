@@ -36,7 +36,9 @@ return {
 
       vim.lsp.config("lua_ls", {
         settings = {
-          hint = { enable = true },
+          Lua = {
+            hint = { enable = true },
+          },
         },
       })
 
