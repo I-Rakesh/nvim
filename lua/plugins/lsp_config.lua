@@ -137,31 +137,41 @@ return {
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
 
-          local function client_supports_method(client, method, bufnr)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          local function client_supports_method(method, bufnr)
+            if not client then
+              return false
+            end
             if vim.fn.has("nvim-0.11") == 1 then
               return client:supports_method(method, bufnr)
             else
-              return client.supports_method(method, { bufnr = bufnr })
+              return client:supports_method(method, bufnr)
             end
           end
 
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if
-            client
-            and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
-          then
+          if client and client_supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
             local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
-            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.document_highlight,
-            })
 
-            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-              buffer = event.buf,
-              group = highlight_augroup,
-              callback = vim.lsp.buf.clear_references,
-            })
+            -- initialize only if not set yet
+            if vim.b.lsp_highlight_enabled == nil then
+              vim.b.lsp_highlight_enabled = false -- default ON first time
+            end
+
+            -- apply autocommands only if enabled
+            if vim.b.lsp_highlight_enabled then
+              vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                buffer = event.buf,
+                group = highlight_augroup,
+                callback = vim.lsp.buf.document_highlight,
+              })
+
+              vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+                buffer = event.buf,
+                group = highlight_augroup,
+                callback = vim.lsp.buf.clear_references,
+              })
+            end
 
             vim.api.nvim_create_autocmd("LspDetach", {
               group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
@@ -170,14 +180,34 @@ return {
                 vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event2.buf })
               end,
             })
+
+            vim.keymap.set("n", "grh", function()
+              if vim.b.lsp_highlight_enabled then
+                vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event.buf })
+                vim.lsp.buf.clear_references()
+                vim.b.lsp_highlight_enabled = false
+                vim.notify("LSP Highlights: OFF", vim.log.levels.INFO)
+              else
+                vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+                  buffer = event.buf,
+                  group = highlight_augroup,
+                  callback = vim.lsp.buf.document_highlight,
+                })
+                vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+                  buffer = event.buf,
+                  group = highlight_augroup,
+                  callback = vim.lsp.buf.clear_references,
+                })
+                vim.b.lsp_highlight_enabled = true
+                vim.notify("LSP Highlights: ON", vim.log.levels.INFO)
+                vim.lsp.buf.document_highlight()
+              end
+            end, { buffer = event.buf, desc = "[T]oggle LSP Highlights" })
           end
 
-          -- The following code creates a keymap to toggle inlay hints in your
-          -- code, if the language server you are using supports them
-          --
-          -- This may be unwanted, since they displace some of your code
-          if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            vim.keymap.set("n", "<leader>gi", function()
+          -- Inlay Hints toggle (unchanged, just adjusted to use same helper)
+          if client and client_supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+            vim.keymap.set("n", "grI", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, { desc = "[T]oggle Inlay [H]ints" })
           end

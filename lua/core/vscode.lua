@@ -85,6 +85,7 @@ vim.keymap.set("n", "<C-k>", [[<cmd>call VSCodeNotify('workbench.action.navigate
 vim.keymap.set("n", "-", [[<cmd>call VSCodeNotify('workbench.view.explorer')<cr>]])
 vim.keymap.set("n", "<leader>gs", [[<cmd>call VSCodeNotify('workbench.view.scm')<cr>]])
 vim.keymap.set("n", "T", [[<cmd>call VSCodeNotify('openInIntegratedTerminal')<cr>]])
+vim.keymap.set("n", "<leader>so", [[<cmd>call VSCodeNotify('workbench.action.openRecent')<cr>]])
 vim.keymap.set(
   "n",
   "<leader>'",

@@ -105,6 +105,10 @@ return {
         sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
         sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
         sign("DapStopped", { text = "󰁕 ", texthl = "DiagnosticWarn", linehl = "DapStoppedLine", numhl = "" })
+        sign(
+          "DapBreakpointRejected",
+          { text = " ", texthl = "DapStoppedSymbol", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+        )
       end,
     },
     {

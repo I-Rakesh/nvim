@@ -11,8 +11,8 @@ vim.keymap.set("v", "Q", ":norm @@<CR>", { silent = true, desc = "Replay a Macro
 vim.keymap.set("n", "<S-u>", "<C-r>", { desc = "Redo" })
 
 -- to move selected text up or down
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move Selected Down" })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move Selected Up" })
+vim.keymap.set("v", "K", ":m '<-2<CR><Esc>gv=gv", { silent = true, desc = "Move Selected Up" })
+vim.keymap.set("v", "J", ":m '>+1<CR><Esc>gv=gv", { silent = true, desc = "Move Selected Down" })
 
 -- to keep the cursor in the middle while moving and searching
 vim.keymap.set("n", "J", "mzJ`z")
