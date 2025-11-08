@@ -16,7 +16,7 @@ local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
 local bundles = {}
 local mason_path = vim.fn.glob(vim.fn.stdpath("data") .. "/mason/")

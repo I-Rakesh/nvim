@@ -1,96 +1,158 @@
 return {
-  "hrsh7th/nvim-cmp",
-  event = "InsertEnter",
+  "saghen/blink.cmp",
+  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-buffer",
-    "f3fora/cmp-spell",
-    "saadparwaiz1/cmp_luasnip",
-    "onsails/lspkind.nvim",
     "rafamadriz/friendly-snippets",
-    { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+    "ribru17/blink-cmp-spell",
   },
-  config = function()
-    require("lspkind").init({
-      symbol_map = {
-        Copilot = "",
-      },
-    })
-    local cmp = require("cmp")
-    local lspkind = require("lspkind")
+  version = "1.*",
+  opts = {
+    keymap = {
+      preset = "default",
+      ["<c-l>"] = { "snippet_forward", "fallback" },
+      ["<c-h>"] = { "snippet_backward", "fallback" },
+      ["<C-space>"] = false,
+    },
 
-    require("luasnip.loaders.from_vscode").lazy_load()
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
-    cmp.setup({
-      -- completion = { completeopt = "menu,menuone,noinsert" },
-      -- view = {
-      --   entries = {
-      --     follow_cursor = true,
-      --   },
-      -- },
-      mapping = cmp.mapping.preset.insert({
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
-        ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-j>"] = cmp.mapping.complete({}),
-        ["<C-l>"] = cmp.mapping(function()
-          if require("luasnip").expand_or_locally_jumpable() then
-            require("luasnip").expand_or_jump()
-          end
-        end, { "i", "s" }),
-        ["<C-h>"] = cmp.mapping(function()
-          if require("luasnip").locally_jumpable(-1) then
-            require("luasnip").jump(-1)
-          end
-        end, { "i", "s" }),
-      }),
-
-      snippet = {
-        expand = function(args)
-          require("luasnip").lsp_expand(args.body)
-        end,
+    appearance = {
+      highlight_ns = vim.api.nvim_create_namespace("blink_cmp"),
+      -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+      -- Useful for when your theme doesn't support blink.cmp
+      -- Will be removed in a future release
+      use_nvim_cmp_as_default = false,
+      nerd_font_variant = "mono",
+      kind_icons = {
+        Array = " ",
+        Boolean = "󰨙 ",
+        Class = " ",
+        Codeium = "󰘦 ",
+        Color = " ",
+        Control = " ",
+        Collapsed = " ",
+        Constant = "󰏿 ",
+        Constructor = " ",
+        Copilot = " ",
+        Enum = " ",
+        EnumMember = " ",
+        Event = " ",
+        Field = " ",
+        File = " ",
+        Folder = " ",
+        Function = "󰊕 ",
+        Interface = " ",
+        Key = " ",
+        Keyword = " ",
+        Method = "󰊕 ",
+        Module = " ",
+        Namespace = "󰦮 ",
+        Null = " ",
+        Number = "󰎠 ",
+        Object = " ",
+        Operator = " ",
+        Package = " ",
+        Property = " ",
+        Reference = " ",
+        Snippet = "󱄽 ",
+        String = " ",
+        Struct = "󰆼 ",
+        Supermaven = " ",
+        TabNine = "󰏚 ",
+        Text = " ",
+        TypeParameter = " ",
+        Unit = " ",
+        Value = " ",
+        Variable = "󰀫 ",
       },
-      sources = cmp.config.sources({
-        {
-          name = "spell",
-          option = {
-            keep_all_entries = false,
+    },
+
+    completion = {
+      menu = {
+        border = "rounded",
+        draw = {
+          treesitter = { "lsp" },
+        },
+      },
+      documentation = {
+        window = {
+          border = "rounded",
+        },
+        auto_show = true,
+      },
+      ghost_text = {
+        enabled = false,
+      },
+    },
+    signature = {
+      enabled = true,
+      window = {
+        border = "rounded", -- added border here
+      },
+    },
+
+    sources = {
+      default = { "lazydev", "spell", "lsp", "path", "snippets", "buffer" },
+      per_filetype = {
+        sql = { "snippets", "dadbod", "buffer" },
+      },
+      providers = {
+        dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+        },
+        spell = {
+          name = "Spell",
+          module = "blink-cmp-spell",
+          opts = {
+            -- EXAMPLE: Only enable source in `@spell` captures, and disable it
+            -- in `@nospell` captures.
             enable_in_context = function()
-              return require("cmp.config.context").in_treesitter_capture("spell")
+              local curpos = vim.api.nvim_win_get_cursor(0)
+              local captures = vim.treesitter.get_captures_at_pos(0, curpos[1] - 1, curpos[2] - 1)
+              local in_spell_capture = false
+              for _, cap in ipairs(captures) do
+                if cap.capture == "spell" then
+                  in_spell_capture = true
+                elseif cap.capture == "nospell" then
+                  return false
+                end
+              end
+              return in_spell_capture
             end,
           },
         },
-        { name = "lazydev", group_index = 0 },
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "path" },
-      }, {
-        { name = "buffer" },
-      }),
-      formatting = {
-        format = lspkind.cmp_format({
-          maxwidth = 50,
-          ellipsis_char = "...",
-        }),
       },
-      experimental = {
-        ghost_text = false,
+    },
+
+    -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+    -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+    -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+    --
+    -- See the fuzzy documentation for more information
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+      sorts = {
+        function(a, b)
+          local sort = require("blink.cmp.fuzzy.sort")
+          if a.source_id == "spell" and b.source_id == "spell" then
+            return sort.label(a, b)
+          end
+        end,
+        -- This is the normal default order, which we fall back to
+        "score",
+        "kind",
+        "label",
       },
-      -- for border around completion menu
-      window = {
-        -- completion = cmp.config.window.bordered(),
-        -- documentation = cmp.config.window.bordered(),
+    },
+    cmdline = {
+      keymap = {
+        preset = "inherit",
+        ["<Tab>"] = { "show", "accept" },
       },
-      cmp.setup.filetype({ "sql" }, {
-        sources = {
-          { name = "vim-dadbod-completion" },
-          { name = "buffer" },
-        },
-      }),
-    })
-  end,
+      completion = { menu = { auto_show = true } },
+    },
+  },
+  opts_extend = { "sources.default" },
 }

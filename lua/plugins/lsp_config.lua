@@ -11,70 +11,31 @@ return {
 
       local lsp_defaults = lspconfig.util.default_config
 
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
+      vim.diagnostic.config({
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.HINT] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+          },
+        },
+      })
 
       lsp_defaults.capabilities =
-        vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("cmp_nvim_lsp").default_capabilities())
+        vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("blink.cmp").get_lsp_capabilities(), {
+          textDocument = {
+            foldingRange = {
+              dynamicRegistration = false,
+              lineFoldingOnly = true,
+            },
+          },
+        })
       require("mason-lspconfig").setup({
         ensure_installed = {},
         automatic_enable = {
           exclude = {
             "jdtls",
-          },
-        },
-      })
-      vim.lsp.config("clangd", {
-        cmd = {
-          "clangd",
-          "--offset-encoding=utf-16",
-        },
-      })
-
-      vim.lsp.config("lua_ls", {
-        settings = {
-          Lua = {
-            hint = { enable = true },
-          },
-        },
-      })
-
-      vim.lsp.config("bashls", {
-        settings = {
-          bashIde = {
-            -- Disable shellcheck in bash-language-server. It conflicts with linter settings. And it is slow compared conform.nvim
-            shellcheckPath = "",
-          },
-        },
-      })
-
-      vim.lsp.config("ts_ls", {
-        settings = {
-          javascript = {
-            inlayHints = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = false,
-            },
-          },
-
-          typescript = {
-            inlayHints = {
-              includeInlayEnumMemberValueHints = true,
-              includeInlayFunctionLikeReturnTypeHints = true,
-              includeInlayFunctionParameterTypeHints = true,
-              includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-              includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-              includeInlayPropertyDeclarationTypeHints = true,
-              includeInlayVariableTypeHints = false,
-            },
           },
         },
       })
@@ -112,8 +73,6 @@ return {
             { desc = "Go to Definition in split screen" }
           )
           vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Show Signature Documentation" })
-          -- vim.keymap.set("n", "gI", vim.lsp.buf.implementation, { desc = "Go to Implementation" })
-          -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to Reference's" })
           vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "lsp Add Workspace Folder" })
           vim.keymap.set(
             "n",
@@ -181,7 +140,7 @@ return {
               end,
             })
 
-            vim.keymap.set("n", "grh", function()
+            vim.keymap.set("n", "<leader>th", function()
               if vim.b.lsp_highlight_enabled then
                 vim.api.nvim_clear_autocmds({ group = "kickstart-lsp-highlight", buffer = event.buf })
                 vim.lsp.buf.clear_references()
@@ -207,8 +166,11 @@ return {
 
           -- Inlay Hints toggle (unchanged, just adjusted to use same helper)
           if client and client_supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            vim.keymap.set("n", "grI", function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+            vim.keymap.set("n", "<leader>ti", function()
+              local bufnr = vim.api.nvim_get_current_buf()
+              local new_state = not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
+              vim.lsp.inlay_hint.enable(new_state, { bufnr = bufnr })
+              vim.notify("Inlay hints: " .. (new_state and "ON" or "OFF"), vim.log.levels.INFO, { title = "LSP" })
             end, { desc = "[T]oggle Inlay [H]ints" })
           end
         end,
@@ -217,7 +179,7 @@ return {
     end,
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = { "Mason", "MasonInstall", "MasonInstallAll", "MasonUpdate" },
     opts = {
       ui = {

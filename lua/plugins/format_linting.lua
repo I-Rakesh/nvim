@@ -5,7 +5,7 @@ return {
     cmd = "ConformInfo",
     keys = {
       {
-        "<leader>f",
+        "<leader>ff",
         mode = { "n", "v" },
         function()
           require("conform").format({ lsp_fallback = "fallback", async = false, timeout_ms = 1000 })
@@ -39,7 +39,6 @@ return {
     event = "User FilePost",
     config = function()
       require("lint").linters_by_ft = {
-        python = { "mypy", "ruff" },
         sh = { "Shellcheck" },
         javascript = { "eslint" },
       }

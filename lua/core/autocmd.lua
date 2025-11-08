@@ -42,7 +42,7 @@ vim.api.nvim_create_autocmd({ "TermOpen", "TermEnter" }, {
   callback = function()
     vim.opt_local.spell = false
     vim.opt_local.laststatus = 0
-    vim.api.nvim_command("startinsert") --to start terminal in insert mood
+    -- vim.api.nvim_command("startinsert") --to start terminal in insert mood
   end,
 })
 vim.api.nvim_create_autocmd({ "TermLeave" }, {

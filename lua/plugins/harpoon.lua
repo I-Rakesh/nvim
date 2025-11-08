@@ -1,5 +1,10 @@
 return {
   "ThePrimeagen/harpoon",
+  opts = {
+    settings = {
+      save_on_toggle = true,
+    },
+  },
   branch = "harpoon2",
   -- stylua: ignore
   keys = {
@@ -10,11 +15,4 @@ return {
     { "<A-l>",      mode = "n", function() require("harpoon"):list():select(3) end,                                desc = "Harpoon 3 Mark", },
     { "<A-;>",      mode = "n", function() require("harpoon"):list():select(4) end,                                desc = "Harpoon 4 Mark", },
   },
-  config = function()
-    require("harpoon").setup({
-      settings = {
-        save_on_toggle = true,
-      },
-    })
-  end,
 }

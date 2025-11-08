@@ -13,6 +13,16 @@ return {
         color = "#DB8AA2",
         name = "java",
       },
+      ["cpp"] = {
+        icon = "󰙲",
+        color = "#589EFF",
+        name = "cpp",
+      },
+      ["js"] = {
+        icon = "",
+        color = "#F7DF1E",
+        name = "js",
+      },
     },
   },
 }

@@ -7,15 +7,16 @@ return {
       flavour = "macchiato", -- latte, frappe, macchiato, mocha
       float = {
         transparent = true, -- enable transparent floating windows
-        solid = false, -- use solid styling for floating windows, see |winborder|
+        solid = true, -- use solid styling for floating windows, see |winborder|
       },
-      transparent_background = false, -- disables setting the background color.
+      transparent_background = true, -- disables setting the background color.
       integrations = {
         telescope = {
           enabled = true,
           style = "nvchad",
         },
         noice = true,
+        blink_cmp = true,
       },
       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
         conditionals = {},

@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 vim.opt.guicursor = ""
 
 vim.opt.fillchars = { eob = " " } -- to remove "~" at end of the file
+vim.opt.list = true
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
@@ -40,7 +41,7 @@ vim.opt.sidescrolloff = 10
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
-vim.opt.updatetime = 250
+vim.opt.updatetime = 200
 
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0
@@ -56,11 +57,12 @@ vim.opt.compatible = false
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.splitkeep = "screen"
 
 vim.opt.virtualedit = "block"
 vim.opt.inccommand = "split"
 
--- vim.opt.showmode = false
+vim.opt.showmode = false
 
 vim.opt.pumheight = 10 --to set the limit for cmp-window
 
@@ -68,6 +70,11 @@ vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = {
+    prefix = "●", -- Customize the prefix symbol
+  },
+  float = {
+    border = "rounded",
+  },
 })
 vim.opt.winborder = "rounded"

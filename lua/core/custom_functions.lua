@@ -2,12 +2,13 @@ local M = {}
 
 -- Function to toggle relative line numbers
 function M.toggle_numbering()
-  local cmds = { "rnu!", "nornu!" }
-  local current_index = 1
-  current_index = current_index % #cmds + 1
-  vim.cmd("set " .. cmds[current_index])
-  local signcolumn_setting = "auto"
-  vim.opt.signcolumn = signcolumn_setting
+  if vim.wo.relativenumber then
+    vim.wo.relativenumber = false
+    vim.notify("Relative line numbers disabled", vim.log.levels.INFO)
+  else
+    vim.wo.relativenumber = true
+    vim.notify("Relative line numbers enabled", vim.log.levels.INFO)
+  end
 end
 
 -- Function to toggle Colorcolumn
@@ -18,21 +19,6 @@ function M.colorcolumn()
   else
     vim.cmd("let &colorcolumn = ''")
     vim.notify("Color Column Disabled")
-  end
-end
-
--- Function to go next and prev in quickfix list
-function M.quickfixlist_prev()
-  local ok, err = pcall(vim.cmd.cprev)
-  if not ok then
-    vim.notify(err, vim.log.levels.ERROR)
-  end
-end
-
-function M.quickfixlist_next()
-  local ok, err = pcall(vim.cmd.cnext)
-  if not ok then
-    vim.notify(err, vim.log.levels.ERROR)
   end
 end
 
@@ -93,8 +79,8 @@ end
 
 -- For compiling and running code  ( Youtube-video(https://youtu.be/5HXINnalrAQ?si=e3txV-7vtiauIHtW) git(https://arc.net/l/quote/ulxqjqza))
 local build_commands = {
-  c = "!gcc -std=c11 -o %:p:r.o %",
-  cpp = "!g++ -std=c++17 -Wall -O2 -o %:p:r.o %",
+  c = "!gcc -std=c11 -o %:p:r %",
+  cpp = "!g++ -std=c++17 -Wall -O2 -o %:p:r %",
   rust = "!cargo build --release",
   go = "!go build",
   tex = "VimtexCompile",
@@ -104,15 +90,15 @@ local build_commands = {
 }
 
 local debug_build_commands = {
-  c = "!gcc -std=c11 -g -o %:p:r.o %",
-  cpp = "!g++ -std=c++17 -g -o %:p:r.o %",
+  c = "!gcc -std=c11 -Wall -g -O0 -o %:p:r %",
+  cpp = "!g++ -std=c++17 -Wall -g -O0 -o %:p:r %",
   rust = "!cargo build",
   go = "!go build",
 }
 
 local run = {
-  c = "gcc -std=c11 -o %:p:r.o % && %:p:r.o",
-  cpp = "g++ -std=c++17 -Wall -O2 -o %:p:r.o % && %:p:r.o",
+  c = "gcc -std=c11 -o %:p:r % && %:p:r",
+  cpp = "g++ -std=c++17 -Wall -O2 -o %:p:r % && %:p:r",
   rust = "cargo build --release && cargo run --release",
   go = "go build && go run .",
   tex = "VimtexCompile",
@@ -126,8 +112,8 @@ local run = {
 }
 
 local run_commands = {
-  c = "%:p:r.o",
-  cpp = "%:p:r.o",
+  c = "%:p:r",
+  cpp = "%:p:r",
   rust = "cargo run --release",
   go = "go run .",
   tex = "",
@@ -222,6 +208,18 @@ function M.compilerun()
   end
 end
 
+-- Function to toggle diagnostics
+function M.diagnostics()
+  local bufnr = 0 -- current buffer
+  if vim.diagnostic.is_enabled({ bufnr = bufnr }) then
+    vim.diagnostic.enable(false, { bufnr = bufnr })
+    vim.notify("Diagnostics Disabled")
+  else
+    vim.diagnostic.enable(true, { bufnr = bufnr })
+    vim.notify("Diagnostics Enabled")
+  end
+end
+
 --Killring copied from Youtube-video(https://youtu.be/KCx4mwhXffk?si=g2FJVAhWoJm5RJdk) github(https://github.com/Axlefublr/dotfiles/blob/03f0037c0734bdafaa57ee123d42556f817be84b/neovim/registers/killring.lua)
 -- due to the remaps for this feature we can't use local marks(r,e,t,z,g) and global marks(R,T,Z,E)
 local killring = setmetatable({}, { __index = table })
@@ -291,6 +289,53 @@ function ReverseTable(table)
     table.insert(reversed, table[i])
   end
   return reversed
+end
+
+function M.set_filetype()
+  -- Use local buffer reference for clarity
+  local buf_ft = vim.bo.filetype
+  if buf_ft ~= "" then
+    vim.notify(("Filetype already set to '%s'"):format(buf_ft), vim.log.levels.INFO)
+    return
+  end
+  local ft = vim.fn.input("Set filetype: ")
+  if ft == "" then
+    vim.notify("No filetype entered.", vim.log.levels.WARN)
+    return
+  end
+  vim.bo.filetype = ft
+  vim.notify(("Filetype set to '%s'"):format(ft), vim.log.levels.INFO)
+end
+
+-- This is kept 'local' so it doesn't pollute your module's public API.
+local function find_project_root()
+  local search_path = vim.fn.expand("%:p:h") .. ";"
+  local git_root = vim.fn.finddir(".git", search_path)
+
+  if git_root ~= "" and git_root ~= nil then
+    return vim.fn.fnamemodify(git_root, ":h")
+  else
+    return vim.fn.getcwd()
+  end
+end
+
+-- Your module function, now with the project root logic
+function M.open_in_vscode_at_cursor()
+  local file_path = vim.fn.expand("%:p")
+  if file_path == "" then
+    print("Error: Cannot open in VS Code. Save the file first.")
+    return
+  end
+
+  local line_num = vim.fn.line(".")
+  local col_num = vim.fn.col(".")
+  local project_root = find_project_root()
+  local escaped_project_root = vim.fn.shellescape(project_root)
+  local escaped_file_path = vim.fn.shellescape(file_path)
+  local goto_arg = escaped_file_path .. ":" .. line_num .. ":" .. col_num
+  local cmd_string = "code " .. escaped_project_root .. " && code -g " .. goto_arg
+
+  vim.fn.jobstart({ "sh", "-c", cmd_string }, { detach = true })
 end
 
 return M

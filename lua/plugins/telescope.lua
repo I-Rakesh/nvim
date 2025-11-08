@@ -54,7 +54,7 @@ return {
           prompt_title = "Live Grep in Open Files",
         })
       end,
-      desc = "Search Word in Current Buffer",
+      desc = "Search Word in Open Buffer",
     },
     {
       "<leader>sw",
@@ -76,7 +76,7 @@ return {
         local escaped_text = vim.fn.escape(selected_text, " ")
         vim.cmd(":Telescope live_grep grep_open_files=ture default_text=" .. escaped_text)
       end,
-      desc = "Search Highlighted Word in Current Buffer",
+      desc = "Search Highlighted Word in Open Buffer",
     },
   },
   config = function()

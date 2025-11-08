@@ -5,6 +5,10 @@ return {
   config = function()
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
+    local custom_theme = require("lualine.themes.auto")
+    custom_theme.normal.c.bg = "#1E202F"
+    custom_theme.inactive.c.bg = "#1E202F"
+
     local function is_value_in_array(value, array)
       for _, v in ipairs(array) do
         if v == value then
@@ -101,10 +105,11 @@ return {
     local copilot_indicator = {
       function()
         local client = vim.lsp.get_clients({ name = "copilot" })[1]
+        vim.api.nvim_set_hl(0, "CopilotIcon", { fg = "#6CC644", bg = custom_theme.normal.c.bg, bold = true }) -- GitHub green
         if client == nil then
           return ""
         else
-          return ""
+          return "%#CopilotIcon#%*"
         end
       end,
     }
@@ -121,21 +126,27 @@ return {
 
     local oil_path = {
       function()
+        -- Highlight for the Icon
+        vim.api.nvim_set_hl(0, "Files", { fg = "#C5A2EF", bg = custom_theme.normal.c.bg, bold = true })
+        -- Highlight for the Path (with white text)
+        vim.api.nvim_set_hl(0, "OilPath", { bg = custom_theme.normal.c.bg })
         local ok, oil = pcall(require, "oil")
-        if ok then
-          local current_dir = oil.get_current_dir()
-          if not current_dir then
-            return ""
-          end
-          if current_dir:sub(-1) == "/" and #current_dir > 1 then
-            current_dir = current_dir:sub(1, -2)
-          end
-          return " 󰝰 " .. vim.fn.fnamemodify(current_dir, ":~") .. " %m"
-        else
+        if not ok then
           return ""
         end
+
+        local current_dir = oil.get_current_dir()
+        if not current_dir then
+          return ""
+        end
+
+        if current_dir:sub(-1) == "/" and #current_dir > 1 then
+          current_dir = current_dir:sub(1, -2)
+        end
+
+        return " %#Files#󰙅%*" .. "%#OilPath# " .. vim.fn.fnamemodify(current_dir, ":~") .. " %m %*"
       end,
-      -- color = { fg = "#6E738D" },
+
       padding = { left = 0 },
     }
 
@@ -164,7 +175,7 @@ return {
 
     local mode = {
       function()
-        return ""
+        return ""
       end,
       color = function()
         return { fg = mode_colors[vim.fn.mode()] }
@@ -277,16 +288,12 @@ return {
       },
     }
 
-    local custom_theme = require("lualine.themes.auto")
-    custom_theme.normal.c.bg = "#1E202F"
-    custom_theme.inactive.c.bg = "#1E202F"
-
     require("lualine").setup({
       options = {
         icons_enabled = true,
         theme = custom_theme,
-        component_separators = { left = "", right = "" },
-        section_separators = { left = " ", right = "" },
+        component_separators = { left = "", right = " " },
+        section_separators = { left = "", right = "" },
 
         disabled_filetypes = {
           statusline = { "DiffviewFiles" },
@@ -353,7 +360,7 @@ return {
         lualine_z = {},
       },
       tabline = {
-        lualine_b = { { "tabs", mode = 2 } },
+        lualine_b = { { "tabs", mode = 1 } },
       },
       winbar = {},
       inactive_winbar = {},

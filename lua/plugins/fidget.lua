@@ -8,4 +8,11 @@ return {
       },
     },
   },
+  config = function(_, opts)
+    -- Setup fidget with your options
+    require("fidget").setup(opts)
+
+    -- Override vim.notify to use fidget
+    vim.notify = require("fidget").notify
+  end,
 }

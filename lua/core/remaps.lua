@@ -56,8 +56,8 @@ if not vim.g.vscode then
   vim.keymap.set("n", "<leader>tx", "<cmd>tabc<CR>", { desc = "Close Current Tab" })
 
   -- to move between buffers
-  vim.keymap.set("n", "<Tab>", vim.cmd.bnext, { desc = "Next Buffer" })
-  vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious, { desc = "Previous Buffer" })
+  -- vim.keymap.set("n", "<Tab>", vim.cmd.bnext, { desc = "Next Buffer" })
+  -- vim.keymap.set("n", "<S-Tab>", vim.cmd.bprevious, { desc = "Previous Buffer" })
 
   -- to move between windows
   vim.keymap.set({ "n" }, "<C-j>", "<C-w>j", { desc = "Move focus to the down window" })
@@ -88,19 +88,30 @@ if not vim.g.vscode then
   vim.keymap.set("t", ",<ESC>", "<C-\\><C-n>", { noremap = true })
 
   -- Fun remap to open file in vs_code
-  vim.keymap.set("n", "<leader>vs", "<cmd>!code %<cr>", { desc = "To open file in vscode" })
+  vim.keymap.set("n", "<leader>vs", function()
+    require("core.custom_functions").open_in_vscode_at_cursor()
+  end, { desc = "Open CWD and file at current line in VS Code" })
 
   ----------------------------------------------------------------------------------------------------------------------------------------------------
   --                            Custom functions remaps
   ----------------------------------------------------------------------------------------------------------------------------------------------------
+
+  -- to set file type is nothing is set
+  vim.keymap.set("n", "<leader>ft", function()
+    require("core.custom_functions").set_filetype()
+  end, { desc = "Set File Type" })
 
   -- Color column
   vim.keymap.set("n", "<leader>cc", function()
     require("core.custom_functions").colorcolumn()
   end, { desc = "Toggle Color Column" })
 
+  vim.keymap.set("n", "<leader>td", function()
+    require("core.custom_functions").diagnostics()
+  end, { desc = "Toggle Diagnostics" })
+
   --Line number
-  vim.keymap.set("n", "<leader>n", function()
+  vim.keymap.set("n", "<leader>tn", function()
     require("core.custom_functions").toggle_numbering()
   end, { desc = "Toggle line numbering" })
 
