@@ -87,10 +87,26 @@ if not vim.g.vscode then
   --to go to normal mood in terminal mood
   vim.keymap.set("t", ",<ESC>", "<C-\\><C-n>", { noremap = true })
 
-  -- Fun remap to open file in vs_code
-  vim.keymap.set("n", "<leader>vs", function()
-    require("core.custom_functions").open_in_vscode_at_cursor()
-  end, { desc = "Open CWD and file at current line in VS Code" })
+  --incremental select
+  vim.keymap.set({ "n", "x" }, "<leader><space>", function()
+    vim.lsp.buf.selection_range(1)
+  end, { desc = "Expand selection" })
+
+  vim.keymap.set("x", "<bs>", function()
+    vim.lsp.buf.selection_range(-1)
+  end, { desc = "Shrink selection" })
+
+  -- -- Fun remap to open file in vs_code
+  -- vim.keymap.set("n", "<leader>vs", function()
+  --   require("core.custom_functions").open_in_vscode_at_cursor()
+  -- end, { desc = "Open CWD and file at current line in VS Code" })
+  --
+  -- -- Fun remap to open file in zed
+  -- vim.keymap.set("n", "<leader>vs", function()
+  --   local file = vim.fn.expand("%:p")
+  --   local dir = vim.fn.expand("%:p:h")
+  --   vim.fn.jobstart({ "zed", dir, file }, { detach = true })
+  -- end, { desc = "Open Zed (folder + current file)" })
 
   ----------------------------------------------------------------------------------------------------------------------------------------------------
   --                            Custom functions remaps
@@ -106,9 +122,14 @@ if not vim.g.vscode then
     require("core.custom_functions").colorcolumn()
   end, { desc = "Toggle Color Column" })
 
+  -- Toggle diagnostics (or) virtual text
   vim.keymap.set("n", "<leader>td", function()
     require("core.custom_functions").diagnostics()
   end, { desc = "Toggle Diagnostics" })
+
+  vim.keymap.set("n", "<leader>tv", function()
+    require("core.custom_functions").toggle_virtual_text()
+  end, { desc = "Toggle diagnostic virtual text" })
 
   --Line number
   vim.keymap.set("n", "<leader>tn", function()

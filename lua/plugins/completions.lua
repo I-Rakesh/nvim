@@ -9,6 +9,7 @@ return {
   opts = {
     keymap = {
       preset = "default",
+      ["<Tab>"] = { "accept", "fallback" },
       ["<c-l>"] = { "snippet_forward", "fallback" },
       ["<c-h>"] = { "snippet_backward", "fallback" },
       ["<C-space>"] = false,

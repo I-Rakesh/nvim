@@ -63,21 +63,24 @@ return {
 
               dap.adapters["pwa-node"] = {
                 type = "server",
-                host = "127.0.0.1",
-                port = 8123,
+                host = "localhost",
+                port = "${port}",
                 executable = {
                   command = "js-debug-adapter",
+                  args = { "${port}" },
                 },
               }
-              for _, language in ipairs({ "typescript", "javascript" }) do
+              for _, language in ipairs({ "javascript", "typescript" }) do
                 dap.configurations[language] = {
                   {
                     type = "pwa-node",
                     request = "launch",
-                    name = "Launch file",
+                    name = "Launch current file",
                     program = "${file}",
                     cwd = "${workspaceFolder}",
                     runtimeExecutable = "node",
+                    sourceMaps = true,
+                    skipFiles = { "<node_internals>/**" },
                   },
                 }
               end

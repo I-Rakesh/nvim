@@ -73,8 +73,17 @@ vim.diagnostic.config({
   virtual_text = {
     prefix = "●", -- Customize the prefix symbol
   },
+  underline = true, -- enable underline like VS Code
   float = {
     border = "rounded",
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
   },
 })
 vim.opt.winborder = "rounded"

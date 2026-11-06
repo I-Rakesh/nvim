@@ -19,7 +19,12 @@ return {
     { "<leader>st", mode = "n", "<cmd>Telescope help_tags<CR>", desc = "Search Help Tags" },
     { "<leader>sk", mode = "n", "<cmd>Telescope keymaps<CR>", desc = "Search Keymaps" },
     { "<leader>sg", mode = "n", "<cmd>Telescope git_status<CR>", desc = "Search Git status" },
-    { "<leader>ch", mode = "n", "<cmd>Telescope colorscheme<CR>", desc = "Change Color Scheme" },
+    {
+      "<leader>ch",
+      mode = "n",
+      "<cmd>Telescope colorscheme enable_preview=true previewer=false<CR>",
+      desc = "Change Color Scheme",
+    },
     { "<leader>sdw", mode = "n", "<cmd>Telescope diagnostics<CR>", desc = "Search Workspace Diagnostics" },
     { "<leader>sdb", mode = "n", "<cmd>Telescope diagnostics bufnr=0<CR>", desc = "Search Diagnostics" },
     { "<leader>sr", mode = "n", "<cmd>Telescope lsp_references<CR>", desc = "Search References" },

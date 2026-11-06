@@ -105,7 +105,11 @@ return {
     local copilot_indicator = {
       function()
         local client = vim.lsp.get_clients({ name = "copilot" })[1]
-        vim.api.nvim_set_hl(0, "CopilotIcon", { fg = "#6CC644", bg = custom_theme.normal.c.bg, bold = true }) -- GitHub green
+        vim.api.nvim_set_hl(
+          0,
+          "CopilotIcon",
+          { fg = "#6CC644", bg = vim.api.nvim_get_hl(0, { name = "lualine_c_normal" }).bg, bold = true }
+        ) -- GitHub green
         if client == nil then
           return ""
         else
@@ -127,9 +131,13 @@ return {
     local oil_path = {
       function()
         -- Highlight for the Icon
-        vim.api.nvim_set_hl(0, "Files", { fg = "#C5A2EF", bg = custom_theme.normal.c.bg, bold = true })
+        vim.api.nvim_set_hl(
+          0,
+          "Files",
+          { fg = "#C5A2EF", bg = vim.api.nvim_get_hl(0, { name = "lualine_c_normal" }).bg, bold = true }
+        )
         -- Highlight for the Path (with white text)
-        vim.api.nvim_set_hl(0, "OilPath", { bg = custom_theme.normal.c.bg })
+        vim.api.nvim_set_hl(0, "OilPath", { bg = vim.api.nvim_get_hl(0, { name = "lualine_c_normal" }).bg })
         local ok, oil = pcall(require, "oil")
         if not ok then
           return ""
@@ -276,7 +284,7 @@ return {
 
     local nvim_dap_ui = {
       sections = {
-        lualine_b = { { "filename", file_status = false } },
+        lualine_c = { { "filename", file_status = false } },
       },
       filetypes = {
         "dap-repl",
@@ -360,12 +368,12 @@ return {
         lualine_z = {},
       },
       tabline = {
-        lualine_b = { { "tabs", mode = 1 } },
+        -- lualine_b = { { "tabs", mode = 1 } },
       },
       winbar = {},
       inactive_winbar = {},
       extensions = { fugitive, quickfix, nvim_dap_ui, oil },
     })
-    vim.opt.showtabline = 1
+    vim.opt.showtabline = 0
   end,
 }

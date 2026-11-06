@@ -18,10 +18,15 @@ return {
         color = "#589EFF",
         name = "cpp",
       },
-      ["js"] = {
-        icon = "",
-        color = "#F7DF1E",
-        name = "js",
+      -- ["js"] = {
+      --   icon = "",
+      --   color = "#F7DF1E",
+      --   name = "js",
+      -- },
+      ["ts"] = {
+        icon = "",
+        color = "#3178C6",
+        name = "ts",
       },
     },
   },

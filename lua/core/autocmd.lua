@@ -66,9 +66,15 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 -- this mean that when you open a file, you will be at the last position
 vim.api.nvim_create_autocmd("BufReadPost", {
   desc = "Go to Last loc when Opening a buffer",
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local lcount = vim.api.nvim_buf_line_count(0)
+  callback = function(event)
+    local exclude = { "gitcommit" }
+    local buf = event.buf
+    if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
+      return
+    end
+    vim.b[buf].lazyvim_last_loc = true
+    local mark = vim.api.nvim_buf_get_mark(buf, '"')
+    local lcount = vim.api.nvim_buf_line_count(buf)
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
@@ -158,5 +164,15 @@ vim.api.nvim_create_autocmd({ "BufLeave" }, {
   pattern = { "*.dbout" },
   callback = function()
     vim.opt_local.laststatus = 2
+  end,
+})
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+  desc = "reload file if changed",
+  callback = function()
+    if vim.o.buftype ~= "nofile" then
+      vim.cmd("checktime")
+    end
   end,
 })

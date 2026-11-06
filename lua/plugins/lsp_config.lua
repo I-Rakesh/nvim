@@ -11,17 +11,6 @@ return {
 
       local lsp_defaults = lspconfig.util.default_config
 
-      vim.diagnostic.config({
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = " ",
-            [vim.diagnostic.severity.WARN] = " ",
-            [vim.diagnostic.severity.HINT] = " ",
-            [vim.diagnostic.severity.INFO] = " ",
-          },
-        },
-      })
-
       lsp_defaults.capabilities =
         vim.tbl_deep_extend("force", lsp_defaults.capabilities, require("blink.cmp").get_lsp_capabilities(), {
           textDocument = {
@@ -32,7 +21,6 @@ return {
           },
         })
       require("mason-lspconfig").setup({
-        ensure_installed = {},
         automatic_enable = {
           exclude = {
             "jdtls",

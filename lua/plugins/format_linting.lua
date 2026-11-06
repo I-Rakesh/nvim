@@ -39,7 +39,7 @@ return {
     event = "User FilePost",
     config = function()
       require("lint").linters_by_ft = {
-        sh = { "Shellcheck" },
+        sh = { "shellcheck" },
         javascript = { "eslint" },
       }
 

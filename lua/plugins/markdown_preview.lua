@@ -24,7 +24,7 @@ return {
       },
       heading = {
         sign = false,
-        icons = {},
+        -- icons = {},
       },
     },
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },

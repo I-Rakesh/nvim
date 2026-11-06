@@ -220,6 +220,17 @@ function M.diagnostics()
   end
 end
 
+function M.toggle_virtual_text()
+  local vt = vim.diagnostic.config().virtual_text
+  local is_enabled = (type(vt) == "boolean" and vt) or type(vt) == "table"
+
+  vim.diagnostic.config({ virtual_text = not is_enabled })
+  vim.notify(
+    "Diagnostics virtual text: " .. (is_enabled and "OFF" or "ON"),
+    is_enabled and vim.log.levels.WARN or vim.log.levels.INFO
+  )
+end
+
 --Killring copied from Youtube-video(https://youtu.be/KCx4mwhXffk?si=g2FJVAhWoJm5RJdk) github(https://github.com/Axlefublr/dotfiles/blob/03f0037c0734bdafaa57ee123d42556f817be84b/neovim/registers/killring.lua)
 -- due to the remaps for this feature we can't use local marks(r,e,t,z,g) and global marks(R,T,Z,E)
 local killring = setmetatable({}, { __index = table })

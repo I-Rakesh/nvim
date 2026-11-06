@@ -11,10 +11,7 @@ return {
       },
       transparent_background = true, -- disables setting the background color.
       integrations = {
-        telescope = {
-          enabled = true,
-          style = "nvchad",
-        },
+        telescope = true,
         noice = true,
         blink_cmp = true,
       },
